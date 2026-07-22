@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> body { margin: 0; } ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); } </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); min-height:100vh; display:grid; grid-template-columns:260px 1fr;">
+
+  <!-- SIDEBAR -->
+  <div style="background:oklch(99% 0.004 90); border-right:1px solid oklch(90% 0.008 90); padding:28px 20px; display:flex; flex-direction:column;">
+    <a href="CheckCustoms Landing.dc.html" style="font-family:'Spectral',serif; font-weight:600; font-size:20px; letter-spacing:-0.01em; margin-bottom:40px; padding:0 8px; color:oklch(18% 0.015 260); text-decoration:none; display:block;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+      <a href="{{ item.href }}" style="{{ item.style }}text-decoration:none;">
+        <div style="width:8px; height:8px; border-radius:999px; background:{{ item.dotColor }}; flex-shrink:0;"></div>
+        <span>{{ item.label }}</span>
+      </a>
+    </sc-for>
+  </div>
+
+  <!-- MAIN -->
+  <div style="min-width:0;">
+    <!-- TOP BAR -->
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 48px; border-bottom:1px solid oklch(90% 0.008 90); background:oklch(99% 0.004 90);">
+      <div style="font-size:16px; font-weight:600;">Welcome, Adaeze<span style="color:oklch(50% 0.16 250);">.</span></div>
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div style="position:relative; width:36px; height:36px; border-radius:999px; background:oklch(94% 0.008 90); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;">
+          <div style="width:14px; height:13px; border-radius:9px 9px 3px 3px; background:oklch(35% 0.02 260);"></div>
+          <div style="width:4px; height:4px; border-radius:999px; background:oklch(35% 0.02 260);"></div>
+        </div>
+        <div style="width:36px; height:36px; border-radius:999px; background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px;">A</div>
+      </div>
+    </div>
+
+    <div style="padding:40px 48px;">
+      <!-- HEADER -->
+      <div style="margin-bottom:32px;">
+        <h1 style="font-family:'Spectral',serif; font-size:32px; font-weight:600; margin:0 0 10px; letter-spacing:-0.015em;">Saved Estimates<span style="color:oklch(50% 0.16 250);">.</span></h1>
+        <p style="font-size:14px; color:oklch(40% 0.02 260); margin:0;">Estimates you've saved — pick up where you left off.</p>
+      </div>
+
+      <!-- ESTIMATE CARDS -->
+      <sc-if value="{{ hasEstimates }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid; grid-template-columns:repeat(2, 1fr); gap:20px;">
+          <sc-for list="{{ estimates }}" as="e" hint-placeholder-count="2">
+            <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:28px;">
+              <div style="font-family:'Spectral',serif; font-size:19px; font-weight:600; margin-bottom:10px;">{{ e.name }}</div>
+              <div style="font-family:'Spectral',serif; font-size:30px; font-weight:700; color:oklch(40% 0.15 255); margin-bottom:14px;">{{ e.range }}</div>
+              <div style="font-size:12px; color:oklch(50% 0.02 260); margin-bottom:24px;">Saved {{ e.date }} · Rate version {{ e.rateVersion }}</div>
+              <div style="display:flex; gap:12px;">
+                <a href="{{ e.startHref }}" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:13px; padding:11px 20px; border-radius:999px;">Start clearing →</a>
+                <a href="{{ e.recalcHref }}" style="color:oklch(40% 0.15 255); text-decoration:none; font-weight:600; font-size:13px; padding:11px 20px; border:1px solid oklch(40% 0.15 255); border-radius:999px;">Recalculate</a>
+              </div>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:60px 0; text-align:center;">
+          <div style="font-size:15px; color:oklch(40% 0.02 260); margin-bottom:20px;">No saved estimates yet.</div>
+          <a href="CheckCustoms Vehicle Estimator.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:14px; padding:12px 24px; border-radius:999px;">Run an estimate →</a>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  navLabels = ['Overview', 'My Jobs', 'Saved Estimates', 'Documents', 'Payments & Receipts', 'Account'];
+
+  estimatesData = [
+    { name: '2019 Toyota Camry', range: '₦10.4M – ₦11.1M', date: '3 days ago', rateVersion: 'v2.4', recalcHref: 'CheckCustoms Vehicle Estimator.dc.html' },
+    { name: '40ft Container — Electronics', range: '₦8.9M – ₦9.6M', date: '1 week ago', rateVersion: 'v2.3', recalcHref: 'CheckCustoms Goods Estimator.dc.html' }
+  ].map(e => ({ ...e, startHref: `CheckCustoms Request Step1.dc.html?desc=${encodeURIComponent(e.name)}&range=${encodeURIComponent(e.range)}` }));
+
+  renderVals() {
+    const navItems = this.navLabels.map((label, i) => {
+      const active = i === 2;
+      const hrefs = ['CheckCustoms Dashboard.dc.html', 'CheckCustoms My Jobs.dc.html', 'CheckCustoms Saved Estimates.dc.html', '#', '#', '#'];
+      return {
+        label, href: hrefs[i],
+        dotColor: active ? 'oklch(40% 0.15 255)' : 'oklch(85% 0.008 90)',
+        style: `display:flex; align-items:center; gap:12px; padding:12px 10px; border-radius:8px; font-size:14px; font-weight:${active ? 600 : 500}; color:${active ? 'oklch(18% 0.015 260)' : 'oklch(45% 0.02 260)'}; background:${active ? 'oklch(96% 0.008 240)' : 'transparent'}; margin-bottom:4px;`
+      };
+    });
+    return {
+      navItems,
+      estimates: this.estimatesData,
+      hasEstimates: this.estimatesData.length > 0,
+      isEmpty: this.estimatesData.length === 0
+    };
+  }
+}
+</script>
+</body>
+</html>

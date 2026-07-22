@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> body { margin: 0; } ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); } </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); min-height:100vh; display:grid; grid-template-columns:260px 1fr;">
+
+  <!-- SIDEBAR -->
+  <div style="background:oklch(99% 0.004 90); border-right:1px solid oklch(90% 0.008 90); padding:28px 20px; display:flex; flex-direction:column;">
+    <a href="CheckCustoms Landing.dc.html" style="font-family:'Spectral',serif; font-weight:600; font-size:20px; letter-spacing:-0.01em; margin-bottom:40px; padding:0 8px; color:oklch(18% 0.015 260); text-decoration:none; display:block;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+      <a href="{{ item.href }}" style="{{ item.style }}text-decoration:none;">
+        <div style="width:8px; height:8px; border-radius:999px; background:{{ item.dotColor }}; flex-shrink:0;"></div>
+        <span>{{ item.label }}</span>
+      </a>
+    </sc-for>
+  </div>
+
+  <!-- MAIN -->
+  <div style="min-width:0;">
+    <!-- TOP BAR -->
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 48px; border-bottom:1px solid oklch(90% 0.008 90); background:oklch(99% 0.004 90);">
+      <div style="font-size:16px; font-weight:600;">Welcome, Adaeze<span style="color:oklch(50% 0.16 250);">.</span></div>
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div style="position:relative; width:36px; height:36px; border-radius:999px; background:oklch(94% 0.008 90); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;">
+          <div style="width:14px; height:13px; border-radius:9px 9px 3px 3px; background:oklch(35% 0.02 260);"></div>
+          <div style="width:4px; height:4px; border-radius:999px; background:oklch(35% 0.02 260);"></div>
+        </div>
+        <div style="width:36px; height:36px; border-radius:999px; background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px;">A</div>
+      </div>
+    </div>
+
+    <div style="padding:40px 48px;">
+      <!-- HEADER -->
+      <div style="margin-bottom:32px;">
+        <h1 style="font-family:'Spectral',serif; font-size:32px; font-weight:600; margin:0 0 10px; letter-spacing:-0.015em;">Payments &amp; Receipts<span style="color:oklch(50% 0.16 250);">.</span></h1>
+        <p style="font-size:14px; color:oklch(40% 0.02 260); margin:0;">Every payment, clearly broken down.</p>
+      </div>
+
+      <!-- SUMMARY STRIP -->
+      <div style="background:oklch(13% 0.012 260); color:oklch(96% 0.01 90); padding:28px 32px; display:flex; gap:56px; margin-bottom:32px;">
+        <div>
+          <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(65% 0.15 250); margin-bottom:8px;">Total paid to date</div>
+          <div style="font-family:'Spectral',serif; font-size:28px; font-weight:700;">₦10,192,500</div>
+        </div>
+        <div>
+          <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(65% 0.01 90); margin-bottom:8px;">CheckCustoms service fees</div>
+          <div style="font-family:'Spectral',serif; font-size:28px; font-weight:700;">₦350,000</div>
+        </div>
+        <div>
+          <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(65% 0.01 90); margin-bottom:8px;">Statutory & port (pass-through)</div>
+          <div style="font-family:'Spectral',serif; font-size:28px; font-weight:700;">₦9,842,500</div>
+        </div>
+      </div>
+
+      <!-- PAYMENT LIST -->
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <sc-for list="{{ payments }}" as="p" hint-placeholder-count="2">
+          <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:26px 28px;">
+            <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:20px;">
+              <div>
+                <div style="font-family:'Spectral',serif; font-size:16px; font-weight:600;">{{ p.jobName }}</div>
+                <div style="font-size:12px; color:oklch(50% 0.02 260); margin-top:4px;">{{ p.date }} · {{ p.method }}</div>
+              </div>
+              <div style="display:flex; gap:12px;">
+                <a href="#" style="font-size:13px; color:oklch(40% 0.15 255); text-decoration:none; font-weight:600;">View receipt</a>
+                <a href="#" style="font-size:13px; color:oklch(40% 0.15 255); text-decoration:none; font-weight:600;">Download</a>
+              </div>
+            </div>
+            <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:20px; padding-top:16px; border-top:1px solid oklch(92% 0.006 90);">
+              <div>
+                <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(50% 0.02 260); margin-bottom:6px;">CheckCustoms fee</div>
+                <div style="font-size:15px; font-weight:600; color:oklch(40% 0.15 255);">{{ p.serviceFee }}</div>
+              </div>
+              <div>
+                <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(50% 0.02 260); margin-bottom:6px;">Statutory & port (pass-through)</div>
+                <div style="font-size:15px; font-weight:600;">{{ p.passThrough }}</div>
+              </div>
+              <div>
+                <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(50% 0.02 260); margin-bottom:6px;">Total paid</div>
+                <div style="font-size:15px; font-weight:700;">{{ p.total }}</div>
+              </div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  navLabels = ['Overview', 'My Jobs', 'Saved Estimates', 'Documents', 'Payments & Receipts', 'Account'];
+
+  paymentsData = [
+    { jobName: '2019 Toyota Camry — Tin Can Island (CC-48213)', date: '20 Jul 2026', method: 'Bank transfer', serviceFee: '₦350,000', passThrough: '₦9,842,500', total: '₦10,192,500' },
+    { jobName: 'General cargo — Textiles (CC-48155)', date: '14 Jul 2026', method: 'Card', serviceFee: '₦180,000', passThrough: '₦2,410,000', total: '₦2,590,000' }
+  ];
+
+  renderVals() {
+    const navItems = this.navLabels.map((label, i) => {
+      const active = i === 4;
+      const hrefs = ['CheckCustoms Dashboard.dc.html', 'CheckCustoms My Jobs.dc.html', 'CheckCustoms Saved Estimates.dc.html', 'CheckCustoms Documents.dc.html', 'CheckCustoms Payments.dc.html', '#'];
+      return {
+        label, href: hrefs[i],
+        dotColor: active ? 'oklch(40% 0.15 255)' : 'oklch(85% 0.008 90)',
+        style: `display:flex; align-items:center; gap:12px; padding:12px 10px; border-radius:8px; font-size:14px; font-weight:${active ? 600 : 500}; color:${active ? 'oklch(18% 0.015 260)' : 'oklch(45% 0.02 260)'}; background:${active ? 'oklch(96% 0.008 240)' : 'transparent'}; margin-bottom:4px;`
+      };
+    });
+    return { navItems, payments: this.paymentsData };
+  }
+}
+</script>
+</body>
+</html>

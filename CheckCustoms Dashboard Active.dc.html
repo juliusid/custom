@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> body { margin: 0; } ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); } </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); min-height:100vh; display:grid; grid-template-columns:260px 1fr;">
+
+  <!-- SIDEBAR -->
+  <div style="background:oklch(99% 0.004 90); border-right:1px solid oklch(90% 0.008 90); padding:28px 20px; display:flex; flex-direction:column;">
+    <a href="CheckCustoms Landing.dc.html" style="font-family:'Spectral',serif; font-weight:600; font-size:20px; letter-spacing:-0.01em; margin-bottom:40px; padding:0 8px; color:oklch(18% 0.015 260); text-decoration:none; display:block;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+      <a href="{{ item.href }}" style="{{ item.style }}text-decoration:none;">
+        <div style="width:8px; height:8px; border-radius:999px; background:{{ item.dotColor }}; flex-shrink:0;"></div>
+        <span>{{ item.label }}</span>
+      </a>
+    </sc-for>
+  </div>
+
+  <!-- MAIN -->
+  <div>
+    <!-- TOP BAR -->
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 48px; border-bottom:1px solid oklch(90% 0.008 90); background:oklch(99% 0.004 90);">
+      <div style="font-size:16px; font-weight:600;">Welcome, Adaeze<span style="color:oklch(50% 0.16 250);">.</span></div>
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div style="position:relative;">
+          <div onClick="{{ onToggleNotif }}" style="position:relative; width:36px; height:36px; border-radius:999px; background:oklch(94% 0.008 90); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; cursor:pointer;">
+            <div style="width:14px; height:13px; border-radius:9px 9px 3px 3px; background:oklch(35% 0.02 260);"></div>
+            <div style="width:4px; height:4px; border-radius:999px; background:oklch(35% 0.02 260);"></div>
+            <sc-if value="{{ hasUnread }}" hint-placeholder-val="{{ true }}">
+              <div style="position:absolute; top:2px; right:3px; width:8px; height:8px; border-radius:999px; background:oklch(60% 0.18 25); border:2px solid oklch(99% 0.004 90);"></div>
+            </sc-if>
+          </div>
+          <div style="{{ notifPanelStyle }}position:absolute; top:46px; right:0; width:340px; background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); box-shadow:0 24px 60px -20px oklch(20% 0.02 260 / 0.35); z-index:50;">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid oklch(90% 0.008 90);">
+              <div style="font-size:14px; font-weight:600;">Notifications</div>
+              <a onClick="{{ onMarkAllRead }}" style="font-size:12px; color:oklch(40% 0.15 255); text-decoration:none; font-weight:600; cursor:pointer;">Mark all as read</a>
+            </div>
+            <div style="max-height:320px; overflow-y:auto;">
+              <sc-for list="{{ notifications }}" as="n" hint-placeholder-count="4">
+                <a href="{{ n.href }}" style="{{ n.rowStyle }}">
+                  <div style="{{ n.iconStyle }}"></div>
+                  <div style="flex:1; min-width:0;">
+                    <div style="font-size:13px; color:oklch(20% 0.015 260); line-height:1.4;">{{ n.message }}</div>
+                    <div style="font-size:11px; color:oklch(50% 0.02 260); margin-top:4px;">{{ n.time }}</div>
+                  </div>
+                  <sc-if value="{{ n.unread }}" hint-placeholder-val="{{ false }}">
+                    <div style="width:7px; height:7px; border-radius:999px; background:oklch(40% 0.15 255); flex-shrink:0; margin-top:5px;"></div>
+                  </sc-if>
+                </a>
+              </sc-for>
+            </div>
+            <div style="padding:12px 20px; border-top:1px solid oklch(90% 0.008 90); text-align:center;">
+              <a href="CheckCustoms My Jobs.dc.html" style="font-size:12px; color:oklch(40% 0.15 255); text-decoration:none; font-weight:600;">View all</a>
+            </div>
+          </div>
+        </div>
+        <div style="width:36px; height:36px; border-radius:999px; background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px;">A</div>
+      </div>
+    </div>
+
+    <div style="padding:28px 32px; display:grid; grid-template-columns:1fr 280px; gap:20px; align-items:start;">
+      <!-- LEFT COLUMN -->
+      <div style="min-width:0;">
+        <!-- ACTIVE JOB CARD -->
+        <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:36px; box-shadow:0 20px 50px -25px oklch(20% 0.02 260 / 0.15); margin-bottom:28px;">
+          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:28px;">
+            <div>
+              <div style="font-family:'Spectral',serif; font-size:19px; font-weight:600; line-height:1.3;">2019 Toyota Camry — Tin Can Island</div>
+              <div style="font-size:13px; color:oklch(50% 0.02 260); margin-top:6px;">Job CC-48213</div>
+            </div>
+            <div style="font-size:13px; font-weight:600; color:oklch(40% 0.15 255); background:oklch(96% 0.008 240); padding:8px 14px; border-radius:999px;">Stage 4 of 8</div>
+          </div>
+
+          <div style="display:flex; align-items:flex-start; gap:2px; margin-bottom:12px; overflow-x:auto;">
+            <sc-for list="{{ stages }}" as="stage" hint-placeholder-count="8">
+              <div style="display:flex; flex-direction:column; align-items:center; flex:1 1 0; min-width:64px;" title="{{ stage.detail }}">
+                <div style="{{ stage.dotStyle }}">{{ stage.mark }}</div>
+                <div style="{{ stage.labelStyle }}">{{ stage.title }}</div>
+              </div>
+            </sc-for>
+          </div>
+          <div style="height:4px; background:oklch(90% 0.008 90); border-radius:999px; margin-bottom:28px; overflow:hidden;">
+            <div style="height:100%; width:43.75%; background:oklch(40% 0.15 255); border-radius:999px;"></div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px; margin-bottom:24px;">
+            <div>
+              <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(50% 0.02 260); margin-bottom:8px;">Assigned to</div>
+              <div style="display:flex; align-items:center; gap:10px;">
+                <div style="width:28px; height:28px; border-radius:999px; background-image:url('https://randomuser.me/api/portraits/women/68.jpg'); background-size:cover;"></div>
+                <div style="font-size:14px; font-weight:600;">Adaeze O. — Agent</div>
+              </div>
+            </div>
+            <div>
+              <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(50% 0.02 260); margin-bottom:8px;">Time in stage</div>
+              <div style="font-size:14px; font-weight:600;">3 days</div>
+            </div>
+            <div>
+              <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(50% 0.02 260); margin-bottom:8px;">Port</div>
+              <div style="font-size:14px; font-weight:600;">Tin Can Island</div>
+            </div>
+          </div>
+
+          <div style="background:oklch(96% 0.008 240); border-left:3px solid oklch(65% 0.15 25); padding:16px 18px; font-size:13px; color:oklch(30% 0.02 260); line-height:1.5;"><strong>Action needed:</strong> awaiting your signature on Form M — sign to keep this stage moving.</div>
+        </div>
+
+        <!-- SECONDARY COLLAPSED JOBS -->
+        <sc-for list="{{ otherJobs }}" as="job" hint-placeholder-count="2">
+          <div style="display:flex; justify-content:space-between; align-items:center; background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:18px 24px; margin-bottom:12px; cursor:pointer;">
+            <div>
+              <div style="font-size:14px; font-weight:600;">{{ job.name }}</div>
+              <div style="font-size:12px; color:oklch(50% 0.02 260); margin-top:4px;">{{ job.ref }}</div>
+            </div>
+            <div style="display:flex; align-items:center; gap:20px;">
+              <div style="font-size:12px; font-weight:600; color:oklch(40% 0.15 255); background:oklch(96% 0.008 240); padding:6px 12px; border-radius:999px;">{{ job.stageBadge }}</div>
+              <div style="font-size:13px; color:oklch(50% 0.02 260);">{{ job.progressPct }}%</div>
+            </div>
+          </div>
+        </sc-for>
+
+        <!-- RECENT ACTIVITY -->
+        <div style="margin-top:28px;">
+          <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:16px;">Recent activity</div>
+          <sc-for list="{{ activity }}" as="a" hint-placeholder-count="4">
+            <div style="display:flex; justify-content:space-between; padding:12px 0; border-bottom:1px solid oklch(90% 0.008 90); font-size:14px;">
+              <span>{{ a.text }}</span>
+              <span style="color:oklch(50% 0.02 260); font-size:12px;">{{ a.time }}</span>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div style="display:flex; flex-direction:column; gap:20px;">
+        <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:24px;">
+          <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:16px;">Saved estimates</div>
+          <sc-for list="{{ savedEstimates }}" as="e" hint-placeholder-count="2">
+            <div style="padding:14px 0; border-bottom:1px solid oklch(90% 0.008 90);">
+              <div style="font-size:14px; font-weight:600;">{{ e.name }}</div>
+              <div style="font-size:13px; color:oklch(40% 0.15 255); font-weight:600; margin:6px 0;">{{ e.range }}</div>
+              <div style="font-size:11px; color:oklch(50% 0.02 260); margin-bottom:10px;">Saved {{ e.date }}</div>
+              <a href="CheckCustoms Contact.dc.html#form" style="font-size:12px; color:oklch(40% 0.15 255); text-decoration:none; font-weight:600;">Start clearing →</a>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:24px;">
+          <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:16px;">Documents — CC-48213</div>
+          <sc-for list="{{ documents }}" as="d" hint-placeholder-count="3">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 0; border-bottom:1px solid oklch(90% 0.008 90); font-size:13px;">
+              <span>{{ d.name }}</span>
+              <span style="{{ d.badgeStyle }}">{{ d.status }}</span>
+            </div>
+          </sc-for>
+        </div>
+
+        <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:24px;">
+          <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:16px;">Payments & receipts</div>
+          <div style="display:flex; justify-content:space-between; font-size:13px; padding:6px 0;"><span>CheckCustoms service fee</span><span>₦350,000</span></div>
+          <div style="display:flex; justify-content:space-between; font-size:13px; padding:6px 0;"><span>Statutory & port charges (pass-through)</span><span>₦9,842,500</span></div>
+          <div style="display:flex; justify-content:space-between; font-size:13px; font-weight:600; padding:12px 0 4px; border-top:1px solid oklch(90% 0.008 90); margin-top:6px;"><span>Total paid</span><span>₦10,192,500</span></div>
+          <a href="#" style="display:block; margin-top:14px; font-size:12px; color:oklch(40% 0.15 255); text-decoration:none; font-weight:600;">View all receipts →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { notifOpen: false, notifsRead: false };
+  navLabels = ['Overview', 'My Jobs', 'Saved Estimates', 'Documents', 'Payments & Receipts', 'Account'];
+  notifsData = [
+    { message: 'Payment confirmed for 2019 Toyota Camry', time: '2 hours ago', unread: true, type: 'payment', href: 'CheckCustoms Dashboard Active.dc.html' },
+    { message: 'Documents verified — moving to Duty payment', time: 'Yesterday', unread: true, type: 'doc', href: 'CheckCustoms Documents.dc.html' },
+    { message: 'Your agent has been assigned — Adaeze O.', time: '2 days ago', unread: false, type: 'check', href: 'CheckCustoms Dashboard Active.dc.html' },
+    { message: 'Quote confirmed for 40ft Container — Electronics', time: '3 days ago', unread: false, type: 'check', href: 'CheckCustoms My Jobs.dc.html' }
+  ];
+
+  stagesData = [
+    { n: '01', title: 'Request', detail: 'Submitted with shipping documents.' },
+    { n: '02', title: 'Quote', detail: 'Firm quote confirmed against estimate.' },
+    { n: '03', title: 'Payment', detail: 'Confirmed quote paid.' },
+    { n: '04', title: 'Documentation', detail: 'Entry documents being lodged with NCS.' },
+    { n: '05', title: 'Duty payment', detail: 'Duty, levies and VAT paid to NCS.' },
+    { n: '06', title: 'Examination', detail: 'NCS inspection if selected.' },
+    { n: '07', title: 'Release', detail: 'NCS release and gate-out.' },
+    { n: '08', title: 'Delivery', detail: 'Delivered or ready for pickup.' }
+  ];
+  currentStageIndex = 3;
+
+  otherJobsData = [
+    { name: '40ft Container — Electronics', ref: 'CC-48190', stageBadge: 'Duty payment', progressPct: 63 },
+    { name: 'General cargo — Textiles', ref: 'CC-48155', stageBadge: 'Delivered', progressPct: 100 }
+  ];
+
+  activityData = [
+    { text: 'Payment confirmed — CC-48213', time: '2 hours ago' },
+    { text: 'Documents uploaded — CC-48213', time: 'Yesterday' },
+    { text: 'Quote confirmed — CC-48190', time: '2 days ago' },
+    { text: 'Delivered — CC-48155', time: '4 days ago' }
+  ];
+
+  savedEstimatesData = [
+    { name: '2021 Honda CR-V', range: '₦7.8M – ₦8.4M', date: '3 days ago' },
+    { name: 'LCL — Spare parts', range: '₦1.1M – ₦1.4M', date: '1 week ago' }
+  ];
+
+  documentsData = [
+    { name: 'Bill of Lading', status: 'Verified' },
+    { name: 'Commercial Invoice', status: 'Verified' },
+    { name: 'Form M / PAAR', status: 'Pending' }
+  ];
+
+  renderVals() {
+    const navHrefs = ['CheckCustoms Dashboard.dc.html','CheckCustoms My Jobs.dc.html','#','#','#','#'];
+    const navItems = this.navLabels.map((label, i) => {
+      const active = i === 0;
+      return {
+        label,
+        href: navHrefs[i],
+        dotColor: active ? 'oklch(40% 0.15 255)' : 'oklch(85% 0.008 90)',
+        style: `display:flex; align-items:center; gap:12px; padding:12px 10px; border-radius:8px; font-size:14px; font-weight:${active ? 600 : 500}; color:${active ? 'oklch(18% 0.015 260)' : 'oklch(45% 0.02 260)'}; background:${active ? 'oklch(96% 0.008 240)' : 'transparent'}; margin-bottom:4px;`
+      };
+    });
+
+    const stages = this.stagesData.map((s, i) => {
+      const done = i < this.currentStageIndex;
+      const current = i === this.currentStageIndex;
+      const bg = done ? 'oklch(40% 0.15 255)' : current ? 'oklch(40% 0.15 255)' : 'oklch(90% 0.008 90)';
+      const color = (done || current) ? 'oklch(98% 0.005 90)' : 'oklch(55% 0.02 260)';
+      return {
+        title: s.title, detail: s.detail,
+        mark: done ? '✓' : s.n,
+        dotStyle: `width:36px; height:36px; border-radius:999px; display:flex; align-items:center; justify-content:center; font-family:'Spectral',serif; font-size:13px; font-weight:700; margin-bottom:8px; background:${bg}; color:${color}; ${current ? 'box-shadow:0 0 0 4px oklch(40% 0.15 255 / 0.18);' : ''}`,
+        labelStyle: `font-size:10px; text-align:center; line-height:1.25; word-break:break-word; padding:0 2px; font-weight:${current ? 600 : 500}; color:${current ? 'oklch(18% 0.015 260)' : 'oklch(55% 0.02 260)'};`
+      };
+    });
+
+    const documents = this.documentsData.map(d => ({
+      ...d,
+      badgeStyle: `font-size:11px; font-weight:600; padding:4px 10px; border-radius:999px; background:${d.status === 'Verified' ? 'oklch(94% 0.03 150)' : 'oklch(96% 0.03 90)'}; color:${d.status === 'Verified' ? 'oklch(40% 0.1 150)' : 'oklch(45% 0.1 80)'};`
+    }));
+
+    const notifications = this.notifsData.map(n => ({
+      ...n,
+      unread: this.state.notifsRead ? false : n.unread,
+      iconStyle: n.type === 'payment' ? 'width:26px; height:20px; border:2px solid oklch(40% 0.15 255); border-radius:3px; flex-shrink:0; margin-top:2px;'
+        : n.type === 'doc' ? 'width:20px; height:24px; border:2px solid oklch(50% 0.05 240); border-radius:0 3px 3px 3px; flex-shrink:0; margin-top:2px;'
+        : 'width:22px; height:22px; border-radius:999px; background:oklch(94% 0.03 150); flex-shrink:0; margin-top:2px;',
+      rowStyle: `display:flex; align-items:flex-start; gap:12px; padding:14px 20px; text-decoration:none; border-bottom:1px solid oklch(93% 0.006 90); background:${(!this.state.notifsRead && n.unread) ? 'oklch(96% 0.008 240)' : 'transparent'};`
+    }));
+
+    return {
+      navItems, stages,
+      onToggleNotif: () => this.setState(s => ({ notifOpen: !s.notifOpen })),
+      onMarkAllRead: () => this.setState({ notifsRead: true }),
+      notifPanelStyle: `opacity:${this.state.notifOpen ? 1 : 0}; visibility:${this.state.notifOpen ? 'visible' : 'hidden'}; transform:translateY(${this.state.notifOpen ? '0' : '-6px'}); transition:opacity 0.2s ease, transform 0.2s ease;`,
+      hasUnread: !this.state.notifsRead && this.notifsData.some(n => n.unread),
+      notifications,
+      otherJobs: this.otherJobsData,
+      activity: this.activityData,
+      savedEstimates: this.savedEstimatesData,
+      documents
+    };
+  }
+}
+</script>
+</body>
+</html>

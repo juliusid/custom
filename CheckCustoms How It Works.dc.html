@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: oklch(98% 0.006 90); }
+    ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); }
+  </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); overflow-x:hidden;">
+
+  <!-- NAV -->
+  <nav style="{{ navStyle }}position:fixed; top:0; left:0; right:0; z-index:100; display:grid; grid-template-columns:auto 1fr auto; align-items:center;">
+    <a href="CheckCustoms Landing.dc.html" style="{{ navLogoStyle }}text-decoration:none;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <div style="display:flex; align-items:center; gap:32px; min-width:0; justify-self:center;">
+      <div style="position:relative; flex-shrink:0; padding-bottom:28px; margin-bottom:-28px;" onMouseEnter="{{ onMegaEnter }}" onMouseLeave="{{ onMegaLeave }}">
+        <a href="/estimators" style="{{ navLinkStyle }}">Estimators</a>
+        <div style="{{ megaMenuStyle }}position:absolute; top:28px; left:-24px; width:340px; background:oklch(99% 0.004 90); border:1px solid oklch(89% 0.008 90); box-shadow:0 24px 60px -20px oklch(20% 0.02 260 / 0.3); padding:12px;">
+          <sc-for list="{{ megaItems }}" as="item" hint-placeholder-count="3">
+            <a href="{{ item.href }}" style="display:flex; align-items:center; gap:14px; padding:12px; text-decoration:none; color:inherit;" style-hover="background:oklch(96% 0.008 240);">
+              <div style="width:34px; height:34px; background:{{ item.color }}; flex-shrink:0;"></div>
+              <div>
+                <div style="font-size:14px; font-weight:600; color:oklch(18% 0.015 260);">{{ item.label }}</div>
+                <div style="font-size:12px; color:oklch(45% 0.02 260); margin-top:2px;">{{ item.desc }}</div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+      <a href="CheckCustoms How It Works.dc.html" style="{{ navLinkStyle }}">How It Works</a>
+      <a href="/about" style="{{ navLinkStyle }}">About</a>
+      <a href="/contact" style="{{ navLinkStyle }}">Contact</a>
+    </div>
+    <sc-if value="{{ isLoggedOut }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; align-items:center; gap:16px; flex-shrink:0; justify-self:end;">
+        <a href="CheckCustoms Login.dc.html" style="color:oklch(20% 0.015 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; padding:11px 18px; background:oklch(99% 0.004 90 / 0.92); border:1px solid oklch(80% 0.01 90); border-radius:999px;" style-hover="border-color:oklch(40% 0.15 255); color:oklch(40% 0.15 255);">Log in</a>
+        <a href="CheckCustoms Get Started.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-size:14px; font-weight:600; padding:11px 20px; border-radius:999px; white-space:nowrap;" style-hover="background:oklch(32% 0.15 255);">Get Started</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isLoggedIn }}" hint-placeholder-val="{{ false }}">
+      <div style="justify-self:end;">
+        <a href="CheckCustoms Dashboard.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-size:14px; font-weight:600; padding:11px 20px; border-radius:999px; white-space:nowrap;" style-hover="background:oklch(32% 0.15 255);">Dashboard →</a>
+      </div>
+    </sc-if>
+  </nav>
+
+  <!-- HERO -->
+  <section style="position:relative; min-height:78vh; display:grid; grid-template-columns:1fr;">
+    <div style="position:absolute; inset:0; overflow:hidden;">
+      <div style="position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1758146296671-0e46a91739a8?fm=jpg&q=70&auto=format&fit=crop&w=1920&h=1100'); background-size:cover; background-position:center 30%;"></div>
+    </div>
+    <div style="position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(100deg, oklch(9% 0.012 260 / 0.88) 0%, oklch(9% 0.012 260 / 0.55) 42%, oklch(9% 0.012 260 / 0.1) 70%);"></div>
+    <div style="position:relative; z-index:2; padding:200px 64px 120px; max-width:680px;">
+      <div style="font-family:'Work Sans',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(65% 0.15 250); font-weight:600; margin-bottom:24px;">How It Works</div>
+      <h1 style="font-family:'Spectral',serif; font-size:66px; line-height:1.02; font-weight:600; margin:0 0 28px; letter-spacing:-0.02em; color:oklch(98% 0.005 90);">Two moves. Full visibility<span style="color:oklch(60% 0.16 250);">.</span></h1>
+      <p style="font-size:19px; line-height:1.6; color:oklch(85% 0.008 90); max-width:540px;">From the moment you check a cost to the moment your goods are delivered, you see every step — who's responsible, what's next, and how long it should take.</p>
+    </div>
+  </section>
+
+  <!-- STEP 1 DEEP DIVE -->
+  <section id="step1" style="{{ reveal.step1 }}" ref="{{ refs.step1 }}">
+    <div>
+      <div style="font-family:'Spectral',serif; font-size:88px; font-weight:700; color:oklch(88% 0.03 250); line-height:0.8;">01</div>
+      <h2 style="font-family:'Spectral',serif; font-size:42px; font-weight:600; line-height:1.1; margin:20px 0 24px; letter-spacing:-0.015em;">Know the cost<span style="color:oklch(50% 0.16 250);">.</span></h2>
+      <p style="font-size:16px; line-height:1.7; color:oklch(32% 0.02 260); max-width:440px; margin:0 0 20px;">Enter what you're importing — a vehicle by make, model, year and VIN, or a container/goods shipment by category and HS code. We match it against the current NCS tariff and valuation rules engine and return an itemised breakdown: duty, levies, VAT, and port/terminal charges.</p>
+      <p style="font-size:16px; line-height:1.7; color:oklch(32% 0.02 260); max-width:440px;">Every estimate carries the effective FX rate and rules-engine version that produced it — so you know exactly what it's based on, and when it was last updated.</p>
+    </div>
+    <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:36px; box-shadow:0 30px 80px -30px oklch(20% 0.02 260 / 0.25);">
+      <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:20px;">Sample itemised breakdown — Tariff v2.4</div>
+      <sc-for list="{{ sampleBreakdown }}" as="line" hint-placeholder-count="6">
+        <div style="display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;">
+          <span style="color:oklch(30% 0.02 260);">{{ line.label }}</span>
+          <span style="color:oklch(35% 0.02 260); font-variant-numeric:tabular-nums;">{{ line.value }}</span>
+        </div>
+      </sc-for>
+      <div style="display:flex; justify-content:space-between; padding-top:20px; margin-top:8px;">
+        <span style="font-weight:600; font-size:15px;">Total landed cost</span>
+        <span style="font-family:'Spectral',serif; font-weight:700; font-size:24px; color:oklch(40% 0.15 255);">₦6,140,000</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-top:20px; padding-top:16px; border-top:1px dashed oklch(85% 0.008 90); font-size:11px; color:oklch(50% 0.02 260); font-family:monospace;">
+        <span>FX: ₦1,550/$1</span>
+        <span>Rules engine v2.4</span>
+      </div>
+      <p style="font-size:12px; color:oklch(45% 0.02 260); margin:16px 0 0; line-height:1.5;">Figures are indicative, pending NCS's own assessment.</p>
+    </div>
+  </section>
+
+  <!-- STEP 2 DEEP DIVE -->
+  <section id="step2" style="{{ reveal.step2 }}" ref="{{ refs.step2 }}">
+    <div>
+      <div style="font-family:'Spectral',serif; font-size:88px; font-weight:700; color:oklch(88% 0.03 250); line-height:0.8;">02</div>
+      <h2 style="font-family:'Spectral',serif; font-size:42px; font-weight:600; line-height:1.1; margin:20px 0 24px; letter-spacing:-0.015em;">Get it cleared<span style="color:oklch(50% 0.16 250);">.</span></h2>
+      <p style="font-size:16px; line-height:1.7; color:oklch(32% 0.02 260); max-width:440px; margin:0 0 20px;">Your estimate becomes a clearing request: upload your Bill of Lading, invoice, and Form M/PAAR reference. CheckCustoms ops reviews it and confirms a firm quote.</p>
+      <p style="font-size:16px; line-height:1.7; color:oklch(32% 0.02 260); max-width:440px;">From there, either CheckCustoms handles clearing directly, or we assign a vetted licensed agent. Either way, CheckCustoms remains your counterparty — you're never dealing with the agent alone.</p>
+    </div>
+    <div style="background:oklch(96% 0.008 240); padding:40px; display:flex; flex-direction:column; align-items:center;">
+      <div style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); padding:14px 24px; border-radius:999px; font-size:14px; font-weight:600;">Request accepted</div>
+      <div style="width:2px; height:36px; background:oklch(80% 0.02 250);"></div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; width:100%; max-width:420px;">
+        <div style="background:oklch(99% 0.004 90); border-top:3px solid oklch(40% 0.15 255); padding:22px 18px; text-align:center;">
+          <div style="font-size:14px; font-weight:600; margin-bottom:8px;">Direct handling</div>
+          <div style="font-size:12px; color:oklch(45% 0.02 260); line-height:1.5;">CheckCustoms ops clears it themselves, end to end.</div>
+        </div>
+        <div style="background:oklch(99% 0.004 90); border-top:3px solid oklch(40% 0.15 255); padding:22px 18px; text-align:center;">
+          <div style="font-size:14px; font-weight:600; margin-bottom:8px;">Vetted agent</div>
+          <div style="font-size:12px; color:oklch(45% 0.02 260); line-height:1.5;">A licensed agent from our network is assigned, CheckCustoms stays accountable.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PIPELINE -->
+  <section id="pipeline" style="{{ reveal.pipeline }}" ref="{{ refs.pipeline }}">
+    <div style="max-width:680px; margin:0 0 64px;">
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">The Full Clearing Pipeline</div>
+      <h2 style="font-family:'Spectral',serif; font-size:44px; font-weight:600; line-height:1.1; margin:0 0 20px; letter-spacing:-0.015em;">Eight stages. One tracker<span style="color:oklch(50% 0.16 250);">.</span></h2>
+      <p style="font-size:17px; line-height:1.7; color:oklch(32% 0.02 260);">Click any stage to see what happens, who's responsible, and how long it typically takes.</p>
+    </div>
+    <div style="display:flex; align-items:flex-start; gap:0; overflow-x:auto; padding-bottom:8px;">
+      <sc-for list="{{ stages }}" as="stage" hint-placeholder-count="8">
+        <div style="{{ stage.itemStyle }}">
+          <div style="display:flex; flex-direction:column; align-items:center; cursor:pointer; flex:1;" onClick="{{ stage.onClick }}">
+            <div style="{{ stage.dotStyle }}">{{ stage.n }}</div>
+            <div style="{{ stage.labelStyle }}">{{ stage.title }}</div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+    <div style="background:oklch(13% 0.012 260); color:oklch(96% 0.01 90); padding:40px 48px; margin-top:32px; display:grid; grid-template-columns:1fr auto auto; gap:40px; align-items:center;">
+      <div>
+        <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(65% 0.15 250); margin-bottom:10px;">Stage {{ activeStageData.n }} — {{ activeStageData.title }}</div>
+        <div style="font-size:16px; line-height:1.6; max-width:520px;">{{ activeStageData.detail }}</div>
+      </div>
+      <div>
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(65% 0.02 260); margin-bottom:8px;">Responsible</div>
+        <div style="font-size:16px; font-weight:600;">{{ activeStageData.who }}</div>
+      </div>
+      <div>
+        <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(65% 0.02 260); margin-bottom:8px;">Typical duration</div>
+        <div style="font-size:16px; font-weight:600;">{{ activeStageData.duration }}</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section style="{{ reveal.dashboard }}" ref="{{ refs.dashboard }}">
+    <div>
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Your Dashboard</div>
+      <h2 style="font-family:'Spectral',serif; font-size:44px; font-weight:600; line-height:1.1; margin:0 0 24px; letter-spacing:-0.015em;">The whole way, in one place<span style="color:oklch(50% 0.16 250);">.</span></h2>
+      <p style="font-size:17px; line-height:1.7; color:oklch(32% 0.02 260); max-width:460px; margin:0 0 20px;">From the moment you sign up, every active job surfaces this exact pipeline on your personal dashboard — current stage highlighted, overall progress, who's assigned, time spent in stage, and what happens next.</p>
+      <p style="font-size:17px; line-height:1.7; color:oklch(32% 0.02 260); max-width:460px;">Notifications — in-app, email, SMS or WhatsApp — deep-link straight back to it, so you never have to go looking for a status update.</p>
+    </div>
+    <div style="background:oklch(20% 0.012 260); border-radius:10px; overflow:hidden; box-shadow:0 40px 90px -30px oklch(9% 0.012 260 / 0.5);">
+      <div style="display:flex; align-items:center; gap:8px; padding:14px 18px; background:oklch(15% 0.012 260);">
+        <div style="width:10px; height:10px; border-radius:999px; background:oklch(65% 0.15 25);"></div>
+        <div style="width:10px; height:10px; border-radius:999px; background:oklch(75% 0.13 90);"></div>
+        <div style="width:10px; height:10px; border-radius:999px; background:oklch(65% 0.15 145);"></div>
+        <div style="margin-left:12px; font-family:monospace; font-size:11px; color:oklch(65% 0.01 90);">app.checkcustoms.ng/jobs/CC-48213</div>
+      </div>
+      <div style="padding:32px; background:oklch(99% 0.004 90);">
+        <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:20px;">
+          <div style="font-family:'Spectral',serif; font-size:20px; font-weight:600;">Toyota Camry 2019 — CC-48213</div>
+          <div style="font-size:12px; color:oklch(45% 0.02 260);">Tin-Can</div>
+        </div>
+        <div style="display:flex; gap:6px; margin-bottom:16px;">
+          <sc-for list="{{ dashboardStages }}" as="d" hint-placeholder-count="8">
+            <div style="{{ d.barStyle }}"></div>
+          </sc-for>
+        </div>
+        <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:24px;">
+          <div>
+            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(45% 0.02 260); margin-bottom:6px;">Current stage</div>
+            <div style="font-size:15px; font-weight:600; color:oklch(40% 0.15 255);">Documentation</div>
+          </div>
+          <div>
+            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(45% 0.02 260); margin-bottom:6px;">Assigned to</div>
+            <div style="font-size:15px; font-weight:600;">Agent — Adaeze O.</div>
+          </div>
+          <div>
+            <div style="font-size:11px; text-transform:uppercase; letter-spacing:0.06em; color:oklch(45% 0.02 260); margin-bottom:6px;">Time in stage</div>
+            <div style="font-size:15px; font-weight:600;">6h 12m</div>
+          </div>
+        </div>
+        <div style="margin-top:20px; padding-top:16px; border-top:1px dashed oklch(85% 0.008 90); font-size:13px; color:oklch(35% 0.02 260);">Next: awaiting NCS examination slot</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST RECAP -->
+  <section style="{{ reveal.trust }}" ref="{{ refs.trust }}">
+    <div style="max-width:640px; margin:0 0 56px;">
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Trust Mechanics</div>
+      <h2 style="font-family:'Spectral',serif; font-size:40px; font-weight:600; line-height:1.1; margin:0; letter-spacing:-0.015em;">Nothing moves without visibility<span style="color:oklch(50% 0.16 250);">.</span></h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;">
+      <div style="background:oklch(96% 0.008 240); border-top:3px solid oklch(40% 0.15 255); padding:28px 24px;">
+        <div style="font-family:'Spectral',serif; font-size:20px; font-weight:600; margin-bottom:12px;">Encrypted document vault</div>
+        <div style="font-size:14px; color:oklch(35% 0.02 260); line-height:1.6;">Every BoL, invoice and PAAR reference is stored encrypted, per job.</div>
+      </div>
+      <div style="background:oklch(96% 0.008 240); border-top:3px solid oklch(40% 0.15 255); padding:28px 24px;">
+        <div style="font-family:'Spectral',serif; font-size:20px; font-weight:600; margin-bottom:12px;">Full audit log</div>
+        <div style="font-size:14px; color:oklch(35% 0.02 260); line-height:1.6;">Every status change is timestamped and attributed — nothing happens off the record.</div>
+      </div>
+      <div style="background:oklch(96% 0.008 240); border-top:3px solid oklch(40% 0.15 255); padding:28px 24px;">
+        <div style="font-family:'Spectral',serif; font-size:20px; font-weight:600; margin-bottom:12px;">Milestone-based payment</div>
+        <div style="font-size:14px; color:oklch(35% 0.02 260); line-height:1.6;">Funds are held and released against clearing milestones, not paid upfront in full.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section style="{{ reveal.faq }}" ref="{{ refs.faq }}">
+    <div style="max-width:640px; margin:0 0 56px;">
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">FAQ</div>
+      <h2 style="font-family:'Spectral',serif; font-size:40px; font-weight:600; line-height:1.1; margin:0; letter-spacing:-0.015em;">Questions, answered<span style="color:oklch(50% 0.16 250);">.</span></h2>
+    </div>
+    <div style="max-width:800px;">
+      <sc-for list="{{ faqs }}" as="faq" hint-placeholder-count="4">
+        <div style="border-bottom:1px solid oklch(88% 0.008 90);">
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 0; cursor:pointer;" onClick="{{ faq.onClick }}">
+            <div style="font-family:'Spectral',serif; font-size:19px; font-weight:600;">{{ faq.q }}</div>
+            <div style="font-size:22px; color:oklch(40% 0.15 255); font-weight:400;">{{ faq.icon }}</div>
+          </div>
+          <div style="{{ faq.answerStyle }}">
+            <p style="font-size:15px; line-height:1.7; color:oklch(32% 0.02 260); margin:0 0 24px; max-width:640px;">{{ faq.a }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="{{ reveal.finalCta }}" ref="{{ refs.finalCta }}">
+    <div style="max-width:680px; position:relative; z-index:2;">
+      <h2 style="font-family:'Spectral',serif; font-size:58px; font-weight:600; line-height:1.05; margin:0 0 32px; letter-spacing:-0.02em;">See exactly where your shipment stands<span style="color:oklch(60% 0.16 250);">.</span></h2>
+      <p style="font-size:19px; line-height:1.6; color:oklch(78% 0.01 90); margin:0 0 40px; max-width:540px;">Run a free estimate and get the full pipeline on your dashboard from day one.</p>
+      <a href="CheckCustoms Landing.dc.html#how" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:17px; padding:20px 40px; border-radius:999px; display:inline-block;" style-hover="background:oklch(50% 0.15 250);">Check My Cost →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:oklch(11% 0.012 260); color:oklch(90% 0.01 90); padding:64px 64px 40px; display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; gap:40px; border-top:1px solid oklch(22% 0.012 260);">
+    <div>
+      <div style="font-family:'Spectral',serif; font-weight:600; font-size:20px; margin-bottom:14px; color:oklch(97% 0.005 90);">CheckCustoms<span style="color:oklch(60% 0.12 250);">.ng</span></div>
+      <p style="font-size:13px; color:oklch(65% 0.015 90); line-height:1.6; max-width:240px;">Transparent customs clearing estimates and managed clearing for importers across Nigeria.</p>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Contact</div>
+      <div style="font-size:14px; color:oklch(88% 0.008 90); line-height:2;">
+        <div>WhatsApp: +234 800 CUSTOMS</div>
+        <div>Phone: +234 800 XXX XXXX</div>
+        <div>hello@checkcustoms.ng</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Product</div>
+      <div style="font-size:14px; color:oklch(88% 0.008 90); line-height:2;">
+        <div><a href="CheckCustoms Landing.dc.html#how" style="color:inherit; text-decoration:none;">Get an estimate</a></div>
+        <div><a href="CheckCustoms Landing.dc.html#agents" style="color:inherit; text-decoration:none;">Managed clearing</a></div>
+        <div><a href="CheckCustoms Landing.dc.html#coverage" style="color:inherit; text-decoration:none;">Coverage</a></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Legal</div>
+      <p style="font-size:12px; color:oklch(60% 0.015 90); line-height:1.7; max-width:220px;">Estimates are indicative only; final assessment and clearance rest with the Nigeria Customs Service (NCS). We do not store payment card data.</p>
+    </div>
+  </footer>
+  <div style="text-align:center; padding:20px; font-size:12px; color:oklch(55% 0.015 90); background:oklch(9% 0.01 260);">© 2026 CheckCustoms.ng — prototype concept, Lagos, Nigeria.</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { loggedIn: (typeof localStorage !== 'undefined' && localStorage.getItem('cc_auth') === '1'), scrollY: 0, visible: {}, megaOpen: false, activeStage: 0, faqOpen: 0 };
+
+  megaItems = [
+    { label: 'Vehicle Estimator', desc: 'Duty, levy & terminal fees for cars, trucks & bikes', color: 'oklch(40% 0.15 255)', href: 'CheckCustoms Vehicle Estimator.dc.html' },
+    { label: 'Container Estimator', desc: 'FCL & LCL landed-cost breakdown by HS code', color: 'oklch(50% 0.05 240)', href: 'CheckCustoms Goods Estimator.dc.html' },
+    { label: 'General Goods Estimator', desc: 'Palletised and loose cargo, any port of entry', color: 'oklch(65% 0.02 250)', href: 'CheckCustoms Goods Estimator.dc.html' }
+  ];
+
+  stagesData = [
+    { n: '01', title: 'Request', who: 'You', duration: 'Instant', detail: "You submit a clearing request from your estimate, with your Bill of Lading, invoice and Form M/PAAR reference attached." },
+    { n: '02', title: 'Quote', who: 'CheckCustoms ops', duration: '4–8 hours', detail: 'Our ops team reviews your documents and confirms a firm, final quote against your original estimate.' },
+    { n: '03', title: 'Payment', who: 'You', duration: 'Instant', detail: 'You pay the confirmed quote. Funds are held and released against clearing milestones, not paid out upfront.' },
+    { n: '04', title: 'Documentation', who: 'Ops / Agent', duration: '~1 day', detail: 'Entry documents are lodged with NCS and the terminal, by CheckCustoms ops or your assigned agent.' },
+    { n: '05', title: 'Duty payment', who: 'CheckCustoms ops', duration: '~1 day', detail: 'Assessed duty, levies and VAT are paid to the Nigeria Customs Service on your behalf.' },
+    { n: '06', title: 'Examination', who: 'NCS', duration: '1–2 days', detail: 'NCS inspects the shipment or vehicle if selected for physical or documentary examination.' },
+    { n: '07', title: 'Release', who: 'CheckCustoms ops', duration: '~1 day', detail: 'NCS issues release; terminal charges are settled and gate-out is authorised.' },
+    { n: '08', title: 'Delivery', who: 'Agent / You', duration: '1–2 days', detail: 'Your goods are delivered to your specified location, or made ready for pickup at the port.' }
+  ];
+
+  faqsData = [
+    { q: "What if my estimate doesn't match NCS's final assessment?", a: "Our estimate is built against the current NCS tariff and valuation rules and is indicative, not binding — NCS's own assessment is always final. We target ±10% accuracy, and if the final figure differs meaningfully, we flag it before you pay so there's no surprise." },
+    { q: 'How long does clearing typically take?', a: 'Our median target is 7 days or less, from request to delivery, for most vehicle and container shipments — tracked stage by stage on your dashboard the whole way.' },
+    { q: "What happens if there's a delay or demurrage?", a: 'Delays are visible in real time on your dashboard with the reason and the responsible party. Where CheckCustoms ops caused the delay, related demurrage is on us; where it is an NCS-side hold, we flag it immediately.' },
+    { q: 'Can I switch from agent-assigned to CheckCustoms handling it directly?', a: 'Yes — at any point before documentation is lodged, you can request CheckCustoms take over direct handling from your dashboard. Ops will confirm the switch and keep the same quote wherever possible.' }
+  ];
+
+  sectionKeys = ['step1','step2','pipeline','dashboard','trust','faq','finalCta'];
+  nodeRefs = {};
+  observer = null;
+  refCallbacks = (() => {
+    const map = {};
+    ['step1','step2','pipeline','dashboard','trust','faq','finalCta'].forEach(k => { map[k] = (node) => this.registerNode(k, node); });
+    return map;
+  })();
+
+  componentDidMount() {
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const key = e.target.dataset.revealKey;
+          if (key) this.setState(s => ({ visible: { ...s.visible, [key]: true } }));
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
+    Object.keys(this.nodeRefs).forEach(k => this.observer.observe(this.nodeRefs[k]));
+
+    requestAnimationFrame(() => {
+      const vh = window.innerHeight;
+      Object.keys(this.nodeRefs).forEach(k => {
+        const r = this.nodeRefs[k].getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) this.setState(s => ({ visible: { ...s.visible, [k]: true } }));
+      });
+    });
+
+    this._revealTimeout = setTimeout(() => {
+      const all = {};
+      this.sectionKeys.forEach(k => { all[k] = true; });
+      this.setState(s => ({ visible: { ...all, ...s.visible } }));
+    }, 2500);
+
+    this.onScroll = () => {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => { this.setState({ scrollY: window.scrollY }); this._raf = null; });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+
+  componentWillUnmount() {
+    if (this.observer) this.observer.disconnect();
+    if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+    if (this._revealTimeout) clearTimeout(this._revealTimeout);
+  }
+
+  registerNode(key, node) {
+    if (!node) return;
+    this.nodeRefs[key] = node;
+    node.dataset.revealKey = key;
+    if (this.observer) this.observer.observe(node);
+  }
+
+  reveal(key, extraCss, distance) {
+    const on = this.state.visible[key];
+    return `${extraCss} opacity:${on ? 1 : 0}; transform:${on ? 'translateY(0)' : `translateY(${distance || 28}px)`}; transition:opacity 0.9s cubic-bezier(.16,.8,.24,1), transform 0.9s cubic-bezier(.16,.8,.24,1);`;
+  }
+
+  renderVals() {
+    const scrollY = this.state.scrollY;
+
+    const reveal = {
+      step1: this.reveal('step1', 'padding:160px 64px 80px; display:grid; grid-template-columns:0.9fr 1.1fr; gap:80px; align-items:start;'),
+      step2: this.reveal('step2', 'padding:80px 64px 160px; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center;'),
+      pipeline: this.reveal('pipeline', 'padding:120px 64px 160px; background:oklch(96% 0.008 240);'),
+      dashboard: this.reveal('dashboard', 'padding:160px 64px; display:grid; grid-template-columns:0.9fr 1.1fr; gap:80px; align-items:center;'),
+      trust: this.reveal('trust', 'padding:140px 64px; background:oklch(98% 0.006 90);'),
+      faq: this.reveal('faq', 'padding:140px 64px 160px; background:oklch(96% 0.008 240);'),
+      finalCta: this.reveal('finalCta', 'background:oklch(11% 0.012 260); color:oklch(97% 0.005 90); padding:200px 64px;')
+    };
+
+    const stages = this.stagesData.map((s, i) => {
+      const active = i === this.state.activeStage;
+      const revealed = this.state.visible.pipeline;
+      return {
+        ...s,
+        onClick: () => this.setState({ activeStage: i }),
+        itemStyle: `display:flex; align-items:flex-start; flex:1; min-width:110px; opacity:${revealed ? 1 : 0}; transform:${revealed ? 'translateY(0)' : 'translateY(20px)'}; transition:opacity 0.6s cubic-bezier(.16,.8,.24,1) ${i * 90}ms, transform 0.6s cubic-bezier(.16,.8,.24,1) ${i * 90}ms;`,
+        dotStyle: `width:44px; height:44px; border-radius:999px; display:flex; align-items:center; justify-content:center; font-family:'Spectral',serif; font-size:14px; font-weight:700; margin-bottom:10px; background:${active ? 'oklch(40% 0.15 255)' : 'oklch(90% 0.01 250)'}; color:${active ? 'oklch(98% 0.005 90)' : 'oklch(35% 0.02 260)'}; transition:background 0.25s ease, color 0.25s ease;`,
+        labelStyle: `font-size:12px; text-align:center; font-weight:${active ? 600 : 500}; color:${active ? 'oklch(18% 0.015 260)' : 'oklch(50% 0.02 260)'}; transition:color 0.25s ease;`
+      };
+    });
+
+    const dashboardStages = this.stagesData.map((s, i) => ({
+      barStyle: `flex:1; height:6px; border-radius:999px; background:${i <= 3 ? 'oklch(40% 0.15 255)' : 'oklch(88% 0.01 250)'};`
+    }));
+
+    const faqs = this.faqsData.map((f, i) => {
+      const open = this.state.faqOpen === i;
+      return {
+        ...f,
+        onClick: () => this.setState(s => ({ faqOpen: s.faqOpen === i ? null : i })),
+        icon: open ? '−' : '+',
+        answerStyle: `overflow:hidden; max-height:${open ? '220px' : '0px'}; opacity:${open ? 1 : 0}; transition:max-height 0.35s ease, opacity 0.3s ease;`
+      };
+    });
+
+    return {
+      isLoggedIn: this.state.loggedIn, isLoggedOut: !this.state.loggedIn,
+      navStyle: `padding:${scrollY > 40 ? '14px 48px' : '26px 48px'}; backdrop-filter:${scrollY > 10 ? 'blur(14px) saturate(140%)' : 'none'}; background:${scrollY > 10 ? 'oklch(99% 0.004 90 / 0.9)' : 'transparent'}; box-shadow:${scrollY > 10 ? '0 1px 0 oklch(88% 0.008 90)' : 'none'}; transition:all 0.4s cubic-bezier(.2,.7,.3,1);`,
+      navLogoStyle: `font-family:'Spectral',serif; font-weight:600; font-size:22px; letter-spacing:-0.01em; color:${scrollY > 10 ? 'oklch(18% 0.015 260)' : 'oklch(98% 0.005 90)'}; transition:color 0.3s ease;`,
+      navLinkStyle: `color:${scrollY > 10 ? 'oklch(30% 0.02 260)' : 'oklch(96% 0.008 90)'}; text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; flex-shrink:0; text-shadow:${scrollY > 10 ? 'none' : '0 1px 3px oklch(9% 0.012 260 / 0.5)'}; transition:color 0.3s ease;`,
+      megaItems: this.megaItems,
+      megaMenuStyle: `opacity:${this.state.megaOpen ? 1 : 0}; visibility:${this.state.megaOpen ? 'visible' : 'hidden'}; transform: translateY(${this.state.megaOpen ? '0' : '-6px'}); transition: opacity 0.2s ease, transform 0.2s ease;`,
+      onMegaEnter: () => this.setState({ megaOpen: true }),
+      onMegaLeave: () => this.setState({ megaOpen: false }),
+      reveal,
+      refs: this.refCallbacks,
+      sampleBreakdown: [
+        { label: 'Declared value (CIF)', value: '₦4,200,000' },
+        { label: 'Import duty (20%)', value: '₦840,000' },
+        { label: 'VAT (7.5%)', value: '₦378,000' },
+        { label: 'ETLS (0.5%)', value: '₦21,000' },
+        { label: 'Terminal handling', value: '₦45,000' },
+        { label: 'Agency fee', value: '₦65,000' }
+      ],
+      stages,
+      activeStageData: this.stagesData[this.state.activeStage],
+      dashboardStages,
+      faqs
+    };
+  }
+}
+</script>
+</body>
+</html>

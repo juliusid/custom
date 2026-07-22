@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: oklch(98% 0.006 90); }
+    ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); }
+  </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); overflow-x:hidden;">
+
+  <!-- NAV -->
+  <nav style="{{ navStyle }}position:fixed; top:0; left:0; right:0; z-index:100; display:grid; grid-template-columns:auto 1fr auto; align-items:center;">
+    <div style="font-family:'Spectral',serif; font-weight:600; font-size:22px; letter-spacing:-0.01em;">CheckCustoms<span style="color:oklch(40% 0.15 255);">.ng</span></div>
+    <div style="display:flex; align-items:center; gap:32px; min-width:0; justify-self:center;">
+      <div style="position:relative; flex-shrink:0;" onMouseEnter="{{ onMegaEnter }}" onMouseLeave="{{ onMegaLeave }}">
+        <a href="/estimators" style="color:oklch(30% 0.02 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap;">Estimators</a>
+        <div style="{{ megaMenuStyle }}position:absolute; top:28px; left:-24px; width:340px; background:oklch(99% 0.004 90); border:1px solid oklch(89% 0.008 90); box-shadow:0 24px 60px -20px oklch(20% 0.02 260 / 0.3); padding:12px;">
+          <sc-for list="{{ megaItems }}" as="item" hint-placeholder-count="3">
+            <a href="#how" style="display:flex; align-items:center; gap:14px; padding:12px; text-decoration:none; color:inherit;" style-hover="background:oklch(96% 0.008 240);">
+              <div style="width:34px; height:34px; background:{{ item.color }}; flex-shrink:0;"></div>
+              <div>
+                <div style="font-size:14px; font-weight:600; color:oklch(18% 0.015 260);">{{ item.label }}</div>
+                <div style="font-size:12px; color:oklch(45% 0.02 260); margin-top:2px;">{{ item.desc }}</div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+      <a href="/how-it-works" style="color:oklch(30% 0.02 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; flex-shrink:0;">How It Works</a>
+      <a href="/about" style="color:oklch(30% 0.02 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; flex-shrink:0;">About</a>
+      <a href="/contact" style="color:oklch(30% 0.02 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; flex-shrink:0;">Contact</a>
+    </div>
+    <div style="display:flex; align-items:center; gap:16px; flex-shrink:0; justify-self:end;">
+      <a href="/login" style="color:oklch(20% 0.015 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; padding:11px 18px; background:oklch(99% 0.004 90 / 0.92); border:1px solid oklch(80% 0.01 90); border-radius:2px;" style-hover="border-color:oklch(40% 0.15 255); color:oklch(40% 0.15 255);">Log in</a>
+      <a href="/signup" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-size:14px; font-weight:600; padding:11px 20px; border-radius:2px; white-space:nowrap;" style-hover="background:oklch(32% 0.15 255);">Get Started</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section style="position:relative; min-height:100vh; display:grid; grid-template-columns:1fr;">
+    <div style="position:absolute; inset:0; overflow:hidden;">
+      <div style="{{ heroImgStyle }}position:absolute; top:-8%; right:0; width:62%; height:118%; background:repeating-linear-gradient(128deg, oklch(38% 0.06 242) 0px, oklch(38% 0.06 242) 18px, oklch(32% 0.07 245) 18px, oklch(32% 0.07 245) 36px);">
+        <div style="position:absolute; bottom:32px; left:32px; background:oklch(14% 0.02 255 / 0.75); color:oklch(96% 0.01 90); font-family:'Work Sans',monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; padding:8px 12px;">Photo — Apapa Port, aerial container yard</div>
+      </div>
+    </div>
+    <div style="position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(100deg, oklch(98% 0.006 90) 0%, oklch(98% 0.006 90) 40%, oklch(98% 0.006 90 / 0) 64%);"></div>
+    <div style="position:relative; z-index:2; padding:180px 0 140px 64px; max-width:560px;">
+      <div style="font-family:'Work Sans',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:24px;">Nigerian Customs Clearing, Priced Upfront</div>
+      <h1 style="font-family:'Spectral',serif; font-size:76px; line-height:0.98; font-weight:600; margin:0 0 32px; letter-spacing:-0.02em;">Know the cost <span style="color:oklch(40% 0.15 255);">before</span> your goods land.</h1>
+      <p style="font-size:19px; line-height:1.6; color:oklch(32% 0.02 260); max-width:480px; margin:0 0 40px;">CheckCustoms.ng gives importers a transparent, itemised estimate of duty, levies and terminal charges against current Nigeria Customs Service tariffs — then, if you want it, a vetted agent to clear it for you.</p>
+      <div style="display:flex; align-items:center; gap:20px;">
+        <a href="#how" style="background:oklch(18% 0.02 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:16px; padding:18px 32px; border-radius:2px; display:inline-block;" style-hover="background:oklch(40% 0.15 255);">Check My Cost →</a>
+        <span style="font-size:14px; color:oklch(45% 0.02 260);">No account needed · 2 minutes</span>
+      </div>
+    </div>
+
+    <div style="position:absolute; right:64px; bottom:80px; z-index:3; width:300px; background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); box-shadow:0 24px 60px -20px oklch(20% 0.02 260 / 0.35); padding:24px;">
+      <div style="font-family:'Work Sans',monospace; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:14px;">Live estimate preview</div>
+      <div style="display:flex; justify-content:space-between; font-size:14px; margin-bottom:8px;"><span>Toyota Camry 2019</span><span style="color:oklch(45% 0.02 260);">Tin-Can</span></div>
+      <div style="display:flex; justify-content:space-between; align-items:baseline; padding-top:12px; border-top:1px dashed oklch(85% 0.008 90);">
+        <span style="font-size:13px; color:oklch(45% 0.02 260);">Estimated total</span>
+        <span style="font-family:'Spectral',serif; font-size:26px; font-weight:600; color:oklch(40% 0.15 255);">₦4.82M</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROBLEM -->
+  <section id="problem" style="{{ reveal.problem }}padding:180px 64px; display:grid; grid-template-columns:0.85fr 1.15fr; gap:80px; align-items:center;" ref="{{ refs.problem }}">
+    <div style="position:relative;">
+      <div style="width:100%; aspect-ratio:4/5; background:repeating-linear-gradient(112deg, oklch(64% 0.03 240) 0px, oklch(64% 0.03 240) 16px, oklch(56% 0.035 238) 16px, oklch(56% 0.035 238) 32px); position:relative;">
+        <div style="position:absolute; bottom:20px; left:20px; background:oklch(14% 0.02 255 / 0.75); color:oklch(96% 0.01 90); font-family:monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; padding:8px 12px;">Photo — clearing agent reviewing paperwork, Tin-Can</div>
+      </div>
+      <div style="position:absolute; top:-40px; right:-48px; background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); padding:28px 32px; width:180px;">
+        <div style="font-family:'Spectral',serif; font-size:40px; font-weight:700; line-height:1;">61%</div>
+        <div style="font-size:13px; margin-top:8px; line-height:1.4;">of first-time importers say they paid more than they were quoted, in Nigeria trade surveys.</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">The Problem</div>
+      <blockquote style="font-family:'Spectral',serif; font-size:38px; font-weight:500; line-height:1.28; margin:0 0 32px; font-style:normal; color:oklch(18% 0.015 260);">"Nobody tells you the real number until your container is already sitting at the terminal, and the clock is running on demurrage."</blockquote>
+      <p style="font-size:17px; line-height:1.7; color:oklch(32% 0.02 260); max-width:500px;">Clearing charges in Nigeria are built from a mix of NCS duty schedules, VAT, levies, terminal handling and agency fees that shift by HS code, port and season. Most importers only discover the true total after goods have already landed — by then, storage and demurrage are compounding daily.</p>
+    </div>
+  </section>
+
+  <!-- HOW IT WORKS -->
+  <section id="how" style="padding:160px 64px 200px; background:oklch(96% 0.008 240);">
+    <div style="{{ reveal.howHead }}max-width:640px; margin:0 0 100px;" ref="{{ refs.howHead }}">
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">How It Works</div>
+      <h2 style="font-family:'Spectral',serif; font-size:52px; font-weight:600; line-height:1.05; margin:0; letter-spacing:-0.015em;">Two moves. That's the whole product.</h2>
+    </div>
+
+    <div style="{{ reveal.step1 }}display:grid; grid-template-columns:0.55fr 1fr; gap:60px; align-items:start; margin-bottom:120px;" ref="{{ refs.step1 }}">
+      <div style="display:flex; flex-direction:column; gap:16px;">
+        <div style="font-family:'Spectral',serif; font-size:100px; font-weight:700; color:oklch(84% 0.03 250); line-height:0.8;">01</div>
+        <h3 style="font-family:'Spectral',serif; font-size:34px; font-weight:600; margin:0;">Know the cost</h3>
+        <p style="font-size:16px; line-height:1.7; color:oklch(32% 0.02 260); max-width:380px;">Tell us what you're importing, its declared value, and the port of entry. We match it against current NCS tariff bands and terminal schedules to itemise duty, VAT, levies and fees — instantly.</p>
+      </div>
+      <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:40px; box-shadow:0 30px 70px -30px oklch(20% 0.02 260 / 0.2);">
+        <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:24px;">Cost estimator — try it</div>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px;">
+          <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500;">Category
+            <select value="{{ category }}" onChange="{{ onCategoryChange }}" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;">
+              <sc-for list="{{ categoryOptions }}" as="opt" hint-placeholder-count="5">
+                <option value="{{ opt.id }}">{{ opt.label }}</option>
+              </sc-for>
+            </select>
+          </label>
+          <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500;">Port of entry
+            <select value="{{ city }}" onChange="{{ onCityChange }}" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;">
+              <option value="apapa">Apapa</option>
+              <option value="tincan">Tin-Can Island</option>
+              <option value="onne">Onne</option>
+              <option value="pharotel">PH Terminal</option>
+            </select>
+          </label>
+        </div>
+        <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:24px;">Declared value ({{ currencyLabel }})
+          <input type="number" value="{{ declaredValue }}" onChange="{{ onValueChange }}" placeholder="e.g. 8500000" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;"></input>
+        </label>
+        <a onClick="{{ onCalculate }}" style="background:oklch(18% 0.02 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:15px; padding:14px 28px; border-radius:2px; display:inline-block; cursor:pointer;" style-hover="background:oklch(40% 0.15 255);">Calculate estimate</a>
+
+        <sc-if value="{{ showResult }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top:28px; padding-top:24px; border-top:1px dashed oklch(85% 0.008 90);">
+            <div style="display:flex; justify-content:space-between; font-size:14px; padding:6px 0; color:oklch(35% 0.02 260);"><span>Import duty</span><span>{{ estimate.dutyFmt }}</span></div>
+            <div style="display:flex; justify-content:space-between; font-size:14px; padding:6px 0; color:oklch(35% 0.02 260);"><span>Levy</span><span>{{ estimate.levyFmt }}</span></div>
+            <div style="display:flex; justify-content:space-between; font-size:14px; padding:6px 0; color:oklch(35% 0.02 260);"><span>VAT (7.5%)</span><span>{{ estimate.vatFmt }}</span></div>
+            <div style="display:flex; justify-content:space-between; font-size:14px; padding:6px 0; color:oklch(35% 0.02 260);"><span>ETLS</span><span>{{ estimate.etlsFmt }}</span></div>
+            <div style="display:flex; justify-content:space-between; font-size:14px; padding:6px 0; color:oklch(35% 0.02 260);"><span>Terminal handling</span><span>{{ estimate.terminalFmt }}</span></div>
+            <div style="display:flex; justify-content:space-between; font-size:14px; padding:6px 0; color:oklch(35% 0.02 260);"><span>Agency fee</span><span>{{ estimate.agencyFmt }}</span></div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; padding-top:16px; margin-top:8px; border-top:1px solid oklch(85% 0.008 90);">
+              <span style="font-size:14px; font-weight:600;">Estimated total</span>
+              <span style="font-family:'Spectral',serif; font-size:28px; font-weight:700; color:oklch(40% 0.15 255);">{{ estimate.totalFmt }}</span>
+            </div>
+            <p style="font-size:12px; color:oklch(45% 0.02 260); margin:16px 0 0; line-height:1.5;">±10% target accuracy against final invoice. Estimates are indicative — final assessment is by the Nigeria Customs Service (NCS).</p>
+          </div>
+        </sc-if>
+      </div>
+    </div>
+
+    <div style="{{ reveal.step2 }}display:grid; grid-template-columns:1fr 0.55fr; gap:60px; align-items:start;" ref="{{ refs.step2 }}">
+      <div style="position:relative;">
+        <div style="width:100%; aspect-ratio:16/10; background:repeating-linear-gradient(70deg, oklch(40% 0.06 242) 0px, oklch(40% 0.06 242) 20px, oklch(33% 0.07 245) 20px, oklch(33% 0.07 245) 40px); position:relative;">
+          <div style="position:absolute; bottom:20px; left:20px; background:oklch(14% 0.02 255 / 0.75); color:oklch(96% 0.01 90); font-family:monospace; font-size:11px; letter-spacing:0.06em; text-transform:uppercase; padding:8px 12px;">Photo — vetted agent handing over cleared documents</div>
+        </div>
+      </div>
+      <div style="display:flex; flex-direction:column; gap:16px; padding-top:32px;">
+        <div style="font-family:'Spectral',serif; font-size:100px; font-weight:700; color:oklch(84% 0.03 250); line-height:0.8;">02</div>
+        <h3 style="font-family:'Spectral',serif; font-size:34px; font-weight:600; margin:0;">Get it cleared</h3>
+        <p style="font-size:16px; line-height:1.7; color:oklch(32% 0.02 260); max-width:380px;">Like what you see? Hand it to one of our vetted agents at the port of entry. You get status updates at each customs stage, and one invoice that matches the estimate — no surprise line items.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE -->
+  <section id="coverage" style="{{ reveal.coverage }}padding:180px 64px;" ref="{{ refs.coverage }}">
+    <div style="max-width:640px; margin:0 0 72px;">
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Coverage</div>
+      <h2 style="font-family:'Spectral',serif; font-size:52px; font-weight:600; line-height:1.05; margin:0 0 20px; letter-spacing:-0.015em;">Whatever's on the manifest.</h2>
+      <p style="font-size:17px; line-height:1.7; color:oklch(32% 0.02 260);">From a single used engine to a full RoRo shipment — if it's crossing a Nigerian port or airport, we price it.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(6, 1fr); grid-template-rows:repeat(2, 340px); gap:20px;">
+      <div style="grid-column:span 3; grid-row:span 2; position:relative; background:repeating-linear-gradient(100deg, oklch(42% 0.06 240) 0px, oklch(42% 0.06 240) 18px, oklch(35% 0.07 242) 18px, oklch(35% 0.07 242) 36px);">
+        <div style="position:absolute; bottom:20px; left:20px; background:oklch(14% 0.02 255 / 0.75); color:oklch(96% 0.01 90); font-family:monospace; font-size:11px; text-transform:uppercase; padding:8px 12px;">Photo — used vehicles lined up at Tin-Can terminal</div>
+        <div style="position:absolute; top:20px; left:20px; font-family:'Spectral',serif; font-size:26px; font-weight:600; color:oklch(98% 0.005 90);">Vehicles</div>
+      </div>
+      <div style="grid-column:span 3; grid-row:span 1; position:relative; background:repeating-linear-gradient(140deg, oklch(50% 0.05 235) 0px, oklch(50% 0.05 235) 16px, oklch(43% 0.06 238) 16px, oklch(43% 0.06 238) 32px);">
+        <div style="position:absolute; bottom:16px; left:20px; background:oklch(14% 0.02 255 / 0.75); color:oklch(96% 0.01 90); font-family:monospace; font-size:11px; text-transform:uppercase; padding:8px 12px;">Photo — 40ft containers stacked, Apapa</div>
+        <div style="position:absolute; top:16px; left:20px; font-family:'Spectral',serif; font-size:22px; font-weight:600; color:oklch(98% 0.005 90);">Containers · FCL/LCL</div>
+      </div>
+      <div style="grid-column:span 2; grid-row:span 1; position:relative; background:repeating-linear-gradient(60deg, oklch(58% 0.02 250) 0px, oklch(58% 0.02 250) 16px, oklch(50% 0.025 248) 16px, oklch(50% 0.025 248) 32px);">
+        <div style="position:absolute; bottom:14px; left:16px; background:oklch(14% 0.02 255 / 0.75); color:oklch(96% 0.01 90); font-family:monospace; font-size:10px; text-transform:uppercase; padding:6px 10px;">Photo — palletised general cargo</div>
+        <div style="position:absolute; top:14px; left:16px; font-family:'Spectral',serif; font-size:18px; font-weight:600; color:oklch(98% 0.005 90);">General goods</div>
+      </div>
+      <div style="grid-column:span 1; grid-row:span 1; position:relative; background:repeating-linear-gradient(160deg, oklch(46% 0.05 250) 0px, oklch(46% 0.05 250) 14px, oklch(38% 0.06 252) 14px, oklch(38% 0.06 252) 28px);">
+        <div style="position:absolute; bottom:12px; left:12px; background:oklch(14% 0.02 255 / 0.75); color:oklch(96% 0.01 90); font-family:monospace; font-size:9px; text-transform:uppercase; padding:5px 8px;">Photo — RoRo vessel loading ramp</div>
+        <div style="position:absolute; top:12px; left:12px; font-family:'Spectral',serif; font-size:15px; font-weight:600; color:oklch(98% 0.005 90);">RoRo</div>
+      </div>
+    </div>
+    <div style="margin-top:20px; display:grid; grid-template-columns:1fr; ">
+      <div style="position:relative; height:220px; background:repeating-linear-gradient(20deg, oklch(38% 0.07 250) 0px, oklch(38% 0.07 250) 22px, oklch(30% 0.08 252) 22px, oklch(30% 0.08 252) 44px);">
+        <div style="position:absolute; bottom:20px; left:24px; background:oklch(14% 0.02 255 / 0.75); color:oklch(96% 0.01 90); font-family:monospace; font-size:11px; text-transform:uppercase; padding:8px 12px;">Photo — air cargo pallet on the tarmac, MMIA</div>
+        <div style="position:absolute; top:20px; left:24px; font-family:'Spectral',serif; font-size:26px; font-weight:600; color:oklch(98% 0.005 90);">Air freight</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRUST & TRANSPARENCY -->
+  <section style="{{ reveal.trust }}padding:180px 64px; background:oklch(96% 0.008 240); display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;" ref="{{ refs.trust }}">
+    <div>
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Trust &amp; Transparency</div>
+      <h2 style="font-family:'Spectral',serif; font-size:48px; font-weight:600; line-height:1.08; margin:0 0 32px; letter-spacing:-0.015em;">Rates you can audit, not a black box.</h2>
+      <p style="font-size:17px; line-height:1.7; color:oklch(32% 0.02 260); margin:0 0 48px; max-width:460px;">Every estimate is versioned against the tariff schedule it was generated from. When NCS updates duty bands, our rates update within days — and we show you which version priced your quote.</p>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:32px;">
+        <div>
+          <div style="font-family:'Spectral',serif; font-size:52px; font-weight:700; color:oklch(40% 0.15 255); line-height:1;">±10%</div>
+          <div style="font-size:14px; color:oklch(35% 0.02 260); margin-top:10px;">target accuracy vs. final NCS invoice</div>
+        </div>
+        <div>
+          <div style="font-family:'Spectral',serif; font-size:52px; font-weight:700; color:oklch(40% 0.15 255); line-height:1;">v2.4</div>
+          <div style="font-size:14px; color:oklch(35% 0.02 260); margin-top:10px;">current tariff schedule version, updated this quarter</div>
+        </div>
+      </div>
+    </div>
+    <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:36px; box-shadow:0 30px 80px -30px oklch(20% 0.02 260 / 0.25);">
+      <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:20px;">Sample itemised breakdown — Tariff v2.4</div>
+      <sc-for list="{{ sampleBreakdown }}" as="line" hint-placeholder-count="6">
+        <div style="display:flex; justify-content:space-between; padding:11px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;">
+          <span style="color:oklch(30% 0.02 260);">{{ line.label }}</span>
+          <span style="color:oklch(35% 0.02 260); font-variant-numeric:tabular-nums;">{{ line.value }}</span>
+        </div>
+      </sc-for>
+      <div style="display:flex; justify-content:space-between; padding-top:20px; margin-top:8px;">
+        <span style="font-weight:600; font-size:15px;">Total landed cost</span>
+        <span style="font-family:'Spectral',serif; font-weight:700; font-size:24px; color:oklch(40% 0.15 255);">₦6,140,000</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- MANAGED SERVICE / AGENTS -->
+  <section id="agents" style="{{ reveal.agents }}padding:180px 64px;" ref="{{ refs.agents }}">
+    <div style="display:grid; grid-template-columns:0.9fr 1.1fr; gap:80px; align-items:center;">
+      <div>
+        <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Managed Service</div>
+        <h2 style="font-family:'Spectral',serif; font-size:48px; font-weight:600; line-height:1.08; margin:0 0 28px; letter-spacing:-0.015em;">We stand behind the quote — and the clearing agent.</h2>
+        <p style="font-size:17px; line-height:1.7; color:oklch(32% 0.02 260); margin:0 0 32px; max-width:460px;">Every agent on our network is vetted for licensing, port relationships and track record before they touch your shipment. You deal with CheckCustoms; we deal with the agent.</p>
+        <div style="display:flex; gap:40px;">
+          <div>
+            <div style="font-family:'Spectral',serif; font-size:36px; font-weight:700; color:oklch(18% 0.015 260);">30+</div>
+            <div style="font-size:13px; color:oklch(45% 0.02 260); margin-top:6px;">vetted agents, Lagos ports</div>
+          </div>
+          <div>
+            <div style="font-family:'Spectral',serif; font-size:36px; font-weight:700; color:oklch(18% 0.015 260);">4.3/5</div>
+            <div style="font-size:13px; color:oklch(45% 0.02 260); margin-top:6px;">early customer satisfaction</div>
+          </div>
+        </div>
+      </div>
+      <sc-if value="{{ showAgentGrid }}" hint-placeholder-val="{{ true }}">
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+          <div style="aspect-ratio:3/4; background:repeating-linear-gradient(115deg, oklch(56% 0.03 240) 0px, oklch(56% 0.03 240) 15px, oklch(48% 0.035 238) 15px, oklch(48% 0.035 238) 30px); position:relative; align-self:end;">
+            <div style="position:absolute; bottom:14px; left:14px; background:oklch(14% 0.02 255 / 0.75); color:oklch(96% 0.01 90); font-family:monospace; font-size:10px; text-transform:uppercase; padding:6px 10px;">Photo — agent at NCS desk, Apapa</div>
+          </div>
+          <div style="aspect-ratio:3/4; background:repeating-linear-gradient(65deg, oklch(50% 0.025 250) 0px, oklch(50% 0.025 250) 15px, oklch(42% 0.03 248) 15px, oklch(42% 0.03 248) 30px); position:relative; margin-top:60px;">
+            <div style="position:absolute; bottom:14px; left:14px; background:oklch(14% 0.02 255 / 0.75); color:oklch(96% 0.01 90); font-family:monospace; font-size:10px; text-transform:uppercase; padding:6px 10px;">Photo — handshake, importer and agent</div>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ showAgentGridFalse }}" hint-placeholder-val="{{ false }}">
+        <div style="aspect-ratio:4/3; background:repeating-linear-gradient(100deg, oklch(56% 0.03 240) 0px, oklch(56% 0.03 240) 18px, oklch(48% 0.035 238) 18px, oklch(48% 0.035 238) 36px); position:relative;">
+          <div style="position:absolute; bottom:20px; left:20px; background:oklch(14% 0.02 255 / 0.75); color:oklch(96% 0.01 90); font-family:monospace; font-size:11px; text-transform:uppercase; padding:8px 12px;">Photo — agent and importer reviewing cleared shipment</div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- STATS BAND -->
+  <section style="{{ reveal.stats }}background:oklch(20% 0.05 255); padding:120px 64px; display:grid; grid-template-columns:repeat(4, 1fr); gap:40px;" ref="{{ refs.stats }}">
+    <div>
+      <div style="font-family:'Spectral',serif; font-size:60px; font-weight:700; color:oklch(99% 0.004 90); line-height:1;">25,000+</div>
+      <div style="font-size:14px; color:oklch(75% 0.03 250); margin-top:14px;">estimate sessions targeted monthly at launch</div>
+    </div>
+    <div>
+      <div style="font-family:'Spectral',serif; font-size:60px; font-weight:700; color:oklch(99% 0.004 90); line-height:1;">30+</div>
+      <div style="font-size:14px; color:oklch(75% 0.03 250); margin-top:14px;">vetted agents across Lagos-area ports</div>
+    </div>
+    <div>
+      <div style="font-family:'Spectral',serif; font-size:60px; font-weight:700; color:oklch(99% 0.004 90); line-height:1;">±10%</div>
+      <div style="font-size:14px; color:oklch(75% 0.03 250); margin-top:14px;">estimate accuracy vs. final invoice</div>
+    </div>
+    <div>
+      <div style="font-family:'Spectral',serif; font-size:60px; font-weight:700; color:oklch(99% 0.004 90); line-height:1;">4.3/5</div>
+      <div style="font-size:14px; color:oklch(75% 0.03 250); margin-top:14px;">early customer satisfaction</div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="{{ reveal.finalCta }}background:oklch(14% 0.02 255); color:oklch(97% 0.005 90); padding:200px 64px; text-align:left; position:relative; overflow:hidden;" ref="{{ refs.finalCta }}">
+    <div style="max-width:720px; position:relative; z-index:2;">
+      <h2 style="font-family:'Spectral',serif; font-size:64px; font-weight:600; line-height:1.05; margin:0 0 36px; letter-spacing:-0.02em;">Stop guessing what customs will cost you.</h2>
+      <p style="font-size:19px; line-height:1.6; color:oklch(78% 0.01 90); margin:0 0 44px; max-width:560px;">Run a free estimate against the current NCS tariff schedule in under two minutes — no account, no obligation.</p>
+      <a href="#how" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:17px; padding:20px 40px; border-radius:2px; display:inline-block;" style-hover="background:oklch(50% 0.15 250);">Check My Cost →</a>
+    </div>
+    <div style="position:absolute; right:0; top:0; width:440px; height:100%; background:repeating-linear-gradient(135deg, oklch(22% 0.03 255) 0px, oklch(22% 0.03 255) 20px, oklch(18% 0.03 255) 20px, oklch(18% 0.03 255) 40px);">
+      <div style="position:absolute; bottom:24px; right:24px; background:oklch(10% 0.02 255 / 0.7); color:oklch(90% 0.01 90); font-family:monospace; font-size:10px; letter-spacing:0.06em; text-transform:uppercase; padding:6px 10px;">Photo — night container terminal, cranes lit</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:oklch(14% 0.02 255); color:oklch(90% 0.01 90); padding:64px 64px 40px; display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; gap:40px; border-top:1px solid oklch(24% 0.03 255);">
+    <div>
+      <div style="font-family:'Spectral',serif; font-weight:600; font-size:20px; margin-bottom:14px; color:oklch(97% 0.005 90);">CheckCustoms<span style="color:oklch(60% 0.12 250);">.ng</span></div>
+      <p style="font-size:13px; color:oklch(65% 0.015 90); line-height:1.6; max-width:240px;">Transparent customs clearing estimates and managed clearing for importers across Nigeria.</p>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Contact</div>
+      <div style="font-size:14px; color:oklch(88% 0.008 90); line-height:2;">
+        <div>WhatsApp: +234 800 CUSTOMS</div>
+        <div>Phone: +234 800 XXX XXXX</div>
+        <div>hello@checkcustoms.ng</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Product</div>
+      <div style="font-size:14px; color:oklch(88% 0.008 90); line-height:2;">
+        <div><a href="#how" style="color:inherit; text-decoration:none;">Get an estimate</a></div>
+        <div><a href="#agents" style="color:inherit; text-decoration:none;">Managed clearing</a></div>
+        <div><a href="#coverage" style="color:inherit; text-decoration:none;">Coverage</a></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Legal</div>
+      <p style="font-size:12px; color:oklch(60% 0.015 90); line-height:1.7; max-width:220px;">Estimates are indicative only; final assessment and clearance rest with the Nigeria Customs Service (NCS). We do not store payment card data.</p>
+    </div>
+  </footer>
+  <div style="text-align:center; padding:20px; font-size:12px; color:oklch(55% 0.015 90); background:oklch(12% 0.02 255);">© 2026 CheckCustoms.ng — prototype concept, Lagos, Nigeria.</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;revealMotionEnabled&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Behavior&quot;}, &quot;estimateCurrency&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;default&quot;: &quot;NGN&quot;, &quot;options&quot;: [&quot;NGN&quot;, &quot;USD&quot;], &quot;tsType&quot;: &quot;string&quot;, &quot;section&quot;: &quot;Behavior&quot;}, &quot;showAgentPhotosGrid&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: true, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Behavior&quot;}}">
+class Component extends DCLogic {
+  state = {
+    scrollY: 0,
+    visible: {},
+    category: 'containers',
+    city: 'apapa',
+    declaredValue: '3200000',
+    showResult: false,
+    megaOpen: false
+  };
+
+  categoryOptions = [
+    { id: 'vehicles', label: 'Vehicles', dutyRate: 0.35, levyRate: 0.15 },
+    { id: 'containers', label: 'Containers (FCL/LCL)', dutyRate: 0.20, levyRate: 0 },
+    { id: 'general', label: 'General goods', dutyRate: 0.20, levyRate: 0 },
+    { id: 'roro', label: 'RoRo', dutyRate: 0.35, levyRate: 0.10 },
+    { id: 'air', label: 'Air freight', dutyRate: 0.20, levyRate: 0 }
+  ];
+
+  megaItems = [
+    { label: 'Vehicle Estimator', desc: 'Duty, levy & terminal fees for cars, trucks & bikes', color: 'oklch(40% 0.15 255)' },
+    { label: 'Container Estimator', desc: 'FCL & LCL landed-cost breakdown by HS code', color: 'oklch(50% 0.05 240)' },
+    { label: 'General Goods Estimator', desc: 'Palletised and loose cargo, any port of entry', color: 'oklch(65% 0.02 250)' }
+  ];
+
+  sectionKeys = ['problem','howHead','step1','step2','coverage','trust','agents','stats','finalCta'];
+  nodeRefs = {};
+  observer = null;
+
+  componentDidMount() {
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const key = e.target.dataset.revealKey;
+          if (key) this.setState(s => ({ visible: { ...s.visible, [key]: true } }));
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
+    Object.keys(this.nodeRefs).forEach(k => this.observer.observe(this.nodeRefs[k]));
+
+    // catch anything already on-screen at mount that the observer might miss
+    requestAnimationFrame(() => {
+      const vh = window.innerHeight;
+      Object.keys(this.nodeRefs).forEach(k => {
+        const r = this.nodeRefs[k].getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) {
+          this.setState(s => ({ visible: { ...s.visible, [k]: true } }));
+        }
+      });
+    });
+
+    this.onScroll = () => {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => {
+        this.setState({ scrollY: window.scrollY });
+        this._raf = null;
+      });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+
+  componentWillUnmount() {
+    if (this.observer) this.observer.disconnect();
+    if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+  }
+
+  registerNode(key, node) {
+    if (!node) return;
+    this.nodeRefs[key] = node;
+    node.dataset.revealKey = key;
+    if (this.observer) this.observer.observe(node);
+  }
+
+  reveal(key, distance) {
+    const enabled = this.props.revealMotionEnabled ?? true;
+    const on = !enabled || this.state.visible[key];
+    return {
+      opacity: on ? 1 : 0,
+      transform: on ? 'translateY(0)' : `translateY(${distance || 28}px)`,
+      transition: 'opacity 0.9s cubic-bezier(.16,.8,.24,1), transform 0.9s cubic-bezier(.16,.8,.24,1)'
+    };
+  }
+
+  fmt(n) {
+    const currency = this.props.estimateCurrency ?? 'NGN';
+    if (currency === 'USD') {
+      return '$' + (n / 1550).toLocaleString('en-US', { maximumFractionDigits: 0 });
+    }
+    return '₦' + Math.round(n).toLocaleString('en-NG');
+  }
+
+  calcEstimate() {
+    const cat = this.categoryOptions.find(c => c.id === this.state.category) || this.categoryOptions[1];
+    const value = parseFloat(this.state.declaredValue) || 0;
+    const duty = value * cat.dutyRate;
+    const levy = value * cat.levyRate;
+    const vat = (value + duty) * 0.075;
+    const etls = value * 0.005;
+    const terminal = 45000;
+    const agency = 65000;
+    const total = value + duty + levy + vat + etls + terminal + agency;
+    return {
+      dutyFmt: this.fmt(duty), levyFmt: this.fmt(levy), vatFmt: this.fmt(vat),
+      etlsFmt: this.fmt(etls), terminalFmt: this.fmt(terminal), agencyFmt: this.fmt(agency),
+      totalFmt: this.fmt(total)
+    };
+  }
+
+  renderVals() {
+    const scrollY = this.state.scrollY;
+    const refs = {};
+    this.sectionKeys.forEach(k => { refs[k] = (node) => this.registerNode(k, node); });
+    const reveal = {};
+    this.sectionKeys.forEach(k => { reveal[k] = this.reveal(k); });
+
+    return {
+      navStyle: `padding:${scrollY > 40 ? '14px 48px' : '26px 48px'}; backdrop-filter:${scrollY > 10 ? 'blur(14px) saturate(140%)' : 'none'}; background:${scrollY > 10 ? 'oklch(99% 0.004 90 / 0.9)' : 'transparent'}; box-shadow:${scrollY > 10 ? '0 1px 0 oklch(88% 0.008 90)' : 'none'}; transition:all 0.4s cubic-bezier(.2,.7,.3,1);`,
+      heroImgStyle: `transform: translateY(${Math.min(scrollY * 0.12, 90)}px) scale(1.08);`,
+      refs,
+      reveal,
+      category: this.state.category,
+      city: this.state.city,
+      declaredValue: this.state.declaredValue,
+      categoryOptions: this.categoryOptions,
+      megaItems: this.megaItems,
+      megaMenuStyle: `opacity:${this.state.megaOpen ? 1 : 0}; visibility:${this.state.megaOpen ? 'visible' : 'hidden'}; transform: translateY(${this.state.megaOpen ? '0' : '-6px'}); transition: opacity 0.2s ease, transform 0.2s ease;`,
+      onMegaEnter: () => this.setState({ megaOpen: true }),
+      onMegaLeave: () => this.setState({ megaOpen: false }),
+      currencyLabel: (this.props.estimateCurrency ?? 'NGN') === 'USD' ? 'USD' : 'NGN',
+      onCategoryChange: (e) => this.setState({ category: e.target.value, showResult: false }),
+      onCityChange: (e) => this.setState({ city: e.target.value }),
+      onValueChange: (e) => this.setState({ declaredValue: e.target.value, showResult: false }),
+      onCalculate: () => this.setState({ showResult: true }),
+      showResult: this.state.showResult,
+      estimate: this.calcEstimate(),
+      showAgentGrid: this.props.showAgentPhotosGrid ?? true,
+      showAgentGridFalse: !(this.props.showAgentPhotosGrid ?? true),
+      sampleBreakdown: [
+        { label: 'Declared value (CIF)', value: '₦4,200,000' },
+        { label: 'Import duty (20%)', value: '₦840,000' },
+        { label: 'VAT (7.5%)', value: '₦378,000' },
+        { label: 'ETLS (0.5%)', value: '₦21,000' },
+        { label: 'Terminal handling', value: '₦45,000' },
+        { label: 'Agency fee', value: '₦65,000' }
+      ]
+    };
+  }
+}
+</script>
+</body>
+</html>

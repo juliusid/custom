@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: oklch(98% 0.006 90); }
+    ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); }
+  </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); overflow-x:hidden;">
+
+  <!-- NAV -->
+  <nav style="{{ navStyle }}position:fixed; top:0; left:0; right:0; z-index:100; display:grid; grid-template-columns:auto 1fr auto; align-items:center;">
+    <a href="CheckCustoms Landing.dc.html" style="font-family:'Spectral',serif; font-weight:600; font-size:22px; letter-spacing:-0.01em; color:oklch(18% 0.015 260); text-decoration:none;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <div style="display:flex; align-items:center; gap:32px; min-width:0; justify-self:center;">
+      <div style="position:relative; flex-shrink:0; padding-bottom:28px; margin-bottom:-28px;" onMouseEnter="{{ onMegaEnter }}" onMouseLeave="{{ onMegaLeave }}">
+        <a href="CheckCustoms Goods Estimator.dc.html" style="color:oklch(30% 0.02 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap;">Estimators</a>
+        <div style="{{ megaMenuStyle }}position:absolute; top:28px; left:-24px; width:340px; background:oklch(99% 0.004 90); border:1px solid oklch(89% 0.008 90); box-shadow:0 24px 60px -20px oklch(20% 0.02 260 / 0.3); padding:12px;">
+          <a href="CheckCustoms Vehicle Estimator.dc.html" style="display:flex; align-items:center; gap:14px; padding:12px; text-decoration:none; color:inherit;" style-hover="background:oklch(96% 0.008 240);">
+            <div style="width:34px; height:34px; background:oklch(40% 0.15 255); flex-shrink:0;"></div>
+            <div>
+              <div style="font-size:14px; font-weight:600; color:oklch(18% 0.015 260);">Vehicle Estimator</div>
+              <div style="font-size:12px; color:oklch(45% 0.02 260); margin-top:2px;">Duty, levy & terminal fees for cars, trucks & bikes</div>
+            </div>
+          </a>
+          <a href="CheckCustoms Goods Estimator.dc.html" style="display:flex; align-items:center; gap:14px; padding:12px; text-decoration:none; color:inherit;" style-hover="background:oklch(96% 0.008 240);">
+            <div style="width:34px; height:34px; background:oklch(50% 0.05 240); flex-shrink:0;"></div>
+            <div>
+              <div style="font-size:14px; font-weight:600; color:oklch(18% 0.015 260);">Container Estimator</div>
+              <div style="font-size:12px; color:oklch(45% 0.02 260); margin-top:2px;">FCL & LCL landed-cost breakdown by HS code</div>
+            </div>
+          </a>
+          <a href="CheckCustoms Goods Estimator.dc.html" style="display:flex; align-items:center; gap:14px; padding:12px; text-decoration:none; color:inherit;" style-hover="background:oklch(96% 0.008 240);">
+            <div style="width:34px; height:34px; background:oklch(65% 0.02 250); flex-shrink:0;"></div>
+            <div>
+              <div style="font-size:14px; font-weight:600; color:oklch(18% 0.015 260);">General Goods Estimator</div>
+              <div style="font-size:12px; color:oklch(45% 0.02 260); margin-top:2px;">Palletised and loose cargo, any port of entry</div>
+            </div>
+          </a>
+        </div>
+      </div>
+      <a href="CheckCustoms How It Works.dc.html" style="color:oklch(30% 0.02 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; flex-shrink:0;">How It Works</a>
+      <a href="CheckCustoms About.dc.html" style="color:oklch(30% 0.02 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; flex-shrink:0;">About</a>
+      <a href="CheckCustoms Contact.dc.html" style="color:oklch(30% 0.02 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; flex-shrink:0;">Contact</a>
+    </div>
+    <sc-if value="{{ isLoggedOut }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; align-items:center; gap:16px; flex-shrink:0; justify-self:end;">
+        <a href="CheckCustoms Login.dc.html" style="color:oklch(20% 0.015 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; padding:11px 18px; background:oklch(99% 0.004 90 / 0.92); border:1px solid oklch(80% 0.01 90); border-radius:999px;" style-hover="border-color:oklch(40% 0.15 255); color:oklch(40% 0.15 255);">Log in</a>
+        <a href="CheckCustoms Get Started.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-size:14px; font-weight:600; padding:11px 20px; border-radius:999px; white-space:nowrap;" style-hover="background:oklch(32% 0.15 255);">Get Started</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isLoggedIn }}" hint-placeholder-val="{{ false }}">
+      <div style="justify-self:end;">
+        <a href="CheckCustoms Dashboard.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-size:14px; font-weight:600; padding:11px 20px; border-radius:999px; white-space:nowrap;" style-hover="background:oklch(32% 0.15 255);">Dashboard →</a>
+      </div>
+    </sc-if>
+  </nav>
+
+  <!-- HERO/INTRO -->
+  <section style="padding:180px 64px 56px;">
+    <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Container & Goods Estimator</div>
+    <h1 style="font-family:'Spectral',serif; font-size:48px; font-weight:600; line-height:1.1; margin:0 0 20px; letter-spacing:-0.015em; max-width:680px;">What will it cost to clear your shipment<span style="color:oklch(50% 0.16 250);">?</span></h1>
+    <p style="font-size:17px; line-height:1.6; color:oklch(32% 0.02 260); max-width:560px;">Covers containers, general cargo, RoRo, and air freight — any goods, priced by HS code.</p>
+  </section>
+
+  <!-- FORM + RESULTS -->
+  <section style="padding:0 64px 100px; max-width:800px; margin:0 auto;">
+    <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:40px; box-shadow:0 30px 80px -30px oklch(20% 0.02 260 / 0.2);">
+      <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:24px;">Shipment details</div>
+
+      <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:20px;">Shipment type
+        <select value="{{ shipmentType }}" onChange="{{ onShipmentTypeChange }}" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;">
+          <sc-for list="{{ shipmentTypes }}" as="t" hint-placeholder-count="6">
+            <option value="{{ t }}">{{ t }}</option>
+          </sc-for>
+        </select>
+      </label>
+
+      <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:20px;">Goods category / HS code
+        <select value="{{ category }}" onChange="{{ onCategoryChange }}" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;">
+          <sc-for list="{{ categories }}" as="c" hint-placeholder-count="9">
+            <option value="{{ c }}">{{ c }}</option>
+          </sc-for>
+        </select>
+      </label>
+
+      <sc-if value="{{ showHsSearch }}" hint-placeholder-val="{{ false }}">
+        <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:20px;">HS code or product description
+          <input type="text" value="{{ hsSearch }}" onChange="{{ onHsSearchChange }}" placeholder="e.g. 8471.30 or 'laptop computers'" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;"></input>
+        </label>
+      </sc-if>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:20px;">
+        <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500;">Declared / estimated value (₦)
+          <input type="number" value="{{ declaredValue }}" onChange="{{ onValueChange }}" placeholder="e.g. 5000000" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;"></input>
+        </label>
+        <sc-if value="{{ showQuantity }}" hint-placeholder-val="{{ false }}">
+          <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500;">Quantity or weight
+            <input type="text" value="{{ quantity }}" onChange="{{ onQuantityChange }}" placeholder="e.g. 40 cartons / 1,200kg" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;"></input>
+          </label>
+        </sc-if>
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; margin-bottom:{{ portMarginBottom }}px;">
+        <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500;">{{ portLabel }}
+          <select value="{{ port }}" onChange="{{ onPortChange }}" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;">
+            <sc-for list="{{ portOptions }}" as="p" hint-placeholder-count="2">
+              <option value="{{ p }}">{{ p }}</option>
+            </sc-for>
+          </select>
+        </label>
+        <sc-if value="{{ showDestination }}" hint-placeholder-val="{{ false }}">
+          <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500;">Destination
+            <select value="{{ destination }}" onChange="{{ onDestinationChange }}" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;">
+              <option value="Within Lagos">Within Lagos</option>
+              <option value="Outside Lagos">Outside Lagos</option>
+            </select>
+          </label>
+        </sc-if>
+      </div>
+
+      <a onClick="{{ onSubmit }}" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:15px; padding:14px 32px; border-radius:999px; display:inline-block; cursor:pointer;" style-hover="background:oklch(32% 0.15 255);">Calculate estimate</a>
+    </div>
+
+    <!-- RESULTS -->
+    <sc-if value="{{ showResults }}" hint-placeholder-val="{{ false }}">
+      <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:40px; margin-top:24px; box-shadow:0 30px 80px -30px oklch(20% 0.02 260 / 0.2);">
+        <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:20px;">Statutory charges — {{ result.categoryLabel }}</div>
+        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>Import duty ({{ result.dutyRateLabel }})</span><span style="font-variant-numeric:tabular-nums;">{{ result.dutyFmt }}</span></div>
+        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>ETLS (0.5%)</span><span style="font-variant-numeric:tabular-nums;">{{ result.etlsFmt }}</span></div>
+        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>VAT (7.5%)</span><span style="font-variant-numeric:tabular-nums;">{{ result.vatFmt }}</span></div>
+        <div style="display:flex; justify-content:space-between; padding-top:16px; margin-top:4px; font-size:14px; font-weight:600;"><span>Statutory subtotal</span><span style="font-variant-numeric:tabular-nums;">{{ result.statutorySubtotalFmt }}</span></div>
+
+        <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin:32px 0 20px;">Standard charges</div>
+        <sc-if value="{{ result.showTerminalDeposit }}" hint-placeholder-val="{{ false }}">
+          <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>Terminal deposit ({{ result.terminalDepositLabel }})</span><span style="font-variant-numeric:tabular-nums;">{{ result.terminalDepositFmt }}</span></div>
+        </sc-if>
+        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>Shipping-line fee</span><span style="font-variant-numeric:tabular-nums;">{{ result.shippingFeeFmt }}</span></div>
+        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>Customs documentation</span><span style="font-variant-numeric:tabular-nums;">{{ result.docsFmt }}</span></div>
+        <div style="display:flex; justify-content:space-between; padding:10px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>Agency fee</span><span style="font-variant-numeric:tabular-nums;">{{ result.agencyFmt }}</span></div>
+        <div style="display:flex; justify-content:space-between; padding-top:16px; margin-top:4px; font-size:14px; font-weight:600;"><span>Standard charges subtotal</span><span style="font-variant-numeric:tabular-nums;">{{ result.standardSubtotalFmt }}</span></div>
+
+        <div style="margin-top:24px; background:oklch(96% 0.008 240); border-left:3px solid oklch(65% 0.15 25); padding:16px 20px; font-size:13px; color:oklch(30% 0.02 260); line-height:1.6;">Demurrage risk: terminal and shipping-line charges accrue daily if clearing is delayed past the free period.</div>
+
+        <div style="margin-top:36px; padding-top:28px; border-top:2px solid oklch(18% 0.015 260);">
+          <div style="font-size:13px; color:oklch(45% 0.02 260); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.06em;">Estimated total (range)</div>
+          <div style="font-family:'Spectral',serif; font-size:44px; font-weight:700; color:oklch(40% 0.15 255); line-height:1;">{{ result.rangeFmt }}</div>
+        </div>
+
+        <div style="display:flex; gap:32px; margin-top:24px; padding-top:20px; border-top:1px dashed oklch(85% 0.008 90); font-size:12px; color:oklch(50% 0.02 260); font-family:monospace; flex-wrap:wrap;">
+          <span>FX: ₦1,550/$1</span>
+          <span>Rules engine v2.4</span>
+          <span>Generated {{ result.timestamp }}</span>
+        </div>
+
+        <p style="font-size:13px; color:oklch(45% 0.02 260); margin:20px 0 0; line-height:1.6; background:oklch(96% 0.008 240); padding:14px 18px;">Figures are indicative — goods valuation is HS-classification-dependent. Final assessment is by the Nigeria Customs Service (NCS).</p>
+
+        <div style="display:flex; align-items:center; gap:24px; margin-top:28px; flex-wrap:wrap;">
+          <a href="{{ clearHref }}" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:15px; padding:14px 28px; border-radius:999px; display:inline-block;" style-hover="background:oklch(32% 0.15 255);">Get a firmed-up quote →</a>
+          <a onClick="{{ onSaveEmail }}" style="color:oklch(40% 0.15 255); text-decoration:none; font-weight:600; font-size:14px; cursor:pointer;">Save or email this estimate</a>
+        </div>
+        <sc-if value="{{ saved }}" hint-placeholder-val="{{ false }}">
+          <div style="font-size:13px; color:oklch(40% 0.15 255); margin-top:12px;">Estimate link sent — check your inbox.</div>
+        </sc-if>
+      </div>
+    </sc-if>
+  </section>
+
+  <!-- COVERAGE REASSURANCE -->
+  <section style="{{ reveal.coverage }}" ref="{{ refs.coverage }}">
+    <div style="text-align:center; max-width:680px; margin:0 auto;">
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Coverage</div>
+      <h2 style="font-family:'Spectral',serif; font-size:34px; font-weight:600; line-height:1.2; margin:0 0 16px; letter-spacing:-0.015em;">Whatever's on the manifest — if it has an HS code, we can estimate and clear it<span style="color:oklch(50% 0.16 250);">.</span></h2>
+      <p style="font-size:15px; line-height:1.7; color:oklch(35% 0.02 260); max-width:560px; margin:0 auto;">Vehicles are just the easiest category to model. Every category of import is treated equally, driven by HS code.</p>
+    </div>
+  </section>
+
+  <!-- TRUST REINFORCEMENT -->
+  <section style="{{ reveal.trust }}" ref="{{ refs.trust }}">
+    <div>
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Trust &amp; Transparency</div>
+      <h2 style="font-family:'Spectral',serif; font-size:40px; font-weight:600; line-height:1.1; margin:0 0 24px; letter-spacing:-0.015em;">Rates you can audit, not a black box<span style="color:oklch(50% 0.16 250);">.</span></h2>
+      <p style="font-size:16px; line-height:1.7; color:oklch(32% 0.02 260); max-width:460px;">Every estimate is versioned against the tariff schedule it was generated from. When NCS updates duty bands, our rates update within days — and we show you which version priced your quote.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px;">
+      <div style="background:oklch(96% 0.008 240); border-top:3px solid oklch(40% 0.15 255); padding:28px 24px;">
+        <div style="font-family:'Spectral',serif; font-size:40px; font-weight:700; color:oklch(40% 0.15 255); line-height:1;">±10%</div>
+        <div style="font-size:14px; color:oklch(35% 0.02 260); margin-top:14px; line-height:1.4;">target accuracy vs. final NCS invoice</div>
+      </div>
+      <div style="background:oklch(96% 0.008 240); border-top:3px solid oklch(40% 0.15 255); padding:28px 24px;">
+        <div style="font-family:'Spectral',serif; font-size:40px; font-weight:700; color:oklch(40% 0.15 255); line-height:1;">v2.4</div>
+        <div style="font-size:14px; color:oklch(35% 0.02 260); margin-top:14px; line-height:1.4;">current tariff schedule version</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:oklch(11% 0.012 260); color:oklch(90% 0.01 90); padding:64px 64px 40px; display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; gap:40px; border-top:1px solid oklch(22% 0.012 260);">
+    <div>
+      <div style="font-family:'Spectral',serif; font-weight:600; font-size:20px; margin-bottom:14px; color:oklch(97% 0.005 90);">CheckCustoms<span style="color:oklch(60% 0.12 250);">.ng</span></div>
+      <p style="font-size:13px; color:oklch(65% 0.015 90); line-height:1.6; max-width:240px;">Transparent customs clearing estimates and managed clearing for importers across Nigeria.</p>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Contact</div>
+      <div style="font-size:14px; color:oklch(88% 0.008 90); line-height:2;">
+        <div>WhatsApp: +234 800 CUSTOMS</div>
+        <div>Phone: +234 800 XXX XXXX</div>
+        <div>hello@checkcustoms.ng</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Product</div>
+      <div style="font-size:14px; color:oklch(88% 0.008 90); line-height:2;">
+        <div><a href="CheckCustoms Landing.dc.html#how" style="color:inherit; text-decoration:none;">Get an estimate</a></div>
+        <div><a href="CheckCustoms Landing.dc.html#agents" style="color:inherit; text-decoration:none;">Managed clearing</a></div>
+        <div><a href="CheckCustoms Landing.dc.html#coverage" style="color:inherit; text-decoration:none;">Coverage</a></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Legal</div>
+      <p style="font-size:12px; color:oklch(60% 0.015 90); line-height:1.7; max-width:220px;">Estimates are indicative only; final assessment and clearance rest with the Nigeria Customs Service (NCS). We do not store payment card data.</p>
+    </div>
+  </footer>
+  <div style="text-align:center; padding:20px; font-size:12px; color:oklch(55% 0.015 90); background:oklch(9% 0.01 260);">© 2026 CheckCustoms.ng — prototype concept, Lagos, Nigeria.</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { loggedIn: (typeof localStorage !== 'undefined' && localStorage.getItem('cc_auth') === '1'),
+    scrollY: 0, visible: {}, megaOpen: false,
+    shipmentType: 'Full container 20ft (FCL)', category: 'Electronics', hsSearch: '',
+    declaredValue: '5000000', quantity: '', port: 'Apapa', destination: 'Within Lagos',
+    result: null, saved: false
+  };
+
+  shipmentTypes = ['Full container 20ft (FCL)', 'Full container 40ft (FCL)', 'LCL (part load)', 'General cargo', 'RoRo', 'Air freight'];
+  categories = ['Electronics', 'Machinery & equipment', 'Motorcycles & tricycles', 'Spare parts', 'Building materials', 'Textiles & apparel', 'Food & agro products', 'Personal effects', 'Other (search by HS code)'];
+  dutyRates = { 'Electronics': 0.20, 'Machinery & equipment': 0.10, 'Motorcycles & tricycles': 0.35, 'Spare parts': 0.20, 'Building materials': 0.15, 'Textiles & apparel': 0.20, 'Food & agro products': 0.05, 'Personal effects': 0.20, 'Other (search by HS code)': 0.20 };
+  // non-duty fee totals (shipping-line + docs + agency), USD equivalent, per shipment type
+  nonDutyUsd = { 'Full container 20ft (FCL)': 1300, 'Full container 40ft (FCL)': 2250, 'LCL (part load)': 550, 'General cargo': 400, 'RoRo': 900, 'Air freight': 500 };
+  FX = 1550;
+
+  sectionKeys = ['coverage', 'trust'];
+  nodeRefs = {};
+  observer = null;
+  refCallbacks = (() => {
+    const map = {};
+    ['coverage', 'trust'].forEach(k => { map[k] = (node) => this.registerNode(k, node); });
+    return map;
+  })();
+
+  componentDidMount() {
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const key = e.target.dataset.revealKey;
+          if (key) this.setState(s => ({ visible: { ...s.visible, [key]: true } }));
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
+    Object.keys(this.nodeRefs).forEach(k => this.observer.observe(this.nodeRefs[k]));
+    requestAnimationFrame(() => {
+      const vh = window.innerHeight;
+      Object.keys(this.nodeRefs).forEach(k => {
+        const r = this.nodeRefs[k].getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) this.setState(s => ({ visible: { ...s.visible, [k]: true } }));
+      });
+    });
+    this._revealTimeout = setTimeout(() => {
+      const all = {}; this.sectionKeys.forEach(k => { all[k] = true; });
+      this.setState(s => ({ visible: { ...all, ...s.visible } }));
+    }, 2500);
+    this.onScroll = () => {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => { this.setState({ scrollY: window.scrollY }); this._raf = null; });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+
+  componentWillUnmount() {
+    if (this.observer) this.observer.disconnect();
+    if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+    if (this._revealTimeout) clearTimeout(this._revealTimeout);
+  }
+
+  registerNode(key, node) {
+    if (!node) return;
+    this.nodeRefs[key] = node;
+    node.dataset.revealKey = key;
+    if (this.observer) this.observer.observe(node);
+  }
+
+  reveal(key, extraCss, distance) {
+    const on = this.state.visible[key];
+    return `${extraCss} opacity:${on ? 1 : 0}; transform:${on ? 'translateY(0)' : `translateY(${distance || 28}px)`}; transition:opacity 0.9s cubic-bezier(.16,.8,.24,1), transform 0.9s cubic-bezier(.16,.8,.24,1);`;
+  }
+
+  fmt(n) { return '₦' + Math.round(n).toLocaleString('en-NG'); }
+
+  isContainerType(t) { return t === 'Full container 20ft (FCL)' || t === 'Full container 40ft (FCL)' || t === 'RoRo'; }
+
+  computeEstimate() {
+    const value = parseFloat(this.state.declaredValue) || 0;
+    const dutyRate = this.dutyRates[this.state.category] ?? 0.20;
+    const duty = value * dutyRate;
+    const etls = value * 0.005;
+    const vat = (value + duty) * 0.075;
+    const statutorySubtotal = duty + etls + vat;
+
+    const showTerminalDeposit = this.isContainerType(this.state.shipmentType);
+    let terminalDeposit = 0, terminalDepositLabel = '';
+    if (showTerminalDeposit) {
+      const is40 = this.state.shipmentType === 'Full container 40ft (FCL)';
+      const base = is40 ? 200000 : 100000;
+      terminalDeposit = this.state.destination === 'Outside Lagos' ? base * 1.5 : base;
+      terminalDepositLabel = (is40 ? '40ft' : '20ft') + ', ' + this.state.destination;
+    }
+
+    const nonDutyTotal = (this.nonDutyUsd[this.state.shipmentType] || 500) * this.FX;
+    const shippingFee = nonDutyTotal * 0.55;
+    const docs = nonDutyTotal * 0.12;
+    const agency = nonDutyTotal * 0.33;
+    const standardSubtotal = terminalDeposit + shippingFee + docs + agency;
+
+    const total = statutorySubtotal + standardSubtotal;
+    const low = total * 0.9, high = total * 1.15;
+
+    return {
+      categoryLabel: this.state.category,
+      dutyRateLabel: Math.round(dutyRate * 100) + '%',
+      dutyFmt: this.fmt(duty), etlsFmt: this.fmt(etls), vatFmt: this.fmt(vat),
+      statutorySubtotalFmt: this.fmt(statutorySubtotal),
+      showTerminalDeposit, terminalDepositLabel, terminalDepositFmt: this.fmt(terminalDeposit),
+      shippingFeeFmt: this.fmt(shippingFee), docsFmt: this.fmt(docs), agencyFmt: this.fmt(agency),
+      standardSubtotalFmt: this.fmt(standardSubtotal),
+      rangeFmt: `${this.fmt(low)} – ${this.fmt(high)}`,
+      timestamp: new Date().toLocaleString('en-NG', { dateStyle: 'medium', timeStyle: 'short' })
+    };
+  }
+
+  renderVals() {
+    const scrollY = this.state.scrollY;
+    const reveal = {
+      coverage: this.reveal('coverage', 'padding:120px 64px; background:oklch(96% 0.008 240);'),
+      trust: this.reveal('trust', 'padding:120px 64px 160px; display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start;')
+    };
+    const isAir = this.state.shipmentType === 'Air freight';
+    const showQuantity = ['LCL (part load)', 'General cargo', 'Air freight'].includes(this.state.shipmentType);
+    const showDestination = this.isContainerType(this.state.shipmentType);
+
+    return {
+      isLoggedIn: this.state.loggedIn, isLoggedOut: !this.state.loggedIn,
+      navStyle: `padding:${scrollY > 40 ? '14px 48px' : '26px 48px'}; backdrop-filter:${scrollY > 10 ? 'blur(14px) saturate(140%)' : 'none'}; background:${scrollY > 10 ? 'oklch(99% 0.004 90 / 0.9)' : 'oklch(99% 0.004 90 / 0.7)'}; box-shadow:${scrollY > 10 ? '0 1px 0 oklch(88% 0.008 90)' : 'none'}; transition:all 0.4s cubic-bezier(.2,.7,.3,1);`,
+      megaMenuStyle: `opacity:${this.state.megaOpen ? 1 : 0}; visibility:${this.state.megaOpen ? 'visible' : 'hidden'}; transform: translateY(${this.state.megaOpen ? '0' : '-6px'}); transition: opacity 0.2s ease, transform 0.2s ease;`,
+      onMegaEnter: () => this.setState({ megaOpen: true }),
+      onMegaLeave: () => this.setState({ megaOpen: false }),
+      reveal,
+      refs: this.refCallbacks,
+      shipmentTypes: this.shipmentTypes,
+      categories: this.categories,
+      shipmentType: this.state.shipmentType,
+      category: this.state.category,
+      hsSearch: this.state.hsSearch,
+      declaredValue: this.state.declaredValue,
+      quantity: this.state.quantity,
+      port: this.state.port,
+      destination: this.state.destination,
+      showHsSearch: this.state.category === 'Other (search by HS code)',
+      showQuantity,
+      showDestination,
+      portLabel: isAir ? 'Airport of entry' : 'Port of entry',
+      portOptions: isAir ? ['Murtala Muhammed Int\'l (Lagos)', 'Port Harcourt Int\'l'] : ['Apapa', 'Tin Can Island'],
+      portMarginBottom: showDestination ? 20 : 28,
+      onShipmentTypeChange: (e) => {
+        const t = e.target.value;
+        const isAirNow = t === 'Air freight';
+        this.setState({ shipmentType: t, port: isAirNow ? 'Murtala Muhammed Int\'l (Lagos)' : 'Apapa' });
+      },
+      onCategoryChange: (e) => this.setState({ category: e.target.value }),
+      onHsSearchChange: (e) => this.setState({ hsSearch: e.target.value }),
+      onValueChange: (e) => this.setState({ declaredValue: e.target.value }),
+      onQuantityChange: (e) => this.setState({ quantity: e.target.value }),
+      onPortChange: (e) => this.setState({ port: e.target.value }),
+      onDestinationChange: (e) => this.setState({ destination: e.target.value }),
+      onSubmit: () => this.setState({ result: this.computeEstimate(), saved: false }),
+      onSaveEmail: () => this.setState({ saved: true }),
+      showResults: !!this.state.result,
+      result: this.state.result || {},
+      saved: this.state.saved,
+      clearHref: `CheckCustoms Request Step1.dc.html?desc=${encodeURIComponent(this.state.shipmentType + ' — ' + this.state.category)}&range=${encodeURIComponent(this.state.result ? this.state.result.rangeFmt : '')}`
+    };
+  }
+}
+</script>
+</body>
+</html>

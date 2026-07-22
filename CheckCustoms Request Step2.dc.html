@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> body { margin: 0; } ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); } </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); min-height:100vh;">
+  <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 48px; border-bottom:1px solid oklch(90% 0.008 90); background:oklch(99% 0.004 90);">
+    <a href="CheckCustoms Landing.dc.html" style="font-family:'Spectral',serif; font-weight:600; font-size:20px; letter-spacing:-0.01em; color:oklch(18% 0.015 260); text-decoration:none;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <a href="CheckCustoms Dashboard.dc.html" style="font-size:13px; color:oklch(45% 0.02 260); text-decoration:none;">Save & exit</a>
+  </div>
+
+  <div style="max-width:640px; margin:0 auto; padding:48px 32px 100px;">
+    <!-- STEP PROGRESS -->
+    <div style="margin-bottom:36px;">
+      <div style="font-size:12px; font-weight:600; color:oklch(40% 0.15 255); text-transform:uppercase; letter-spacing:0.08em; margin-bottom:14px;">Step 2 of 3 — Review Quote</div>
+      <div style="display:flex; gap:6px;">
+        <div style="flex:1; height:4px; border-radius:999px; background:oklch(40% 0.15 255);"></div>
+        <div style="flex:1; height:4px; border-radius:999px; background:oklch(40% 0.15 255);"></div>
+        <div style="flex:1; height:4px; border-radius:999px; background:oklch(88% 0.008 90);"></div>
+      </div>
+    </div>
+
+    <div style="background:oklch(96% 0.008 240); padding:22px 26px; margin-bottom:36px;">
+      <div style="font-family:'Spectral',serif; font-size:17px; font-weight:600;">2019 Toyota Camry — Tin Can Island</div>
+      <div style="font-size:12px; color:oklch(45% 0.02 260); margin-top:4px;">Request CC-48214 · Documents received</div>
+    </div>
+
+    <!-- FIRM QUOTE BREAKDOWN -->
+    <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:32px; margin-bottom:24px;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+        <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260);">Firm quote — CC-48214</div>
+        <span style="font-size:11px; font-weight:600; color:oklch(40% 0.1 150); background:oklch(94% 0.03 150); padding:5px 12px; border-radius:999px;">Confirmed</span>
+      </div>
+
+      <div style="font-size:12px; color:oklch(45% 0.02 260); font-weight:600; margin-bottom:6px;">Pass-through statutory & port costs</div>
+      <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>Import duty</span><span>₦4,000,000</span></div>
+      <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>NAC levy</span><span>₦3,000,000</span></div>
+      <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>Import levy</span><span>₦800,000</span></div>
+      <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>ETLS</span><span>₦100,000</span></div>
+      <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>VAT</span><span>₦2,092,500</span></div>
+      <div style="display:flex; justify-content:space-between; padding:8px 0; border-bottom:1px solid oklch(92% 0.006 90); font-size:14px;"><span>Terminal handling & shipping release</span><span>₦320,000</span></div>
+      <div style="display:flex; justify-content:space-between; padding:8px 0; margin-bottom:20px; font-size:14px;"><span>Documentation</span><span>₦40,000</span></div>
+
+      <div style="font-size:12px; color:oklch(45% 0.02 260); font-weight:600; margin-bottom:6px;">CheckCustoms service fee</div>
+      <div style="display:flex; justify-content:space-between; padding:8px 0; margin-bottom:20px; font-size:14px;"><span>Managed clearing & agent coordination</span><span>₦350,000</span></div>
+
+      <div style="display:flex; justify-content:space-between; align-items:baseline; padding-top:20px; border-top:2px solid oklch(18% 0.015 260);">
+        <span style="font-size:15px; font-weight:600;">Firm total</span>
+        <span style="font-family:'Spectral',serif; font-size:32px; font-weight:700; color:oklch(40% 0.15 255);">₦10,702,500</span>
+      </div>
+      <p style="font-size:12px; color:oklch(45% 0.02 260); margin:16px 0 0; line-height:1.5;">This is a firm, confirmed quote — it will match your final invoice, no surprise line items.</p>
+    </div>
+
+    <!-- FULFILMENT MODE -->
+    <div style="background:oklch(96% 0.008 240); border-left:3px solid oklch(40% 0.15 255); padding:20px 24px; margin-bottom:32px; display:flex; align-items:center; gap:16px;">
+      <div style="width:36px; height:36px; border-radius:999px; background-image:url('https://randomuser.me/api/portraits/women/68.jpg'); background-size:cover; flex-shrink:0;"></div>
+      <div>
+        <div style="font-size:14px; font-weight:600;">Assigned to Adaeze O., a vetted CheckCustoms agent</div>
+        <div style="font-size:12px; color:oklch(40% 0.02 260); margin-top:4px; line-height:1.5;">CheckCustoms remains your counterparty regardless — you're never dealing with the agent alone.</div>
+      </div>
+    </div>
+
+    <!-- ACTIONS -->
+    <div style="display:flex; align-items:center; gap:24px;">
+      <a href="CheckCustoms Request Step3.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:15px; padding:15px 32px; border-radius:999px; display:inline-block;" style-hover="background:oklch(32% 0.15 255);">Accept quote & continue to payment →</a>
+      <a href="CheckCustoms Contact.dc.html#form" style="font-size:14px; color:oklch(40% 0.15 255); text-decoration:none; font-weight:600;">Message us about this quote</a>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}"></script>
+</body>
+</html>

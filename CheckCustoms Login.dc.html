@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; }
+    ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); }
+  </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); min-height:100vh; display:grid; grid-template-columns:1fr 1fr;">
+
+  <!-- LEFT: AUTH -->
+  <div style="display:flex; flex-direction:column; padding:40px 64px;">
+    <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:80px;">
+      <a href="CheckCustoms Landing.dc.html" style="font-family:'Spectral',serif; font-weight:600; font-size:22px; letter-spacing:-0.01em; color:oklch(18% 0.015 260); text-decoration:none;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+      <a href="CheckCustoms Landing.dc.html" style="font-size:14px; color:oklch(45% 0.02 260); text-decoration:none;">← Back to home</a>
+    </div>
+
+    <div style="flex:1; display:flex; flex-direction:column; justify-content:center; max-width:400px;">
+      <sc-if value="{{ isIdentifyStep }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <h1 style="font-family:'Spectral',serif; font-size:38px; font-weight:600; margin:0 0 12px; letter-spacing:-0.015em;">Welcome back<span style="color:oklch(50% 0.16 250);">.</span></h1>
+          <p style="font-size:15px; color:oklch(40% 0.02 260); margin:0 0 32px;">Log in to check estimates, track jobs, and manage clearing.</p>
+
+          <div style="display:inline-flex; background:oklch(94% 0.008 90); border-radius:999px; padding:4px; margin-bottom:20px;">
+            <div onClick="{{ onSetPhone }}" style="{{ phoneToggleStyle }}">Phone</div>
+            <div onClick="{{ onSetEmail }}" style="{{ emailToggleStyle }}">Email</div>
+          </div>
+
+          <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:24px;">{{ identifierLabel }}
+            <input type="text" value="{{ identifier }}" onChange="{{ onIdentifierChange }}" placeholder="{{ identifierPlaceholder }}" style="padding:14px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:16px; font-family:'Work Sans',sans-serif;"></input>
+          </label>
+
+          <a onClick="{{ onContinue }}" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:15px; padding:15px; border-radius:999px; display:block; text-align:center; cursor:pointer;" style-hover="background:oklch(32% 0.15 255);">Continue</a>
+          <p style="font-size:13px; color:oklch(50% 0.02 260); margin:16px 0 0; text-align:center;">We'll send a one-time code — no password needed.</p>
+        </div>
+      </sc-if>
+
+      <sc-if value="{{ isOtpStep }}" hint-placeholder-val="{{ false }}">
+        <div>
+          <h1 style="font-family:'Spectral',serif; font-size:34px; font-weight:600; margin:0 0 12px; letter-spacing:-0.015em;">Enter your code<span style="color:oklch(50% 0.16 250);">.</span></h1>
+          <p style="font-size:15px; color:oklch(40% 0.02 260); margin:0 0 32px;">Enter the code sent to <strong>{{ identifier }}</strong></p>
+
+          <div style="display:flex; gap:10px; margin-bottom:20px;">
+            <sc-for list="{{ otpDigits }}" as="d" hint-placeholder-count="6">
+              <input type="text" maxlength="1" value="{{ d.value }}" onChange="{{ d.onChange }}" style="width:48px; height:56px; text-align:center; font-size:22px; font-family:'Spectral',serif; font-weight:600; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90);"></input>
+            </sc-for>
+          </div>
+
+          <div style="font-size:13px; color:oklch(45% 0.02 260); margin-bottom:28px;">{{ resendText }}<span onClick="{{ onResend }}" style="{{ resendLinkStyle }}">{{ resendLinkLabel }}</span></div>
+
+          <a onClick="{{ onVerify }}" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:15px; padding:15px; border-radius:999px; display:block; text-align:center; cursor:pointer;" style-hover="background:oklch(32% 0.15 255);">Verify & continue</a>
+          <a onClick="{{ onBack }}" style="display:block; text-align:center; margin-top:16px; font-size:13px; color:oklch(45% 0.02 260); cursor:pointer;">← Use a different {{ identifierTypeLabel }}</a>
+        </div>
+      </sc-if>
+    </div>
+
+    <div style="display:flex; justify-content:space-between; align-items:center; font-size:13px; color:oklch(45% 0.02 260); padding-top:32px;">
+      <div>Don't have an account? <a href="CheckCustoms Get Started.dc.html" style="color:oklch(40% 0.15 255); text-decoration:none; font-weight:600;">Get Started</a></div>
+      <div style="display:flex; gap:20px;">
+        <a href="/terms" style="color:oklch(45% 0.02 260); text-decoration:none;">Terms</a>
+        <a href="/privacy" style="color:oklch(45% 0.02 260); text-decoration:none;">Privacy</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: PHOTO PANEL -->
+  <div style="position:relative; overflow:hidden;">
+    <div style="position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1758146296671-0e46a91739a8?fm=jpg&q=70&auto=format&fit=crop&w=1400&h=1600'); background-size:cover; background-position:center;"></div>
+    <div style="position:absolute; inset:0; background:linear-gradient(0deg, oklch(9% 0.012 260 / 0.75) 0%, oklch(9% 0.012 260 / 0.1) 55%);"></div>
+    <div style="position:absolute; bottom:56px; left:56px; right:56px; color:oklch(98% 0.005 90);">
+      <div style="font-family:'Spectral',serif; font-size:28px; font-weight:600; line-height:1.3; max-width:420px;">Know the cost before your goods land.</div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = {
+    step: 'identify', method: 'phone', identifier: '',
+    otp: ['', '', '', '', '', ''], resendSeconds: 30
+  };
+
+  componentWillUnmount() {
+    if (this._timer) clearInterval(this._timer);
+  }
+
+  startResendTimer() {
+    if (this._timer) clearInterval(this._timer);
+    this.setState({ resendSeconds: 30 });
+    this._timer = setInterval(() => {
+      this.setState(s => {
+        if (s.resendSeconds <= 1) { clearInterval(this._timer); return { resendSeconds: 0 }; }
+        return { resendSeconds: s.resendSeconds - 1 };
+      });
+    }, 1000);
+  }
+
+  renderVals() {
+    const isPhone = this.state.method === 'phone';
+    const otpDigits = this.state.otp.map((v, i) => ({
+      value: v,
+      onChange: (e) => {
+        const val = e.target.value.replace(/[^0-9]/g, '').slice(0, 1);
+        this.setState(s => { const next = [...s.otp]; next[i] = val; return { otp: next }; });
+      }
+    }));
+
+    return {
+      isIdentifyStep: this.state.step === 'identify',
+      isOtpStep: this.state.step === 'otp',
+      phoneToggleStyle: `padding:9px 20px; border-radius:999px; font-size:13px; font-weight:600; cursor:pointer; background:${isPhone ? 'oklch(40% 0.15 255)' : 'transparent'}; color:${isPhone ? 'oklch(98% 0.005 90)' : 'oklch(35% 0.02 260)'};`,
+      emailToggleStyle: `padding:9px 20px; border-radius:999px; font-size:13px; font-weight:600; cursor:pointer; background:${!isPhone ? 'oklch(40% 0.15 255)' : 'transparent'}; color:${!isPhone ? 'oklch(98% 0.005 90)' : 'oklch(35% 0.02 260)'};`,
+      onSetPhone: () => this.setState({ method: 'phone' }),
+      onSetEmail: () => this.setState({ method: 'email' }),
+      identifierLabel: isPhone ? 'Phone number' : 'Email address',
+      identifierPlaceholder: isPhone ? '+234 800 000 0000' : 'you@email.com',
+      identifier: this.state.identifier,
+      identifierTypeLabel: isPhone ? 'number' : 'email',
+      onIdentifierChange: (e) => this.setState({ identifier: e.target.value }),
+      onContinue: () => { this.setState({ step: 'otp' }); this.startResendTimer(); },
+      onBack: () => this.setState({ step: 'identify' }),
+      otpDigits,
+      resendText: this.state.resendSeconds > 0 ? `Resend code in ${this.state.resendSeconds}s` : "Didn't get it? ",
+      resendLinkLabel: this.state.resendSeconds > 0 ? '' : 'Resend code',
+      resendLinkStyle: `color:oklch(40% 0.15 255); font-weight:600; cursor:${this.state.resendSeconds > 0 ? 'default' : 'pointer'}; margin-left:4px;`,
+      onVerify: () => { localStorage.setItem('cc_auth', '1'); window.location.href = 'CheckCustoms Dashboard.dc.html'; },
+      onResend: () => this.startResendTimer()
+    };
+  }
+}
+</script>
+</body>
+</html>

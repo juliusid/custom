@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> body { margin: 0; } ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); } </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); min-height:100vh; display:grid; grid-template-columns:260px 1fr;">
+
+  <!-- SIDEBAR -->
+  <div style="background:oklch(99% 0.004 90); border-right:1px solid oklch(90% 0.008 90); padding:28px 20px; display:flex; flex-direction:column;">
+    <a href="CheckCustoms Landing.dc.html" style="font-family:'Spectral',serif; font-weight:600; font-size:20px; letter-spacing:-0.01em; margin-bottom:40px; padding:0 8px; color:oklch(18% 0.015 260); text-decoration:none; display:block;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+      <a href="{{ item.href }}" style="{{ item.style }}text-decoration:none;">
+        <div style="width:8px; height:8px; border-radius:999px; background:{{ item.dotColor }}; flex-shrink:0;"></div>
+        <span>{{ item.label }}</span>
+      </a>
+    </sc-for>
+  </div>
+
+  <!-- MAIN -->
+  <div style="min-width:0;">
+    <!-- TOP BAR -->
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 48px; border-bottom:1px solid oklch(90% 0.008 90); background:oklch(99% 0.004 90);">
+      <div style="font-size:16px; font-weight:600;">Welcome, Adaeze<span style="color:oklch(50% 0.16 250);">.</span></div>
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div style="position:relative; width:36px; height:36px; border-radius:999px; background:oklch(94% 0.008 90); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;">
+          <div style="width:14px; height:13px; border-radius:9px 9px 3px 3px; background:oklch(35% 0.02 260);"></div>
+          <div style="width:4px; height:4px; border-radius:999px; background:oklch(35% 0.02 260);"></div>
+        </div>
+        <div style="width:36px; height:36px; border-radius:999px; background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px;">A</div>
+      </div>
+    </div>
+
+    <div style="padding:40px 48px; max-width:640px;">
+      <h1 style="font-family:'Spectral',serif; font-size:32px; font-weight:600; margin:0 0 32px; letter-spacing:-0.015em;">Account<span style="color:oklch(50% 0.16 250);">.</span></h1>
+
+      <!-- PROFILE -->
+      <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:32px; margin-bottom:24px;">
+        <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:20px;">Profile</div>
+        <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:18px;">Full name
+          <input type="text" value="{{ name }}" onChange="{{ onNameChange }}" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;"></input>
+        </label>
+        <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:18px;">Phone number
+          <input type="text" value="{{ phone }}" onChange="{{ onPhoneChange }}" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;"></input>
+        </label>
+        <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:24px;">Email
+          <input type="text" value="{{ email }}" onChange="{{ onEmailChange }}" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;"></input>
+        </label>
+        <a onClick="{{ onSave }}" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:14px; padding:12px 24px; border-radius:999px; display:inline-block; cursor:pointer;">Save changes</a>
+        <sc-if value="{{ saved }}" hint-placeholder-val="{{ false }}">
+          <span style="font-size:13px; color:oklch(40% 0.15 255); margin-left:14px;">Saved.</span>
+        </sc-if>
+      </div>
+
+      <!-- NOTIFICATIONS -->
+      <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:32px; margin-bottom:24px;">
+        <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:20px;">Notification preferences</div>
+        <sc-for list="{{ notifChannels }}" as="ch" hint-placeholder-count="4">
+          <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid oklch(92% 0.006 90);">
+            <span style="font-size:14px;">{{ ch.label }}</span>
+            <div onClick="{{ ch.onToggle }}" style="{{ ch.trackStyle }}">
+              <div style="{{ ch.knobStyle }}"></div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- SECURITY -->
+      <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:32px; margin-bottom:24px;">
+        <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:20px;">Security</div>
+        <p style="font-size:14px; color:oklch(35% 0.02 260); line-height:1.6; margin:0 0 20px;">You log in with a one-time code sent to your phone or email — there's no password to manage or lose.</p>
+        <a onClick="{{ onLogoutAll }}" style="color:oklch(40% 0.15 255); text-decoration:none; font-weight:600; font-size:14px; padding:11px 20px; border:1px solid oklch(40% 0.15 255); border-radius:999px; cursor:pointer; display:inline-block;">Log out of all devices</a>
+      </div>
+
+      <!-- DANGER ZONE -->
+      <div style="padding:20px 0; border-top:1px solid oklch(90% 0.008 90);">
+        <a onClick="{{ onLogout }}" style="font-size:13px; color:oklch(50% 0.02 260); text-decoration:none; cursor:pointer;">Log out</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = {
+    name: 'Adaeze Okonkwo', phone: '+234 803 000 1122', email: 'adaeze@email.com', saved: false,
+    notifs: { 'In-app': true, 'Email': true, 'SMS': false, 'WhatsApp': true }
+  };
+  navLabels = ['Overview', 'My Jobs', 'Saved Estimates', 'Documents', 'Payments & Receipts', 'Account'];
+
+  renderVals() {
+    const navItems = this.navLabels.map((label, i) => {
+      const active = i === 5;
+      const hrefs = ['CheckCustoms Dashboard.dc.html', 'CheckCustoms My Jobs.dc.html', 'CheckCustoms Saved Estimates.dc.html', 'CheckCustoms Documents.dc.html', 'CheckCustoms Payments.dc.html', 'CheckCustoms Account.dc.html'];
+      return {
+        label, href: hrefs[i],
+        dotColor: active ? 'oklch(40% 0.15 255)' : 'oklch(85% 0.008 90)',
+        style: `display:flex; align-items:center; gap:12px; padding:12px 10px; border-radius:8px; font-size:14px; font-weight:${active ? 600 : 500}; color:${active ? 'oklch(18% 0.015 260)' : 'oklch(45% 0.02 260)'}; background:${active ? 'oklch(96% 0.008 240)' : 'transparent'}; margin-bottom:4px;`
+      };
+    });
+
+    const notifChannels = Object.keys(this.state.notifs).map(label => {
+      const on = this.state.notifs[label];
+      return {
+        label,
+        onToggle: () => this.setState(s => ({ notifs: { ...s.notifs, [label]: !s.notifs[label] } })),
+        trackStyle: `width:44px; height:26px; border-radius:999px; padding:3px; cursor:pointer; background:${on ? 'oklch(40% 0.15 255)' : 'oklch(88% 0.008 90)'}; transition:background 0.2s ease; display:flex; justify-content:${on ? 'flex-end' : 'flex-start'};`,
+        knobStyle: `width:20px; height:20px; border-radius:999px; background:oklch(99% 0.004 90);`
+      };
+    });
+
+    return {
+      name: this.state.name, phone: this.state.phone, email: this.state.email, saved: this.state.saved,
+      onNameChange: (e) => this.setState({ name: e.target.value, saved: false }),
+      onPhoneChange: (e) => this.setState({ phone: e.target.value, saved: false }),
+      onEmailChange: (e) => this.setState({ email: e.target.value, saved: false }),
+      onSave: () => this.setState({ saved: true }),
+      onLogoutAll: () => { localStorage.removeItem('cc_auth'); window.location.href = 'CheckCustoms Landing.dc.html'; },
+      onLogout: () => { localStorage.removeItem('cc_auth'); window.location.href = 'CheckCustoms Landing.dc.html'; },
+      navItems, notifChannels
+    };
+  }
+}
+</script>
+</body>
+</html>

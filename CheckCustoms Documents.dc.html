@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> body { margin: 0; } ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); } </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); min-height:100vh; display:grid; grid-template-columns:260px 1fr;">
+
+  <!-- SIDEBAR -->
+  <div style="background:oklch(99% 0.004 90); border-right:1px solid oklch(90% 0.008 90); padding:28px 20px; display:flex; flex-direction:column;">
+    <a href="CheckCustoms Landing.dc.html" style="font-family:'Spectral',serif; font-weight:600; font-size:20px; letter-spacing:-0.01em; margin-bottom:40px; padding:0 8px; color:oklch(18% 0.015 260); text-decoration:none; display:block;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+      <a href="{{ item.href }}" style="{{ item.style }}text-decoration:none;">
+        <div style="width:8px; height:8px; border-radius:999px; background:{{ item.dotColor }}; flex-shrink:0;"></div>
+        <span>{{ item.label }}</span>
+      </a>
+    </sc-for>
+  </div>
+
+  <!-- MAIN -->
+  <div style="min-width:0;">
+    <!-- TOP BAR -->
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 48px; border-bottom:1px solid oklch(90% 0.008 90); background:oklch(99% 0.004 90);">
+      <div style="font-size:16px; font-weight:600;">Welcome, Adaeze<span style="color:oklch(50% 0.16 250);">.</span></div>
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div style="position:relative; width:36px; height:36px; border-radius:999px; background:oklch(94% 0.008 90); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;">
+          <div style="width:14px; height:13px; border-radius:9px 9px 3px 3px; background:oklch(35% 0.02 260);"></div>
+          <div style="width:4px; height:4px; border-radius:999px; background:oklch(35% 0.02 260);"></div>
+        </div>
+        <div style="width:36px; height:36px; border-radius:999px; background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px;">A</div>
+      </div>
+    </div>
+
+    <div style="padding:40px 48px;">
+      <!-- HEADER -->
+      <div style="margin-bottom:32px;">
+        <h1 style="font-family:'Spectral',serif; font-size:32px; font-weight:600; margin:0 0 10px; letter-spacing:-0.015em;">Documents<span style="color:oklch(50% 0.16 250);">.</span></h1>
+        <p style="font-size:14px; color:oklch(40% 0.02 260); margin:0;">Your document vault — organized by job, encrypted and audit-logged.</p>
+      </div>
+
+      <!-- JOB GROUPS -->
+      <sc-for list="{{ jobGroups }}" as="group" hint-placeholder-count="2">
+        <div style="margin-bottom:36px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:14px;">
+            <div style="font-family:'Spectral',serif; font-size:18px; font-weight:600;">{{ group.name }}</div>
+            <div style="font-size:12px; color:oklch(50% 0.02 260);">{{ group.ref }}</div>
+          </div>
+          <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90);">
+            <sc-for list="{{ group.docs }}" as="doc" hint-placeholder-count="3">
+              <div style="display:flex; align-items:center; justify-content:space-between; padding:16px 24px; border-bottom:1px solid oklch(92% 0.006 90);">
+                <div style="display:flex; align-items:center; gap:14px;">
+                  <div style="width:26px; height:20px; border:2px solid oklch(55% 0.02 260); border-radius:0 3px 3px 3px; position:relative; flex-shrink:0;">
+                    <div style="position:absolute; top:-6px; left:0; width:12px; height:6px; border:2px solid oklch(55% 0.02 260); border-bottom:none; border-radius:2px 2px 0 0;"></div>
+                  </div>
+                  <div>
+                    <div style="font-size:14px; font-weight:500;">{{ doc.name }}</div>
+                    <div style="font-size:12px; color:oklch(50% 0.02 260); margin-top:2px;">{{ doc.date }}</div>
+                  </div>
+                </div>
+                <div style="display:flex; align-items:center; gap:16px;">
+                  <span style="{{ doc.badgeStyle }}">{{ doc.status }}</span>
+                  <a href="#" style="font-size:13px; color:oklch(40% 0.15 255); text-decoration:none; font-weight:600;">View →</a>
+                </div>
+              </div>
+            </sc-for>
+            <sc-if value="{{ group.needsUpload }}" hint-placeholder-val="{{ false }}">
+              <div style="padding:16px 24px; display:flex; justify-content:space-between; align-items:center;">
+                <div style="font-size:13px; color:oklch(45% 0.02 260);">This job is missing a document.</div>
+                <a href="#" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:12px; padding:9px 18px; border-radius:999px;">Upload document</a>
+              </div>
+            </sc-if>
+          </div>
+        </div>
+      </sc-for>
+
+      <p style="font-size:12px; color:oklch(50% 0.02 260); margin-top:8px;">All documents are encrypted and access is logged for your security.</p>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  navLabels = ['Overview', 'My Jobs', 'Saved Estimates', 'Documents', 'Payments & Receipts', 'Account'];
+
+  jobGroupsData = [
+    {
+      name: '2019 Toyota Camry — Tin Can Island', ref: 'CC-48213', needsUpload: true,
+      docs: [
+        { name: 'Bill of Lading', date: 'Uploaded 4 days ago', status: 'Verified' },
+        { name: 'Commercial Invoice', date: 'Uploaded 4 days ago', status: 'Verified' },
+        { name: 'Form M / PAAR reference', date: 'Uploaded 2 days ago', status: 'Pending' }
+      ]
+    },
+    {
+      name: '40ft Container — Electronics', ref: 'CC-48190', needsUpload: false,
+      docs: [
+        { name: 'Bill of Lading', date: 'Uploaded 6 days ago', status: 'Verified' },
+        { name: 'Commercial Invoice', date: 'Uploaded 6 days ago', status: 'Verified' },
+        { name: 'Form M / PAAR reference', date: 'Uploaded 5 days ago', status: 'Verified' }
+      ]
+    }
+  ];
+
+  renderVals() {
+    const navItems = this.navLabels.map((label, i) => {
+      const active = i === 3;
+      const hrefs = ['CheckCustoms Dashboard.dc.html', 'CheckCustoms My Jobs.dc.html', 'CheckCustoms Saved Estimates.dc.html', 'CheckCustoms Documents.dc.html', '#', '#'];
+      return {
+        label, href: hrefs[i],
+        dotColor: active ? 'oklch(40% 0.15 255)' : 'oklch(85% 0.008 90)',
+        style: `display:flex; align-items:center; gap:12px; padding:12px 10px; border-radius:8px; font-size:14px; font-weight:${active ? 600 : 500}; color:${active ? 'oklch(18% 0.015 260)' : 'oklch(45% 0.02 260)'}; background:${active ? 'oklch(96% 0.008 240)' : 'transparent'}; margin-bottom:4px;`
+      };
+    });
+
+    const jobGroups = this.jobGroupsData.map(g => ({
+      ...g,
+      docs: g.docs.map(d => ({
+        ...d,
+        badgeStyle: `font-size:11px; font-weight:600; padding:4px 10px; border-radius:999px; white-space:nowrap; background:${d.status === 'Verified' ? 'oklch(94% 0.03 150)' : 'oklch(96% 0.03 90)'}; color:${d.status === 'Verified' ? 'oklch(40% 0.1 150)' : 'oklch(45% 0.1 80)'};`
+      }))
+    }));
+
+    return { navItems, jobGroups };
+  }
+}
+</script>
+</body>
+</html>

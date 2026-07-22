@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> body { margin: 0; } ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); } </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); min-height:100vh; display:grid; grid-template-columns:260px 1fr;">
+
+  <!-- SIDEBAR -->
+  <div style="background:oklch(99% 0.004 90); border-right:1px solid oklch(90% 0.008 90); padding:28px 20px; display:flex; flex-direction:column;">
+    <a href="CheckCustoms Landing.dc.html" style="font-family:'Spectral',serif; font-weight:600; font-size:20px; letter-spacing:-0.01em; margin-bottom:40px; padding:0 8px; color:oklch(18% 0.015 260); text-decoration:none; display:block;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+      <a href="{{ item.href }}" style="{{ item.style }}text-decoration:none;">
+        <div style="width:8px; height:8px; border-radius:999px; background:{{ item.dotColor }}; flex-shrink:0;"></div>
+        <span>{{ item.label }}</span>
+      </a>
+    </sc-for>
+  </div>
+
+  <!-- MAIN -->
+  <div style="min-width:0;">
+    <!-- TOP BAR -->
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 48px; border-bottom:1px solid oklch(90% 0.008 90); background:oklch(99% 0.004 90);">
+      <div style="font-size:16px; font-weight:600;">Welcome, Adaeze<span style="color:oklch(50% 0.16 250);">.</span></div>
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div style="position:relative; width:36px; height:36px; border-radius:999px; background:oklch(94% 0.008 90); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px;">
+          <div style="width:14px; height:13px; border-radius:9px 9px 3px 3px; background:oklch(35% 0.02 260);"></div>
+          <div style="width:4px; height:4px; border-radius:999px; background:oklch(35% 0.02 260);"></div>
+        </div>
+        <div style="width:36px; height:36px; border-radius:999px; background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px;">A</div>
+      </div>
+    </div>
+
+    <div style="padding:40px 48px;">
+      <!-- HEADER -->
+      <div style="margin-bottom:32px;">
+        <h1 style="font-family:'Spectral',serif; font-size:32px; font-weight:600; margin:0 0 10px; letter-spacing:-0.015em;">My Jobs<span style="color:oklch(50% 0.16 250);">.</span></h1>
+        <p style="font-size:14px; color:oklch(40% 0.02 260); margin:0 0 24px;">Every clearing job you've run, from request to delivery.</p>
+        <div style="display:inline-flex; background:oklch(94% 0.008 90); border-radius:999px; padding:4px;">
+          <sc-for list="{{ tabs }}" as="tab" hint-placeholder-count="3">
+            <div onClick="{{ tab.onClick }}" style="{{ tab.style }}">{{ tab.label }}</div>
+          </sc-for>
+        </div>
+      </div>
+
+      <!-- JOB LIST -->
+      <sc-if value="{{ hasJobs }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex; flex-direction:column; gap:16px;">
+          <sc-for list="{{ jobs }}" as="job" hint-placeholder-count="3">
+            <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:24px 28px;">
+              <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:18px;">
+                <div>
+                  <div style="font-family:'Spectral',serif; font-size:17px; font-weight:600;">{{ job.name }}</div>
+                  <div style="font-size:12px; color:oklch(50% 0.02 260); margin-top:4px;">{{ job.ref }} · Assigned: {{ job.assigned }} · Updated {{ job.updated }}</div>
+                </div>
+                <div style="{{ job.badgeStyle }}">{{ job.statusLabel }}</div>
+              </div>
+              <div style="display:flex; align-items:center; gap:6px; margin-bottom:18px;">
+                <sc-for list="{{ job.miniStages }}" as="ms" hint-placeholder-count="8">
+                  <div style="{{ ms.style }}"></div>
+                </sc-for>
+              </div>
+              <a href="{{ job.detailHref }}" style="font-size:13px; color:oklch(40% 0.15 255); text-decoration:none; font-weight:600;">View details →</a>
+            </div>
+          </sc-for>
+        </div>
+      </sc-if>
+      <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:60px 24px; text-align:center;">
+          <div style="width:48px; height:48px; border-radius:999px; background:oklch(96% 0.008 240); display:flex; align-items:center; justify-content:center; margin:0 auto 24px;">
+            <div style="width:18px; height:22px; border:2px solid oklch(55% 0.02 260); border-radius:0 3px 3px 3px;"></div>
+          </div>
+          <div style="font-family:'Spectral',serif; font-size:22px; font-weight:600; margin-bottom:10px;">No {{ emptyLabel }} jobs yet<span style="color:oklch(50% 0.16 250);">.</span></div>
+          <p style="font-size:14px; color:oklch(40% 0.02 260); margin:0 0 36px; max-width:420px; margin-left:auto; margin-right:auto; line-height:1.6;">Once you start a clearing request, you'll track it here from request to delivery.</p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:600px; margin:0 auto; text-align:left;">
+            <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:28px;">
+              <div style="font-family:'Spectral',serif; font-size:18px; font-weight:600; margin-bottom:10px;">Run a cost estimate</div>
+              <p style="font-size:13px; color:oklch(40% 0.02 260); line-height:1.6; margin:0 0 18px;">Check what clearing will cost before you commit to anything.</p>
+              <a href="CheckCustoms Vehicle Estimator.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:13px; padding:10px 20px; border-radius:999px; display:inline-block;">Get an estimate →</a>
+            </div>
+            <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:28px;">
+              <div style="font-family:'Spectral',serif; font-size:18px; font-weight:600; margin-bottom:10px;">Start a clearing request</div>
+              <p style="font-size:13px; color:oklch(40% 0.02 260); line-height:1.6; margin:0 0 18px;">Already have an estimate? Turn it into a real clearing job.</p>
+              <a href="CheckCustoms Request Step1.dc.html" style="color:oklch(40% 0.15 255); text-decoration:none; font-weight:600; font-size:13px; padding:10px 20px; border:1px solid oklch(40% 0.15 255); border-radius:999px; display:inline-block;">Start a request →</a>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showEmptyState&quot;: {&quot;editor&quot;: &quot;boolean&quot;, &quot;default&quot;: false, &quot;tsType&quot;: &quot;boolean&quot;, &quot;section&quot;: &quot;Behavior&quot;}}">
+class Component extends DCLogic {
+  state = { filter: 'All' };
+  navLabels = ['Overview', 'My Jobs', 'Saved Estimates', 'Documents', 'Payments & Receipts', 'Account'];
+  tabLabels = ['All', 'Active', 'Completed'];
+
+  jobsData = [
+    { name: '2019 Toyota Camry — Tin Can Island', ref: 'CC-48213', assigned: 'Adaeze O.', updated: '2 hours ago', status: 'active', currentStage: 3, statusLabel: 'In progress — Documentation' },
+    { name: '40ft Container — Electronics', ref: 'CC-48190', assigned: 'CheckCustoms — Direct', updated: '2 days ago', status: 'active', currentStage: 4, statusLabel: 'In progress — Duty payment' },
+    { name: 'General cargo — Textiles', ref: 'CC-48155', assigned: 'Tunde A.', updated: '4 days ago', status: 'completed', currentStage: 8, statusLabel: 'Delivered' }
+  ];
+
+  renderVals() {
+    const navHrefs = ['CheckCustoms Dashboard.dc.html','CheckCustoms My Jobs.dc.html','#','#','#','#'];
+    const navItems = this.navLabels.map((label, i) => {
+      const active = i === 1;
+      return {
+        label,
+        href: navHrefs[i],
+        dotColor: active ? 'oklch(40% 0.15 255)' : 'oklch(85% 0.008 90)',
+        style: `display:flex; align-items:center; gap:12px; padding:12px 10px; border-radius:8px; font-size:14px; font-weight:${active ? 600 : 500}; color:${active ? 'oklch(18% 0.015 260)' : 'oklch(45% 0.02 260)'}; background:${active ? 'oklch(96% 0.008 240)' : 'transparent'}; margin-bottom:4px;`
+      };
+    });
+
+    const tabs = this.tabLabels.map(label => {
+      const active = this.state.filter === label;
+      return {
+        label,
+        onClick: () => this.setState({ filter: label }),
+        style: `padding:9px 20px; border-radius:999px; font-size:13px; font-weight:600; cursor:pointer; background:${active ? 'oklch(40% 0.15 255)' : 'transparent'}; color:${active ? 'oklch(98% 0.005 90)' : 'oklch(35% 0.02 260)'};`
+      };
+    });
+
+    const filtered = (this.props.showEmptyState ? [] : this.jobsData).filter(j => {
+      if (this.state.filter === 'All') return true;
+      if (this.state.filter === 'Active') return j.status === 'active';
+      return j.status === 'completed';
+    });
+
+    const jobs = filtered.map(j => ({
+      ...j,
+      detailHref: j.status === 'completed' ? 'CheckCustoms Job Detail Completed.dc.html' : 'CheckCustoms Dashboard Active.dc.html',
+      badgeStyle: `font-size:12px; font-weight:600; padding:7px 14px; border-radius:999px; white-space:nowrap; background:${j.status === 'completed' ? 'oklch(94% 0.03 150)' : 'oklch(96% 0.008 240)'}; color:${j.status === 'completed' ? 'oklch(40% 0.1 150)' : 'oklch(40% 0.15 255)'};`,
+      miniStages: Array.from({ length: 8 }, (_, i) => ({
+        style: `width:22px; height:6px; border-radius:999px; background:${i < j.currentStage ? 'oklch(40% 0.15 255)' : 'oklch(88% 0.008 90)'};`
+      }))
+    }));
+
+    return {
+      navItems, tabs, jobs,
+      hasJobs: jobs.length > 0,
+      isEmpty: jobs.length === 0,
+      emptyLabel: this.state.filter.toLowerCase()
+    };
+  }
+}
+</script>
+</body>
+</html>

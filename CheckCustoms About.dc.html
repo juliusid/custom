@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <meta name="ext-resource-dependency" content="https://randomuser.me/api/portraits/men/32.jpg" data-resource-id="team1" />
+  <meta name="ext-resource-dependency" content="https://randomuser.me/api/portraits/women/68.jpg" data-resource-id="team2" />
+  <meta name="ext-resource-dependency" content="https://randomuser.me/api/portraits/men/45.jpg" data-resource-id="team3" />
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: oklch(98% 0.006 90); }
+    ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); }
+  </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); overflow-x:hidden;">
+
+  <!-- NAV -->
+  <nav style="{{ navStyle }}position:fixed; top:0; left:0; right:0; z-index:100; display:grid; grid-template-columns:auto 1fr auto; align-items:center;">
+    <a href="CheckCustoms Landing.dc.html" style="{{ navLogoStyle }}text-decoration:none;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <div style="display:flex; align-items:center; gap:32px; min-width:0; justify-self:center;">
+      <div style="position:relative; flex-shrink:0; padding-bottom:28px; margin-bottom:-28px;" onMouseEnter="{{ onMegaEnter }}" onMouseLeave="{{ onMegaLeave }}">
+        <a href="/estimators" style="{{ navLinkStyle }}">Estimators</a>
+        <div style="{{ megaMenuStyle }}position:absolute; top:28px; left:-24px; width:340px; background:oklch(99% 0.004 90); border:1px solid oklch(89% 0.008 90); box-shadow:0 24px 60px -20px oklch(20% 0.02 260 / 0.3); padding:12px;">
+          <sc-for list="{{ megaItems }}" as="item" hint-placeholder-count="3">
+            <a href="{{ item.href }}" style="display:flex; align-items:center; gap:14px; padding:12px; text-decoration:none; color:inherit;" style-hover="background:oklch(96% 0.008 240);">
+              <div style="width:34px; height:34px; background:{{ item.color }}; flex-shrink:0;"></div>
+              <div>
+                <div style="font-size:14px; font-weight:600; color:oklch(18% 0.015 260);">{{ item.label }}</div>
+                <div style="font-size:12px; color:oklch(45% 0.02 260); margin-top:2px;">{{ item.desc }}</div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+      <a href="CheckCustoms How It Works.dc.html" style="{{ navLinkStyle }}">How It Works</a>
+      <a href="CheckCustoms About.dc.html" style="{{ navLinkStyle }}">About</a>
+      <a href="/contact" style="{{ navLinkStyle }}">Contact</a>
+    </div>
+    <sc-if value="{{ isLoggedOut }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; align-items:center; gap:16px; flex-shrink:0; justify-self:end;">
+        <a href="CheckCustoms Login.dc.html" style="color:oklch(20% 0.015 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; padding:11px 18px; background:oklch(99% 0.004 90 / 0.92); border:1px solid oklch(80% 0.01 90); border-radius:999px;" style-hover="border-color:oklch(40% 0.15 255); color:oklch(40% 0.15 255);">Log in</a>
+        <a href="CheckCustoms Get Started.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-size:14px; font-weight:600; padding:11px 20px; border-radius:999px; white-space:nowrap;" style-hover="background:oklch(32% 0.15 255);">Get Started</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isLoggedIn }}" hint-placeholder-val="{{ false }}">
+      <div style="justify-self:end;">
+        <a href="CheckCustoms Dashboard.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-size:14px; font-weight:600; padding:11px 20px; border-radius:999px; white-space:nowrap;" style-hover="background:oklch(32% 0.15 255);">Dashboard →</a>
+      </div>
+    </sc-if>
+  </nav>
+
+  <!-- HERO -->
+  <section style="position:relative; min-height:80vh; display:grid; grid-template-columns:1fr;">
+    <div style="position:absolute; inset:0; overflow:hidden;">
+      <div style="position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1758146296671-0e46a91739a8?fm=jpg&q=70&auto=format&fit=crop&w=1920&h=1150'); background-size:cover; background-position:center 60%;"></div>
+    </div>
+    <div style="position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(100deg, oklch(9% 0.012 260 / 0.9) 0%, oklch(9% 0.012 260 / 0.6) 46%, oklch(9% 0.012 260 / 0.15) 74%);"></div>
+    <div style="position:relative; z-index:2; padding:200px 64px 130px; max-width:760px;">
+      <div style="font-family:'Work Sans',monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(65% 0.15 250); font-weight:600; margin-bottom:24px;">Our Mission</div>
+      <h1 style="font-family:'Spectral',serif; font-size:52px; line-height:1.18; font-weight:600; margin:0 0 28px; letter-spacing:-0.015em; color:oklch(98% 0.005 90);">Every importer in Nigeria should know exactly what clearing will cost — before their goods land<span style="color:oklch(60% 0.16 250);">.</span></h1>
+      <p style="font-size:18px; line-height:1.6; color:oklch(85% 0.008 90); max-width:560px;">That's the whole reason CheckCustoms.ng exists — and everything below is built around it.</p>
+    </div>
+  </section>
+
+  <!-- THE PROBLEM WE SAW -->
+  <section style="{{ reveal.problem }}" ref="{{ refs.problem }}">
+    <div style="position:relative;">
+      <div style="width:100%; aspect-ratio:4/5; background-image:url('https://picsum.photos/seed/cc-about-paperwork/1000/1250'); background-size:cover; background-position:center;"></div>
+      <div style="position:absolute; top:-36px; right:-44px; background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); padding:26px 30px; width:170px;">
+        <div style="font-family:'Spectral',serif; font-size:36px; font-weight:700; line-height:1;">3–5×</div>
+        <div style="font-size:13px; margin-top:8px; line-height:1.4;">the spread we've seen between competing agent quotes for the same shipment.</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">The Problem We Saw</div>
+      <blockquote style="font-family:'Spectral',serif; font-size:34px; font-weight:500; line-height:1.3; margin:0 0 28px; color:oklch(18% 0.015 260);">Clearing costs in Nigeria have never had a benchmark — so importers were left to guess, or trust a stranger's word.</blockquote>
+      <p style="font-size:16px; line-height:1.7; color:oklch(32% 0.02 260); max-width:460px; margin:0 0 16px;">Agent quotes vary wildly with no reference point. Finding a reliable agent is word-of-mouth and high-risk. And when an under-budgeted shipment sits in demurrage, the cash-flow shock lands on the importer, not the agent.</p>
+      <p style="font-size:16px; line-height:1.7; color:oklch(32% 0.02 260); max-width:460px;">We built the benchmark that should have existed all along.</p>
+    </div>
+  </section>
+
+  <!-- WHY NOW -->
+  <section style="{{ reveal.whyNow }}">
+    <div style="max-width:640px; margin:0 auto 56px;">
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(65% 0.15 250); font-weight:600; margin-bottom:20px;">Why Now</div>
+      <h2 style="font-family:'Spectral',serif; font-size:40px; font-weight:600; line-height:1.15; margin:0; letter-spacing:-0.015em; color:oklch(98% 0.005 90);">The timing wasn't a coincidence<span style="color:oklch(60% 0.16 250);">.</span></h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:32px; max-width:1000px; margin:0 auto;">
+      <div>
+        <div style="font-size:14px; color:oklch(70% 0.13 250); font-weight:600; margin-bottom:10px;">Rising stakes</div>
+        <div style="font-size:15px; line-height:1.7; color:oklch(80% 0.01 90);">Import values are climbing, and so is the cost of getting a clearing estimate wrong.</div>
+      </div>
+      <div>
+        <div style="font-size:14px; color:oklch(70% 0.13 250); font-weight:600; margin-bottom:10px;">Moving targets</div>
+        <div style="font-size:15px; line-height:1.7; color:oklch(80% 0.01 90);">Tariff and levy changes are frequent enough that a static rate card goes stale within a quarter.</div>
+      </div>
+      <div>
+        <div style="font-size:14px; color:oklch(70% 0.13 250); font-weight:600; margin-bottom:10px;">Nobody owns it yet</div>
+        <div style="font-size:15px; line-height:1.7; color:oklch(80% 0.01 90);">Digital comfort among Nigerian importers is real — but no one has taken "check the cost, then clear it" end-to-end.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHO WE SERVE -->
+  <section style="{{ reveal.personas }}" ref="{{ refs.personas }}">
+    <div style="max-width:640px; margin:0 0 64px;">
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Who We Serve</div>
+      <h2 style="font-family:'Spectral',serif; font-size:44px; font-weight:600; line-height:1.1; margin:0; letter-spacing:-0.015em;">Three kinds of people we build for<span style="color:oklch(50% 0.16 250);">.</span></h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:28px;">
+      <div>
+        <div style="width:100%; aspect-ratio:4/5; background-image:url('https://picsum.photos/seed/cc-persona-vehicle/700/875'); background-size:cover; background-position:center; margin-bottom:20px;"></div>
+        <div style="font-family:'Spectral',serif; font-size:20px; font-weight:600; margin-bottom:10px;">The individual vehicle importer</div>
+        <div style="font-size:14px; line-height:1.7; color:oklch(35% 0.02 260);">He's bringing in one car from abroad and has exactly one chance to get the budget right before it lands at Tin-Can.</div>
+      </div>
+      <div>
+        <div style="width:100%; aspect-ratio:4/5; background-image:url('https://picsum.photos/seed/cc-persona-sme/700/875'); background-size:cover; background-position:center; margin-bottom:20px;"></div>
+        <div style="font-family:'Spectral',serif; font-size:20px; font-weight:600; margin-bottom:10px;">The SME goods importer</div>
+        <div style="font-size:14px; line-height:1.7; color:oklch(35% 0.02 260);">She runs recurring shipments and needs consistent, comparable numbers every time — not a fresh negotiation each container.</div>
+      </div>
+      <div>
+        <div style="width:100%; aspect-ratio:4/5; background-image:url('https://picsum.photos/seed/cc-persona-agent/700/875'); background-size:cover; background-position:center; margin-bottom:20px;"></div>
+        <div style="font-family:'Spectral',serif; font-size:20px; font-weight:600; margin-bottom:10px;">The licensed clearing agent</div>
+        <div style="font-size:14px; line-height:1.7; color:oklch(35% 0.02 260);">He's good at his job and wants steady, vetted work — without chasing leads or undercutting quotes to win it.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRINCIPLES -->
+  <section style="{{ reveal.principles }}" ref="{{ refs.principles }}">
+    <div style="max-width:640px; margin:0 0 64px;">
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">How We Work</div>
+      <h2 style="font-family:'Spectral',serif; font-size:44px; font-weight:600; line-height:1.1; margin:0; letter-spacing:-0.015em;">Our principles<span style="color:oklch(50% 0.16 250);">.</span></h2>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(4, 1fr); gap:1px; background:oklch(88% 0.008 90);">
+      <div style="background:oklch(98% 0.006 90); padding:36px 28px;">
+        <div style="font-family:'Spectral',serif; font-size:44px; font-weight:700; color:oklch(88% 0.03 250); margin-bottom:16px;">01</div>
+        <div style="font-size:16px; font-weight:600; margin-bottom:10px;">Transparent pricing</div>
+        <div style="font-size:13px; color:oklch(40% 0.02 260); line-height:1.6;">Every rate is versioned and auditable, not a black box.</div>
+      </div>
+      <div style="background:oklch(98% 0.006 90); padding:36px 28px;">
+        <div style="font-family:'Spectral',serif; font-size:44px; font-weight:700; color:oklch(88% 0.03 250); margin-bottom:16px;">02</div>
+        <div style="font-size:16px; font-weight:600; margin-bottom:10px;">Accountable counterparty</div>
+        <div style="font-size:13px; color:oklch(40% 0.02 260); line-height:1.6;">You never deal with the agent alone — CheckCustoms stands behind every job.</div>
+      </div>
+      <div style="background:oklch(98% 0.006 90); padding:36px 28px;">
+        <div style="font-family:'Spectral',serif; font-size:44px; font-weight:700; color:oklch(88% 0.03 250); margin-bottom:16px;">03</div>
+        <div style="font-size:16px; font-weight:600; margin-bottom:10px;">Rigorous vetting</div>
+        <div style="font-size:13px; color:oklch(40% 0.02 260); line-height:1.6;">Licence, ID/CAC and references are verified before any agent touches a job.</div>
+      </div>
+      <div style="background:oklch(98% 0.006 90); padding:36px 28px;">
+        <div style="font-family:'Spectral',serif; font-size:44px; font-weight:700; color:oklch(88% 0.03 250); margin-bottom:16px;">04</div>
+        <div style="font-size:16px; font-weight:600; margin-bottom:10px;">Responsible with data</div>
+        <div style="font-size:13px; color:oklch(40% 0.02 260); line-height:1.6;">Handled NDPR-compliant, always.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHERE WE OPERATE -->
+  <section style="{{ reveal.where }}" ref="{{ refs.where }}">
+    <div style="position:relative; height:460px; overflow:hidden;">
+      <div style="position:absolute; inset:0; background-image:url('https://images.unsplash.com/photo-1758146296671-0e46a91739a8?fm=jpg&q=70&auto=format&fit=crop&w=1900&h=920'); background-size:cover; background-position:center 40%;"></div>
+      <div style="position:absolute; inset:0; background:linear-gradient(0deg, oklch(9% 0.012 260 / 0.85) 0%, oklch(9% 0.012 260 / 0.1) 55%);"></div>
+      <div style="position:absolute; bottom:0; left:0; right:0; padding:48px 64px; display:flex; justify-content:space-between; align-items:flex-end;">
+        <div>
+          <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(70% 0.15 250); font-weight:600; margin-bottom:16px;">Where We Operate</div>
+          <div style="font-family:'Spectral',serif; font-size:36px; font-weight:600; color:oklch(98% 0.005 90); max-width:520px;">Focused on Lagos, on purpose<span style="color:oklch(60% 0.16 250);">.</span></div>
+        </div>
+        <div style="display:flex; gap:32px;">
+          <div style="background:oklch(13% 0.012 260 / 0.75); padding:16px 22px; border-radius:8px;">
+            <div style="font-size:12px; color:oklch(70% 0.01 90); margin-bottom:6px;">Port</div>
+            <div style="font-size:16px; font-weight:600; color:oklch(98% 0.005 90);">Apapa</div>
+          </div>
+          <div style="background:oklch(13% 0.012 260 / 0.75); padding:16px 22px; border-radius:8px;">
+            <div style="font-size:12px; color:oklch(70% 0.01 90); margin-bottom:6px;">Port</div>
+            <div style="font-size:16px; font-weight:600; color:oklch(98% 0.005 90);">Tin-Can Island</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p style="font-size:15px; line-height:1.7; color:oklch(40% 0.02 260); max-width:560px; padding:32px 64px 0;">We'd rather be excellent at two ports than mediocre at ten. Lagos handles the overwhelming majority of Nigeria's containerised and vehicle imports — so that's where we start.</p>
+  </section>
+
+  <!-- TEAM -->
+  <section style="{{ reveal.team }}" ref="{{ refs.team }}">
+    <div style="max-width:640px; margin:0 0 20px;">
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Our Team</div>
+      <h2 style="font-family:'Spectral',serif; font-size:44px; font-weight:600; line-height:1.1; margin:0 0 16px; letter-spacing:-0.015em;">The people behind it<span style="color:oklch(50% 0.16 250);">.</span></h2>
+      <p style="font-size:14px; color:oklch(50% 0.02 260); font-style:italic;">Placeholder profiles — real team bios go here at launch.</p>
+    </div>
+    <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:28px; margin-top:44px;">
+      <sc-for list="{{ team }}" as="member" hint-placeholder-count="3">
+        <div>
+          <div style="width:100%; aspect-ratio:1; background-image:url('{{ member.photo }}'); background-size:cover; background-position:center; margin-bottom:18px; border-radius:6px;"></div>
+          <div style="font-family:'Spectral',serif; font-size:19px; font-weight:600;">{{ member.name }}</div>
+          <div style="font-size:13px; color:oklch(40% 0.15 255); font-weight:600; margin:4px 0 10px;">{{ member.title }}</div>
+          <div style="font-size:13px; color:oklch(40% 0.02 260); line-height:1.6;">{{ member.bio }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section style="{{ reveal.finalCta }}" ref="{{ refs.finalCta }}">
+    <div style="max-width:680px; position:relative; z-index:2;">
+      <h2 style="font-family:'Spectral',serif; font-size:58px; font-weight:600; line-height:1.05; margin:0 0 32px; letter-spacing:-0.02em;">Know the cost before your goods land<span style="color:oklch(60% 0.16 250);">.</span></h2>
+      <p style="font-size:19px; line-height:1.6; color:oklch(78% 0.01 90); margin:0 0 40px; max-width:540px;">It's why we built this. Run a free estimate in under two minutes.</p>
+      <a href="CheckCustoms Landing.dc.html#how" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:17px; padding:20px 40px; border-radius:999px; display:inline-block;" style-hover="background:oklch(50% 0.15 250);">Check My Cost →</a>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:oklch(11% 0.012 260); color:oklch(90% 0.01 90); padding:64px 64px 40px; display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; gap:40px; border-top:1px solid oklch(22% 0.012 260);">
+    <div>
+      <div style="font-family:'Spectral',serif; font-weight:600; font-size:20px; margin-bottom:14px; color:oklch(97% 0.005 90);">CheckCustoms<span style="color:oklch(60% 0.12 250);">.ng</span></div>
+      <p style="font-size:13px; color:oklch(65% 0.015 90); line-height:1.6; max-width:240px;">Transparent customs clearing estimates and managed clearing for importers across Nigeria.</p>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Contact</div>
+      <div style="font-size:14px; color:oklch(88% 0.008 90); line-height:2;">
+        <div>WhatsApp: +234 800 CUSTOMS</div>
+        <div>Phone: +234 800 XXX XXXX</div>
+        <div>hello@checkcustoms.ng</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Product</div>
+      <div style="font-size:14px; color:oklch(88% 0.008 90); line-height:2;">
+        <div><a href="CheckCustoms Landing.dc.html#how" style="color:inherit; text-decoration:none;">Get an estimate</a></div>
+        <div><a href="CheckCustoms Landing.dc.html#agents" style="color:inherit; text-decoration:none;">Managed clearing</a></div>
+        <div><a href="CheckCustoms Landing.dc.html#coverage" style="color:inherit; text-decoration:none;">Coverage</a></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Legal</div>
+      <p style="font-size:12px; color:oklch(60% 0.015 90); line-height:1.7; max-width:220px;">Estimates are indicative only; final assessment and clearance rest with the Nigeria Customs Service (NCS). We do not store payment card data.</p>
+    </div>
+  </footer>
+  <div style="text-align:center; padding:20px; font-size:12px; color:oklch(55% 0.015 90); background:oklch(9% 0.01 260);">© 2026 CheckCustoms.ng — prototype concept, Lagos, Nigeria.</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { loggedIn: (typeof localStorage !== 'undefined' && localStorage.getItem('cc_auth') === '1'), scrollY: 0, visible: {}, megaOpen: false };
+
+  megaItems = [
+    { label: 'Vehicle Estimator', desc: 'Duty, levy & terminal fees for cars, trucks & bikes', color: 'oklch(40% 0.15 255)', href: 'CheckCustoms Vehicle Estimator.dc.html' },
+    { label: 'Container Estimator', desc: 'FCL & LCL landed-cost breakdown by HS code', color: 'oklch(50% 0.05 240)', href: 'CheckCustoms Goods Estimator.dc.html' },
+    { label: 'General Goods Estimator', desc: 'Palletised and loose cargo, any port of entry', color: 'oklch(65% 0.02 250)', href: 'CheckCustoms Goods Estimator.dc.html' }
+  ];
+
+  teamData = [
+    { name: 'Placeholder Name', title: 'Founder & CEO', bio: 'Sets the vision — placeholder bio pending final team details.', resourceId: 'team1', fallback: 'https://randomuser.me/api/portraits/men/32.jpg' },
+    { name: 'Placeholder Name', title: 'Head of Operations', bio: 'Runs the clearing pipeline day to day — placeholder bio pending final team details.', resourceId: 'team2', fallback: 'https://randomuser.me/api/portraits/women/68.jpg' },
+    { name: 'Placeholder Name', title: 'Head of Agent Network', bio: 'Vets and manages the agent network — placeholder bio pending final team details.', resourceId: 'team3', fallback: 'https://randomuser.me/api/portraits/men/45.jpg' }
+  ];
+
+  sectionKeys = ['problem','whyNow','personas','principles','where','team','finalCta'];
+  nodeRefs = {};
+  observer = null;
+  refCallbacks = (() => {
+    const map = {};
+    ['problem','whyNow','personas','principles','where','team','finalCta'].forEach(k => { map[k] = (node) => this.registerNode(k, node); });
+    return map;
+  })();
+
+  componentDidMount() {
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const key = e.target.dataset.revealKey;
+          if (key) this.setState(s => ({ visible: { ...s.visible, [key]: true } }));
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
+    Object.keys(this.nodeRefs).forEach(k => this.observer.observe(this.nodeRefs[k]));
+
+    requestAnimationFrame(() => {
+      const vh = window.innerHeight;
+      Object.keys(this.nodeRefs).forEach(k => {
+        const r = this.nodeRefs[k].getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) this.setState(s => ({ visible: { ...s.visible, [k]: true } }));
+      });
+    });
+
+    this._revealTimeout = setTimeout(() => {
+      const all = {};
+      this.sectionKeys.forEach(k => { all[k] = true; });
+      this.setState(s => ({ visible: { ...all, ...s.visible } }));
+    }, 2500);
+
+    this.onScroll = () => {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => { this.setState({ scrollY: window.scrollY }); this._raf = null; });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+
+  componentWillUnmount() {
+    if (this.observer) this.observer.disconnect();
+    if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+    if (this._revealTimeout) clearTimeout(this._revealTimeout);
+  }
+
+  registerNode(key, node) {
+    if (!node) return;
+    this.nodeRefs[key] = node;
+    node.dataset.revealKey = key;
+    if (this.observer) this.observer.observe(node);
+  }
+
+  reveal(key, extraCss, distance) {
+    const on = this.state.visible[key];
+    return `${extraCss} opacity:${on ? 1 : 0}; transform:${on ? 'translateY(0)' : `translateY(${distance || 28}px)`}; transition:opacity 0.9s cubic-bezier(.16,.8,.24,1), transform 0.9s cubic-bezier(.16,.8,.24,1);`;
+  }
+
+  renderVals() {
+    const scrollY = this.state.scrollY;
+    const reveal = {
+      problem: this.reveal('problem', 'padding:180px 64px; display:grid; grid-template-columns:0.85fr 1.15fr; gap:80px; align-items:center;'),
+      whyNow: this.reveal('whyNow', 'background:oklch(13% 0.012 260); padding:120px 64px;'),
+      personas: this.reveal('personas', 'padding:160px 64px;'),
+      principles: this.reveal('principles', 'padding:160px 64px; background:oklch(96% 0.008 240);'),
+      where: this.reveal('where', 'padding:120px 0;'),
+      team: this.reveal('team', 'padding:160px 64px;'),
+      finalCta: this.reveal('finalCta', 'background:oklch(11% 0.012 260); color:oklch(97% 0.005 90); padding:200px 64px;')
+    };
+    return { isLoggedIn: this.state.loggedIn, isLoggedOut: !this.state.loggedIn,
+      navStyle: `padding:${scrollY > 40 ? '14px 48px' : '26px 48px'}; backdrop-filter:${scrollY > 10 ? 'blur(14px) saturate(140%)' : 'none'}; background:${scrollY > 10 ? 'oklch(99% 0.004 90 / 0.9)' : 'transparent'}; box-shadow:${scrollY > 10 ? '0 1px 0 oklch(88% 0.008 90)' : 'none'}; transition:all 0.4s cubic-bezier(.2,.7,.3,1);`,
+      navLogoStyle: `font-family:'Spectral',serif; font-weight:600; font-size:22px; letter-spacing:-0.01em; color:${scrollY > 10 ? 'oklch(18% 0.015 260)' : 'oklch(98% 0.005 90)'}; transition:color 0.3s ease;`,
+      navLinkStyle: `color:${scrollY > 10 ? 'oklch(30% 0.02 260)' : 'oklch(96% 0.008 90)'}; text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; flex-shrink:0; text-shadow:${scrollY > 10 ? 'none' : '0 1px 3px oklch(9% 0.012 260 / 0.5)'}; transition:color 0.3s ease;`,
+      megaItems: this.megaItems,
+      megaMenuStyle: `opacity:${this.state.megaOpen ? 1 : 0}; visibility:${this.state.megaOpen ? 'visible' : 'hidden'}; transform: translateY(${this.state.megaOpen ? '0' : '-6px'}); transition: opacity 0.2s ease, transform 0.2s ease;`,
+      onMegaEnter: () => this.setState({ megaOpen: true }),
+      onMegaLeave: () => this.setState({ megaOpen: false }),
+      reveal,
+      refs: this.refCallbacks,
+      team: this.teamData.map(m => ({
+        ...m,
+        photo: (typeof window !== 'undefined' && window.__resources && window.__resources[m.resourceId]) || m.fallback
+      }))
+    };
+  }
+}
+</script>
+</body>
+</html>

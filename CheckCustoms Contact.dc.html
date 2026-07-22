@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    html { scroll-behavior: smooth; }
+    body { margin: 0; background: oklch(98% 0.006 90); }
+    ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); }
+  </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); overflow-x:hidden;">
+
+  <!-- NAV -->
+  <nav style="{{ navStyle }}position:fixed; top:0; left:0; right:0; z-index:100; display:grid; grid-template-columns:auto 1fr auto; align-items:center;">
+    <a href="CheckCustoms Landing.dc.html" style="{{ navLogoStyle }}text-decoration:none;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <div style="display:flex; align-items:center; gap:32px; min-width:0; justify-self:center;">
+      <div style="position:relative; flex-shrink:0; padding-bottom:28px; margin-bottom:-28px;" onMouseEnter="{{ onMegaEnter }}" onMouseLeave="{{ onMegaLeave }}">
+        <a href="/estimators" style="{{ navLinkStyle }}">Estimators</a>
+        <div style="{{ megaMenuStyle }}position:absolute; top:28px; left:-24px; width:340px; background:oklch(99% 0.004 90); border:1px solid oklch(89% 0.008 90); box-shadow:0 24px 60px -20px oklch(20% 0.02 260 / 0.3); padding:12px;">
+          <sc-for list="{{ megaItems }}" as="item" hint-placeholder-count="3">
+            <a href="{{ item.href }}" style="display:flex; align-items:center; gap:14px; padding:12px; text-decoration:none; color:inherit;" style-hover="background:oklch(96% 0.008 240);">
+              <div style="width:34px; height:34px; background:{{ item.color }}; flex-shrink:0;"></div>
+              <div>
+                <div style="font-size:14px; font-weight:600; color:oklch(18% 0.015 260);">{{ item.label }}</div>
+                <div style="font-size:12px; color:oklch(45% 0.02 260); margin-top:2px;">{{ item.desc }}</div>
+              </div>
+            </a>
+          </sc-for>
+        </div>
+      </div>
+      <a href="CheckCustoms How It Works.dc.html" style="{{ navLinkStyle }}">How It Works</a>
+      <a href="CheckCustoms About.dc.html" style="{{ navLinkStyle }}">About</a>
+      <a href="CheckCustoms Contact.dc.html" style="{{ navLinkStyle }}">Contact</a>
+    </div>
+    <sc-if value="{{ isLoggedOut }}" hint-placeholder-val="{{ true }}">
+      <div style="display:flex; align-items:center; gap:16px; flex-shrink:0; justify-self:end;">
+        <a href="CheckCustoms Login.dc.html" style="color:oklch(20% 0.015 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; padding:11px 18px; background:oklch(99% 0.004 90 / 0.92); border:1px solid oklch(80% 0.01 90); border-radius:999px;" style-hover="border-color:oklch(40% 0.15 255); color:oklch(40% 0.15 255);">Log in</a>
+        <a href="CheckCustoms Get Started.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-size:14px; font-weight:600; padding:11px 20px; border-radius:999px; white-space:nowrap;" style-hover="background:oklch(32% 0.15 255);">Get Started</a>
+      </div>
+    </sc-if>
+    <sc-if value="{{ isLoggedIn }}" hint-placeholder-val="{{ false }}">
+      <div style="justify-self:end;">
+        <a href="CheckCustoms Dashboard.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-size:14px; font-weight:600; padding:11px 20px; border-radius:999px; white-space:nowrap;" style-hover="background:oklch(32% 0.15 255);">Dashboard →</a>
+      </div>
+    </sc-if>
+  </nav>
+
+  <!-- HERO -->
+  <section style="padding:200px 64px 80px;">
+    <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Contact</div>
+    <h1 style="font-family:'Spectral',serif; font-size:64px; font-weight:600; line-height:1.05; margin:0 0 24px; letter-spacing:-0.02em; max-width:640px;">Talk to us<span style="color:oklch(50% 0.16 250);">.</span></h1>
+    <p style="font-size:18px; line-height:1.6; color:oklch(32% 0.02 260); max-width:520px;">Whether you're checking a cost, tracking a job, or joining our agent network — we respond fast.</p>
+  </section>
+
+  <!-- TWO PATHS -->
+  <section id="paths" style="{{ reveal.paths }}" ref="{{ refs.paths }}">
+    <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:40px;">
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:16px;">Importers</div>
+      <div style="font-family:'Spectral',serif; font-size:26px; font-weight:600; margin-bottom:14px;">I'm an importer</div>
+      <p style="font-size:15px; line-height:1.7; color:oklch(35% 0.02 260); margin:0 0 24px;">Estimate questions, active job support, or a general inquiry.</p>
+      <a onClick="{{ onSelectReason }}" data-reason="Estimate question" style="color:oklch(40% 0.15 255); text-decoration:none; font-weight:600; font-size:14px; cursor:pointer;">Go to form ↓</a>
+    </div>
+    <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:40px;">
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:16px;">Agents</div>
+      <div style="font-family:'Spectral',serif; font-size:26px; font-weight:600; margin-bottom:14px;">I'm a clearing agent</div>
+      <p style="font-size:15px; line-height:1.7; color:oklch(35% 0.02 260); margin:0 0 24px;">Want steady, vetted work? Apply to join our agent network.</p>
+      <a onClick="{{ onSelectAgentReason }}" style="color:oklch(40% 0.15 255); text-decoration:none; font-weight:600; font-size:14px; cursor:pointer;">Go to form ↓</a>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section id="form" style="{{ reveal.form }}" ref="{{ refs.form }}">
+    <div style="max-width:560px; margin:0 auto; background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:44px; box-shadow:0 30px 80px -30px oklch(20% 0.02 260 / 0.2);">
+      <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:24px;">Send us a message</div>
+      <sc-if value="{{ submitted }}" hint-placeholder-val="{{ false }}">
+        <div style="padding:32px 0; text-align:center;">
+          <div style="font-family:'Spectral',serif; font-size:24px; font-weight:600; margin-bottom:12px;">Message received.</div>
+          <div style="font-size:14px; color:oklch(40% 0.02 260); line-height:1.6;">We typically respond within a few hours during support hours.</div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ notSubmitted }}" hint-placeholder-val="{{ true }}">
+        <div>
+          <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:20px;">Name
+            <input type="text" value="{{ name }}" onChange="{{ onNameChange }}" placeholder="Your full name" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;"></input>
+          </label>
+          <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:20px;">Email or phone
+            <input type="text" value="{{ contact }}" onChange="{{ onContactChange }}" placeholder="you@email.com or +234..." style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;"></input>
+          </label>
+          <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:20px;">Reason for contact
+            <select value="{{ reason }}" onChange="{{ onReasonChange }}" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif;">
+              <option value="General inquiry">General inquiry</option>
+              <option value="Estimate question">Estimate question</option>
+              <option value="Active job support">Active job support</option>
+              <option value="Become an agent">Become an agent</option>
+            </select>
+          </label>
+          <label style="display:flex; flex-direction:column; gap:8px; font-size:13px; color:oklch(35% 0.02 260); font-weight:500; margin-bottom:28px;">Message
+            <textarea value="{{ message }}" onChange="{{ onMessageChange }}" placeholder="Tell us what's going on..." rows="5" style="padding:12px; border:1px solid oklch(82% 0.008 90); background:oklch(99% 0.004 90); font-size:15px; font-family:'Work Sans',sans-serif; resize:vertical;"></textarea>
+          </label>
+          <a onClick="{{ onSubmit }}" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:15px; padding:14px 32px; border-radius:999px; display:inline-block; cursor:pointer;" style-hover="background:oklch(32% 0.15 255);">Send message</a>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <!-- DIRECT CHANNELS -->
+  <section style="{{ reveal.channels }}" ref="{{ refs.channels }}">
+    <div style="display:grid; grid-template-columns:1.15fr 1fr 1fr; gap:24px;">
+      <div style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); padding:36px 32px;">
+        <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.1em; opacity:0.85; margin-bottom:14px;">Fastest response</div>
+        <div style="font-family:'Spectral',serif; font-size:24px; font-weight:600; margin-bottom:10px;">WhatsApp</div>
+        <div style="font-size:16px; font-weight:600;">+234 800 CUSTOMS</div>
+      </div>
+      <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:36px 32px;">
+        <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:oklch(45% 0.02 260); margin-bottom:14px;">Phone</div>
+        <div style="font-family:'Spectral',serif; font-size:24px; font-weight:600; margin-bottom:10px;">Call us</div>
+        <div style="font-size:16px; font-weight:600; color:oklch(30% 0.02 260);">+234 800 XXX XXXX</div>
+      </div>
+      <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:36px 32px;">
+        <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.1em; color:oklch(45% 0.02 260); margin-bottom:14px;">Email</div>
+        <div style="font-family:'Spectral',serif; font-size:24px; font-weight:600; margin-bottom:10px;">Write in</div>
+        <div style="font-size:16px; font-weight:600; color:oklch(30% 0.02 260);">hello@checkcustoms.ng</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- COVERAGE NOTE -->
+  <section style="{{ reveal.coverage }}" ref="{{ refs.coverage }}">
+    <div style="display:flex; justify-content:space-between; align-items:center; max-width:1000px; margin:0 auto; flex-wrap:wrap; gap:16px;">
+      <div style="font-size:15px; color:oklch(35% 0.02 260);">Currently live at Lagos's <strong>Apapa</strong> and <strong>Tin Can Island</strong> ports.</div>
+      <div style="font-size:15px; color:oklch(35% 0.02 260);">Support hours: <strong>Mon–Sat, 8am–8pm WAT</strong></div>
+    </div>
+  </section>
+
+  <!-- FAQ TEASER -->
+  <section style="{{ reveal.faqTeaser }}" ref="{{ refs.faqTeaser }}">
+    <div style="max-width:640px; margin:0 0 40px;">
+      <div style="font-family:monospace; font-size:12px; letter-spacing:0.14em; text-transform:uppercase; color:oklch(40% 0.15 255); font-weight:600; margin-bottom:20px;">Common Questions</div>
+      <h2 style="font-family:'Spectral',serif; font-size:34px; font-weight:600; line-height:1.15; margin:0; letter-spacing:-0.015em;">Before you write in<span style="color:oklch(50% 0.16 250);">.</span></h2>
+    </div>
+    <div style="max-width:760px;">
+      <a href="CheckCustoms How It Works.dc.html#faq" style="display:flex; justify-content:space-between; align-items:center; padding:22px 0; border-bottom:1px solid oklch(88% 0.008 90); text-decoration:none; color:inherit;">
+        <span style="font-size:16px; font-weight:500;">What if my estimate doesn't match NCS's final assessment?</span>
+        <span style="color:oklch(40% 0.15 255); font-size:14px; font-weight:600; white-space:nowrap;">Full FAQ →</span>
+      </a>
+      <a href="CheckCustoms How It Works.dc.html#faq" style="display:flex; justify-content:space-between; align-items:center; padding:22px 0; border-bottom:1px solid oklch(88% 0.008 90); text-decoration:none; color:inherit;">
+        <span style="font-size:16px; font-weight:500;">How long does clearing typically take?</span>
+        <span style="color:oklch(40% 0.15 255); font-size:14px; font-weight:600; white-space:nowrap;">Full FAQ →</span>
+      </a>
+      <a href="CheckCustoms How It Works.dc.html#faq" style="display:flex; justify-content:space-between; align-items:center; padding:22px 0; border-bottom:1px solid oklch(88% 0.008 90); text-decoration:none; color:inherit;">
+        <span style="font-size:16px; font-weight:500;">What happens if there's a delay or demurrage?</span>
+        <span style="color:oklch(40% 0.15 255); font-size:14px; font-weight:600; white-space:nowrap;">Full FAQ →</span>
+      </a>
+    </div>
+  </section>
+
+  <!-- LIGHT CLOSING LINE -->
+  <section style="{{ reveal.closing }}" ref="{{ refs.closing }}">
+    <div style="font-family:'Spectral',serif; font-size:24px; font-weight:500; color:oklch(30% 0.02 260); max-width:560px; margin:0 auto;">Most messages get a reply the same day — usually faster on WhatsApp.</div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="background:oklch(11% 0.012 260); color:oklch(90% 0.01 90); padding:64px 64px 40px; display:grid; grid-template-columns:1.2fr 1fr 1fr 1fr; gap:40px; border-top:1px solid oklch(22% 0.012 260);">
+    <div>
+      <div style="font-family:'Spectral',serif; font-weight:600; font-size:20px; margin-bottom:14px; color:oklch(97% 0.005 90);">CheckCustoms<span style="color:oklch(60% 0.12 250);">.ng</span></div>
+      <p style="font-size:13px; color:oklch(65% 0.015 90); line-height:1.6; max-width:240px;">Transparent customs clearing estimates and managed clearing for importers across Nigeria.</p>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Contact</div>
+      <div style="font-size:14px; color:oklch(88% 0.008 90); line-height:2;">
+        <div>WhatsApp: +234 800 CUSTOMS</div>
+        <div>Phone: +234 800 XXX XXXX</div>
+        <div>hello@checkcustoms.ng</div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Product</div>
+      <div style="font-size:14px; color:oklch(88% 0.008 90); line-height:2;">
+        <div><a href="CheckCustoms Landing.dc.html#how" style="color:inherit; text-decoration:none;">Get an estimate</a></div>
+        <div><a href="CheckCustoms Landing.dc.html#agents" style="color:inherit; text-decoration:none;">Managed clearing</a></div>
+        <div><a href="CheckCustoms Landing.dc.html#coverage" style="color:inherit; text-decoration:none;">Coverage</a></div>
+      </div>
+    </div>
+    <div>
+      <div style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:oklch(65% 0.015 90); margin-bottom:14px; font-weight:600;">Legal</div>
+      <p style="font-size:12px; color:oklch(60% 0.015 90); line-height:1.7; max-width:220px;">Estimates are indicative only; final assessment and clearance rest with the Nigeria Customs Service (NCS). We do not store payment card data.</p>
+    </div>
+  </footer>
+  <div style="text-align:center; padding:20px; font-size:12px; color:oklch(55% 0.015 90); background:oklch(9% 0.01 260);">© 2026 CheckCustoms.ng — prototype concept, Lagos, Nigeria.</div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { loggedIn: (typeof localStorage !== 'undefined' && localStorage.getItem('cc_auth') === '1'),
+    scrollY: 0, visible: {}, megaOpen: false,
+    name: '', contact: '', reason: 'General inquiry', message: '', submitted: false
+  };
+
+  megaItems = [
+    { label: 'Vehicle Estimator', desc: 'Duty, levy & terminal fees for cars, trucks & bikes', color: 'oklch(40% 0.15 255)', href: 'CheckCustoms Vehicle Estimator.dc.html' },
+    { label: 'Container Estimator', desc: 'FCL & LCL landed-cost breakdown by HS code', color: 'oklch(50% 0.05 240)', href: 'CheckCustoms Goods Estimator.dc.html' },
+    { label: 'General Goods Estimator', desc: 'Palletised and loose cargo, any port of entry', color: 'oklch(65% 0.02 250)', href: 'CheckCustoms Goods Estimator.dc.html' }
+  ];
+
+  sectionKeys = ['paths','form','channels','coverage','faqTeaser','closing'];
+  nodeRefs = {};
+  observer = null;
+  refCallbacks = (() => {
+    const map = {};
+    ['paths','form','channels','coverage','faqTeaser','closing'].forEach(k => { map[k] = (node) => this.registerNode(k, node); });
+    return map;
+  })();
+
+  componentDidMount() {
+    this.observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          const key = e.target.dataset.revealKey;
+          if (key) this.setState(s => ({ visible: { ...s.visible, [key]: true } }));
+        }
+      });
+    }, { threshold: 0, rootMargin: '0px 0px -5% 0px' });
+    Object.keys(this.nodeRefs).forEach(k => this.observer.observe(this.nodeRefs[k]));
+
+    requestAnimationFrame(() => {
+      const vh = window.innerHeight;
+      Object.keys(this.nodeRefs).forEach(k => {
+        const r = this.nodeRefs[k].getBoundingClientRect();
+        if (r.top < vh && r.bottom > 0) this.setState(s => ({ visible: { ...s.visible, [k]: true } }));
+      });
+    });
+
+    this._revealTimeout = setTimeout(() => {
+      const all = {};
+      this.sectionKeys.forEach(k => { all[k] = true; });
+      this.setState(s => ({ visible: { ...all, ...s.visible } }));
+    }, 2500);
+
+    this.onScroll = () => {
+      if (this._raf) return;
+      this._raf = requestAnimationFrame(() => { this.setState({ scrollY: window.scrollY }); this._raf = null; });
+    };
+    window.addEventListener('scroll', this.onScroll, { passive: true });
+  }
+
+  componentWillUnmount() {
+    if (this.observer) this.observer.disconnect();
+    if (this.onScroll) window.removeEventListener('scroll', this.onScroll);
+    if (this._revealTimeout) clearTimeout(this._revealTimeout);
+  }
+
+  registerNode(key, node) {
+    if (!node) return;
+    this.nodeRefs[key] = node;
+    node.dataset.revealKey = key;
+    if (this.observer) this.observer.observe(node);
+  }
+
+  reveal(key, extraCss, distance) {
+    const on = this.state.visible[key];
+    return `${extraCss} opacity:${on ? 1 : 0}; transform:${on ? 'translateY(0)' : `translateY(${distance || 28}px)`}; transition:opacity 0.9s cubic-bezier(.16,.8,.24,1), transform 0.9s cubic-bezier(.16,.8,.24,1);`;
+  }
+
+  renderVals() {
+    const scrollY = this.state.scrollY;
+    const reveal = {
+      paths: this.reveal('paths', 'padding:0 64px 100px; display:grid; grid-template-columns:1fr 1fr; gap:28px;'),
+      form: this.reveal('form', 'padding:0 64px 120px;'),
+      channels: this.reveal('channels', 'padding:0 64px 120px;'),
+      coverage: this.reveal('coverage', 'padding:32px 64px; background:oklch(96% 0.008 240);'),
+      faqTeaser: this.reveal('faqTeaser', 'padding:120px 64px;'),
+      closing: this.reveal('closing', 'padding:0 64px 120px; text-align:center;')
+    };
+    return { isLoggedIn: this.state.loggedIn, isLoggedOut: !this.state.loggedIn,
+      navStyle: `padding:${scrollY > 40 ? '14px 48px' : '26px 48px'}; backdrop-filter:${scrollY > 10 ? 'blur(14px) saturate(140%)' : 'none'}; background:${scrollY > 10 ? 'oklch(99% 0.004 90 / 0.9)' : 'oklch(99% 0.004 90 / 0.65)'}; box-shadow:${scrollY > 10 ? '0 1px 0 oklch(88% 0.008 90)' : 'none'}; transition:all 0.4s cubic-bezier(.2,.7,.3,1);`,
+      navLogoStyle: `font-family:'Spectral',serif; font-weight:600; font-size:22px; letter-spacing:-0.01em; color:oklch(18% 0.015 260);`,
+      navLinkStyle: `color:oklch(30% 0.02 260); text-decoration:none; font-size:14px; font-weight:500; white-space:nowrap; flex-shrink:0;`,
+      megaItems: this.megaItems,
+      megaMenuStyle: `opacity:${this.state.megaOpen ? 1 : 0}; visibility:${this.state.megaOpen ? 'visible' : 'hidden'}; transform: translateY(${this.state.megaOpen ? '0' : '-6px'}); transition: opacity 0.2s ease, transform 0.2s ease;`,
+      onMegaEnter: () => this.setState({ megaOpen: true }),
+      onMegaLeave: () => this.setState({ megaOpen: false }),
+      reveal,
+      refs: this.refCallbacks,
+      name: this.state.name,
+      contact: this.state.contact,
+      reason: this.state.reason,
+      message: this.state.message,
+      submitted: this.state.submitted,
+      notSubmitted: !this.state.submitted,
+      onNameChange: (e) => this.setState({ name: e.target.value }),
+      onContactChange: (e) => this.setState({ contact: e.target.value }),
+      onReasonChange: (e) => this.setState({ reason: e.target.value }),
+      onMessageChange: (e) => this.setState({ message: e.target.value }),
+      onSelectReason: () => { this.setState({ reason: 'Estimate question' }); const el = document.getElementById('form'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); },
+      onSelectAgentReason: () => { this.setState({ reason: 'Become an agent' }); const el = document.getElementById('form'); if (el) window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); },
+      onSubmit: () => this.setState({ submitted: true })
+    };
+  }
+}
+</script>
+</body>
+</html>

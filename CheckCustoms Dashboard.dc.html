@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Spectral:wght@400;500;600;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style> body { margin: 0; } ::selection { background: oklch(40% 0.15 255); color: oklch(98% 0.005 90); } </style>
+</helmet>
+
+<div style="font-family:'Work Sans',sans-serif; color:oklch(18% 0.015 260); background:oklch(98% 0.006 90); min-height:100vh; display:grid; grid-template-columns:260px 1fr;">
+
+  <!-- SIDEBAR -->
+  <div style="background:oklch(99% 0.004 90); border-right:1px solid oklch(90% 0.008 90); padding:28px 20px; display:flex; flex-direction:column;">
+    <a href="CheckCustoms Landing.dc.html" style="font-family:'Spectral',serif; font-weight:600; font-size:20px; letter-spacing:-0.01em; margin-bottom:40px; padding:0 8px; color:oklch(18% 0.015 260); text-decoration:none; display:block;">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></a>
+    <sc-for list="{{ navItems }}" as="item" hint-placeholder-count="6">
+      <a href="{{ item.href }}" style="{{ item.style }}text-decoration:none;">
+        <div style="width:8px; height:8px; border-radius:999px; background:{{ item.dotColor }}; flex-shrink:0;"></div>
+        <span>{{ item.label }}</span>
+      </a>
+    </sc-for>
+  </div>
+
+  <!-- MAIN -->
+  <div style="min-width:0;">
+    <!-- TOP BAR -->
+    <div style="display:flex; justify-content:space-between; align-items:center; padding:24px 48px; border-bottom:1px solid oklch(90% 0.008 90); background:oklch(99% 0.004 90);">
+      <div style="font-size:16px; font-weight:600;">Welcome, Adaeze<span style="color:oklch(50% 0.16 250);">.</span></div>
+      <div style="display:flex; align-items:center; gap:20px;">
+        <div style="position:relative;">
+          <div onClick="{{ onToggleNotif }}" style="width:36px; height:36px; border-radius:999px; background:oklch(94% 0.008 90); display:flex; flex-direction:column; align-items:center; justify-content:center; gap:2px; cursor:pointer;">
+            <div style="width:14px; height:13px; border-radius:9px 9px 3px 3px; background:oklch(35% 0.02 260);"></div>
+            <div style="width:4px; height:4px; border-radius:999px; background:oklch(35% 0.02 260);"></div>
+          </div>
+          <div style="{{ notifPanelStyle }}position:absolute; top:46px; right:0; width:340px; background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); box-shadow:0 24px 60px -20px oklch(20% 0.02 260 / 0.35); z-index:50;">
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:16px 20px; border-bottom:1px solid oklch(90% 0.008 90);">
+              <div style="font-size:14px; font-weight:600;">Notifications</div>
+              <a style="font-size:12px; color:oklch(70% 0.01 90); text-decoration:none; font-weight:600;">Mark all as read</a>
+            </div>
+            <div style="padding:48px 24px; text-align:center; font-size:13px; color:oklch(50% 0.02 260); line-height:1.6;">No notifications yet — updates on your jobs will appear here.</div>
+          </div>
+        </div>
+        <div style="width:36px; height:36px; border-radius:999px; background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); display:flex; align-items:center; justify-content:center; font-weight:600; font-size:14px;">A</div>
+      </div>
+    </div>
+
+    <div style="padding:48px;">
+      <!-- WELCOME / ORIENTATION -->
+      <div style="margin-bottom:56px; max-width:640px;">
+        <h1 style="font-family:'Spectral',serif; font-size:36px; font-weight:600; margin:0 0 12px; letter-spacing:-0.015em;">Here's how clearing works<span style="color:oklch(50% 0.16 250);">.</span></h1>
+        <p style="font-size:15px; color:oklch(40% 0.02 260); line-height:1.6; margin:0;">This is your home base — every job you run will show up here, tracked stage by stage, from request to delivery.</p>
+      </div>
+
+      <!-- EDUCATIONAL PIPELINE -->
+      <div style="background:oklch(96% 0.008 240); padding:36px; margin-bottom:48px;">
+        <div style="font-family:monospace; font-size:11px; letter-spacing:0.08em; text-transform:uppercase; color:oklch(45% 0.02 260); margin-bottom:24px;">The clearing pipeline</div>
+        <div style="display:flex; align-items:flex-start; gap:4px; overflow-x:auto;">
+          <sc-for list="{{ stages }}" as="stage" hint-placeholder-count="8">
+            <div style="display:flex; flex-direction:column; align-items:center; flex:1; min-width:0; cursor:default;" title="{{ stage.detail }}">
+              <div style="width:38px; height:38px; border-radius:999px; display:flex; align-items:center; justify-content:center; font-family:'Spectral',serif; font-size:13px; font-weight:700; background:oklch(90% 0.008 90); color:oklch(40% 0.02 260); margin-bottom:10px;">{{ stage.n }}</div>
+              <div style="font-size:12px; text-align:center; color:oklch(45% 0.02 260); font-weight:500;">{{ stage.title }}</div>
+            </div>
+          </sc-for>
+        </div>
+        <p style="font-size:12px; color:oklch(50% 0.02 260); margin:20px 0 0; text-align:center;">Hover any stage to see what happens — no job is active yet.</p>
+      </div>
+
+      <!-- ACTION PROMPTS -->
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:64px;">
+        <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:36px; box-shadow:0 20px 50px -25px oklch(20% 0.02 260 / 0.15);">
+          <div style="font-family:'Spectral',serif; font-size:22px; font-weight:600; margin-bottom:12px;">Run a cost estimate</div>
+          <p style="font-size:14px; color:oklch(40% 0.02 260); line-height:1.6; margin:0 0 24px;">Check what clearing will cost for a vehicle, container or general shipment — before you commit to anything.</p>
+          <a href="CheckCustoms Vehicle Estimator.dc.html" style="background:oklch(40% 0.15 255); color:oklch(98% 0.005 90); text-decoration:none; font-weight:600; font-size:14px; padding:12px 24px; border-radius:999px; display:inline-block;" style-hover="background:oklch(32% 0.15 255);">Get an estimate →</a>
+        </div>
+        <div style="background:oklch(99% 0.004 90); border:1px solid oklch(88% 0.008 90); padding:36px; box-shadow:0 20px 50px -25px oklch(20% 0.02 260 / 0.15);">
+          <div style="font-family:'Spectral',serif; font-size:22px; font-weight:600; margin-bottom:12px;">Start a clearing request</div>
+          <p style="font-size:14px; color:oklch(40% 0.02 260); line-height:1.6; margin:0 0 24px;">Already have an estimate? Turn it into a real clearing job and we'll take it from there.</p>
+          <a href="CheckCustoms Contact.dc.html#form" style="color:oklch(40% 0.15 255); text-decoration:none; font-weight:600; font-size:14px; padding:12px 24px; border:1px solid oklch(40% 0.15 255); border-radius:999px; display:inline-block;">Start a request →</a>
+        </div>
+      </div>
+
+      <!-- SECONDARY EMPTY SECTIONS -->
+      <div style="display:grid; grid-template-columns:repeat(3, 1fr); gap:24px;">
+        <div style="padding:24px; border:1px dashed oklch(85% 0.008 90);">
+          <div style="width:22px; height:26px; border:2px solid oklch(55% 0.02 260); border-radius:2px; margin-bottom:14px; padding:4px 3px; display:flex; flex-direction:column; gap:3px;">
+            <div style="height:2px; background:oklch(70% 0.015 260);"></div>
+            <div style="height:2px; background:oklch(70% 0.015 260);"></div>
+            <div style="height:2px; width:60%; background:oklch(70% 0.015 260);"></div>
+          </div>
+          <div style="font-size:13px; font-weight:600; margin-bottom:4px;">Saved Estimates</div>
+          <div style="font-size:12px; color:oklch(50% 0.02 260);">No saved estimates yet.</div>
+        </div>
+        <div style="padding:24px; border:1px dashed oklch(85% 0.008 90);">
+          <div style="width:26px; height:20px; border:2px solid oklch(55% 0.02 260); border-radius:0 3px 3px 3px; margin-bottom:14px; position:relative;">
+            <div style="position:absolute; top:-6px; left:0; width:12px; height:6px; border:2px solid oklch(55% 0.02 260); border-bottom:none; border-radius:2px 2px 0 0;"></div>
+          </div>
+          <div style="font-size:13px; font-weight:600; margin-bottom:4px;">Documents</div>
+          <div style="font-size:12px; color:oklch(50% 0.02 260);">Your document vault will appear here once you start a job.</div>
+        </div>
+        <div style="padding:24px; border:1px dashed oklch(85% 0.008 90);">
+          <div style="width:28px; height:20px; border:2px solid oklch(55% 0.02 260); border-radius:3px; margin-bottom:14px; position:relative; overflow:hidden;">
+            <div style="position:absolute; top:5px; left:-2px; right:-2px; height:4px; background:oklch(55% 0.02 260);"></div>
+          </div>
+          <div style="font-size:13px; font-weight:600; margin-bottom:4px;">Payments & Receipts</div>
+          <div style="font-size:12px; color:oklch(50% 0.02 260);">No payments yet.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{}">
+class Component extends DCLogic {
+  state = { notifOpen: false };
+  navLabels = ['Overview', 'My Jobs', 'Saved Estimates', 'Documents', 'Payments & Receipts', 'Account'];
+
+  stagesData = [
+    { n: '01', title: 'Request', detail: 'You submit a clearing request with your shipping documents attached.' },
+    { n: '02', title: 'Quote', detail: 'CheckCustoms ops confirms a firm quote against your estimate.' },
+    { n: '03', title: 'Payment', detail: 'You pay the confirmed quote; funds are held against milestones.' },
+    { n: '04', title: 'Documentation', detail: 'Entry documents are lodged with NCS and the terminal.' },
+    { n: '05', title: 'Duty payment', detail: 'Assessed duty, levies and VAT are paid to NCS on your behalf.' },
+    { n: '06', title: 'Examination', detail: 'NCS inspects the shipment if selected for examination.' },
+    { n: '07', title: 'Release', detail: 'NCS issues release; terminal charges are settled.' },
+    { n: '08', title: 'Delivery', detail: 'Your goods are delivered or ready for pickup.' }
+  ];
+
+  renderVals() {
+    const navHrefs = ['CheckCustoms Dashboard.dc.html','CheckCustoms My Jobs.dc.html','CheckCustoms Saved Estimates.dc.html','CheckCustoms Documents.dc.html','CheckCustoms Payments.dc.html','CheckCustoms Account.dc.html'];
+    const navItems = this.navLabels.map((label, i) => {
+      const active = i === 0;
+      return {
+        label,
+        href: navHrefs[i],
+        dotColor: active ? 'oklch(40% 0.15 255)' : 'oklch(85% 0.008 90)',
+        style: `display:flex; align-items:center; gap:12px; padding:12px 10px; border-radius:8px; font-size:14px; font-weight:${active ? 600 : 500}; color:${active ? 'oklch(18% 0.015 260)' : 'oklch(45% 0.02 260)'}; background:${active ? 'oklch(96% 0.008 240)' : 'transparent'}; margin-bottom:4px;`
+      };
+    });
+    return {
+      navItems, stages: this.stagesData,
+      onToggleNotif: () => this.setState(s => ({ notifOpen: !s.notifOpen })),
+      notifPanelStyle: `opacity:${this.state.notifOpen ? 1 : 0}; visibility:${this.state.notifOpen ? 'visible' : 'hidden'}; transform:translateY(${this.state.notifOpen ? '0' : '-6px'}); transition:opacity 0.2s ease, transform 0.2s ease;`
+    };
+  }
+}
+</script>
+</body>
+</html>
