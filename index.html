@@ -24,7 +24,7 @@
     <div style="{{ navLogoStyle }}">CheckCustoms<span style="color:oklch(55% 0.16 250);">.ng</span></div>
     <div style="display:flex; align-items:center; gap:32px; min-width:0; justify-self:center;">
       <div style="position:relative; flex-shrink:0; padding-bottom:28px; margin-bottom:-28px;" onMouseEnter="{{ onMegaEnter }}" onMouseLeave="{{ onMegaLeave }}">
-        <a href="/estimators" style="{{ navLinkStyle }}">Estimators</a>
+        <a href="estimators.html" style="{{ navLinkStyle }}">Estimators</a>
         <div style="{{ megaMenuStyle }}position:absolute; top:28px; left:-24px; width:340px; background:oklch(99% 0.004 90); border:1px solid oklch(89% 0.008 90); box-shadow:0 24px 60px -20px oklch(20% 0.02 260 / 0.3); padding:12px;">
           <sc-for list="{{ megaItems }}" as="item" hint-placeholder-count="3">
             <a href="#how" style="display:flex; align-items:center; gap:14px; padding:12px; text-decoration:none; color:inherit;" style-hover="background:oklch(96% 0.008 240);">
@@ -37,9 +37,9 @@
           </sc-for>
         </div>
       </div>
-      <a href="/how-it-works" style="{{ navLinkStyle }}">How It Works</a>
-      <a href="/about" style="{{ navLinkStyle }}">About</a>
-      <a href="/contact" style="{{ navLinkStyle }}">Contact</a>
+      <a href="how-it-works.html" style="{{ navLinkStyle }}">How It Works</a>
+      <a href="about.html" style="{{ navLinkStyle }}">About</a>
+      <a href="contact.html" style="{{ navLinkStyle }}">Contact</a>
     </div>
     <sc-if value="{{ isLoggedOut }}" hint-placeholder-val="{{ true }}">
       <div style="display:flex; align-items:center; gap:16px; flex-shrink:0; justify-self:end;">
